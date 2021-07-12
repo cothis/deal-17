@@ -2,6 +2,7 @@ const http = require('http');
 const express = require('express');
 const cors = require('cors');
 const { promisePool } = require('./db');
+require('dotenv').config();
 
 const app = express();
 const server = http.createServer(app);
@@ -14,7 +15,7 @@ app.use(cors());
 const test = async () => {
   const [rows, fields] = await promisePool.query('select * from test');
   console.log(rows);
-}
+};
 
 app.get('/test', (req, res) => {
   res.setHeader('Content-Type', 'application/json');
