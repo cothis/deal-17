@@ -12,9 +12,9 @@ app.use(cors());
 
 app.get('/test', (req, res) => {
   res.setHeader('Content-Type', 'application/json');
-  res.send('hi')
-})
+  res.send('{"name": "test"}');
+});
 
 server.listen(app.get('port'), (req, res) => {
-    console.log('Express server listening on port ' + app.get('port'));
+  console.log('Express server listening on port ' + app.get('port'));
 });
