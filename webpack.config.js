@@ -1,9 +1,12 @@
 const webpack = require('webpack');
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+require('dotenv').config();
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const { env } = require('process');
 
 module.exports = {
+  devtool: env.mode === 'development' ? 'cheap-eval-source-map' : '',
   entry: './index.js',
   output: {
     path: path.resolve(__dirname, 'dist'),
@@ -58,5 +61,4 @@ module.exports = {
       },
     },
   },
-  devtool: 'eval-cheap-source-map'
 };
