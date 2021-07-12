@@ -1,7 +1,7 @@
 const http = require('http');
 const express = require('express');
 const cors = require('cors');
-const { db } = require('./db');
+const { promisePool } = require('./db');
 
 const app = express();
 const server = http.createServer(app);
@@ -11,11 +11,10 @@ app.use(express.json());
 
 app.use(cors());
 
-//simple query
-db.query(`SELECT * FROM TEST`).then((rows, fields) => {
+const test = async () => {
+  const [rows, fields] = await promisePool.query('select * from test');
   console.log(rows);
-  console.log(fields);
-});
+}
 
 app.get('/test', (req, res) => {
   res.setHeader('Content-Type', 'application/json');
@@ -25,3 +24,5 @@ app.get('/test', (req, res) => {
 server.listen(app.get('port'), (req, res) => {
   console.log('Express server listening on port ' + app.get('port'));
 });
+
+test();
