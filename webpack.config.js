@@ -7,7 +7,7 @@ const { env } = require('process');
 
 module.exports = {
   devtool: env.mode === 'development' ? 'cheap-eval-source-map' : '',
-  entry: './index.js',
+  entry: './index.ts',
   output: {
     path: path.resolve(__dirname, 'dist'),
     publicPath: '/dist/',
@@ -16,13 +16,20 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.js%/,
+        test: /\.(js|ts)$/,
         include: path.join(__dirname),
         exclude: /(node_modules)|(dist)/,
         use: {
           loader: 'babel-loader',
           options: {
-            presets: ['env'],
+            presets: [
+              '@babel/preset-env',
+              '@babel/preset-typescript'
+            ],
+            plugins: [
+              '@babel/proposal-class-properties',
+              '@babel/proposal-object-rest-spread'
+            ]
           },
         },
       },

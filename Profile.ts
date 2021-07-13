@@ -1,5 +1,8 @@
 export class Profile {
-  constructor(name, email) {
+  name: string;
+  email: string;
+  
+  constructor(name: string, email: string) {
     this.name = name;
     this.email = email;
   }

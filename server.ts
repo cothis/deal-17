@@ -1,11 +1,14 @@
-const http = require('http');
-const express = require('express');
+// const http = require('http');
+import * as http from 'http';
+import express from 'express';
+// const express = require('express');
 const cors = require('cors');
-const { promisePool } = require('./db');
+// const { promisePool } = require('./db');
+import {promisePool} from './db';
 require('dotenv').config();
 
 const app = express();
-const server = http.createServer(app);
+const server: http.Server = http.createServer(app);
 
 app.set('port', process.env.PORT || 8000);
 app.use(express.json());
@@ -22,7 +25,7 @@ app.get('/test', (req, res) => {
   res.send('{"name": "test"}');
 });
 
-server.listen(app.get('port'), (req, res) => {
+server.listen(app.get('port'), () => {
   console.log('Express server listening on port ' + app.get('port'));
 });
 
