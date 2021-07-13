@@ -4,7 +4,7 @@ const template = `
 <div>
   <h1>Test Rendering</h1>
   <div>{{__test__}}</div>
-  <a href="#another">another</a>
+  <a href="another">another</a>
 </div>
 `;
 

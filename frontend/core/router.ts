@@ -17,9 +17,9 @@ export default class Router {
   }
 
   route() {
-    // const routePath = location.pathname;
-    const routePath = location.hash.substr(1);
-    if (routePath === '' && this.defaultRoute) {
+    const routePath = location.pathname;
+    // const routePath = location.hash.substr(1);
+    if (routePath === '/' && this.defaultRoute) {
       this.defaultRoute.page.render();
     }
 
