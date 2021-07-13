@@ -6,22 +6,24 @@ export default class Router {
   private defaultRoute: RouteInfo | null;
 
   constructor() {
-    window.onpopstate = () => this.route.bind(this);
+    // window.onpopstate = () => {
+      // console.log('onpopstate')
+      // this.route.bind(this)
+    // };
+    window.addEventListener('hashchange', this.route.bind(this));
 
     this.routeTable = [];
     this.defaultRoute = null;
   }
 
   route() {
-    const routePath = location.pathname;
-
+    // const routePath = location.pathname;
+    const routePath = location.hash.substr(1);
     if (routePath === '' && this.defaultRoute) {
       this.defaultRoute.page.render();
     }
 
-    const target = this.routeTable.find((routeInfo) => {
-      routePath.indexOf(routeInfo.path) >= 0;
-    });
+    const target = this.routeTable.find((routeInfo) => routePath.indexOf(routeInfo.path) >= 0);
 
     if (target) {
       target.page.render();
@@ -34,5 +36,6 @@ export default class Router {
 
   addRoutePath(path: string, page: View): void {
     this.routeTable.push({ path, page });
+
   }
 }

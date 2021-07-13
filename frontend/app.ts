@@ -7,6 +7,6 @@ const testView = new TestView('app');
 const testAnotherView = new TestAnotherView('app');
 
 router.setDefaultPage(testView);
-router.addRoutePath('/', testView);
-router.addRoutePath('/another', testAnotherView);
-router.route();
+
+router.addRoutePath('another', testAnotherView);
+router.route('');
