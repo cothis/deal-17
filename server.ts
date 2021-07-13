@@ -1,10 +1,7 @@
-// const http = require('http');
 import * as http from 'http';
 import express from 'express';
-// const express = require('express');
-const cors = require('cors');
-// const { promisePool } = require('./db');
-import {promisePool} from './db';
+import cors from 'cors';
+import { promisePool } from './db';
 require('dotenv').config();
 
 const app = express();
