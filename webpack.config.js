@@ -7,7 +7,7 @@ const { env } = require('process');
 
 module.exports = {
   devtool: env.mode === 'development' ? 'cheap-eval-source-map' : '',
-  entry: './index.ts',
+  entry: './frontend/app.ts',
   output: {
     path: path.resolve(__dirname, 'dist'),
     publicPath: '/dist/',
