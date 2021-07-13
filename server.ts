@@ -2,8 +2,7 @@ import * as http from 'http';
 import express from 'express';
 import cors from 'cors';
 import { promisePool } from './db';
-import dotenv from 'dotenv';
-dotenv.config();
+import 'dotenv-defaults/config';
 
 const app = express();
 const server: http.Server = http.createServer(app);

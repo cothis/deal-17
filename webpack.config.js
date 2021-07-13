@@ -1,7 +1,7 @@
 const webpack = require('webpack');
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-require('dotenv').config();
+require('dotenv-defaults').config();
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const { env } = require('process');
 
@@ -13,6 +13,9 @@ module.exports = {
     publicPath: '/dist/',
     filename: 'bundle.js',
   },
+  resolve: {
+    extensions: ['.ts', '.js'],
+  },
   module: {
     rules: [
       {
@@ -22,14 +25,8 @@ module.exports = {
         use: {
           loader: 'babel-loader',
           options: {
-            presets: [
-              '@babel/preset-env',
-              '@babel/preset-typescript'
-            ],
-            plugins: [
-              '@babel/proposal-class-properties',
-              '@babel/proposal-object-rest-spread'
-            ]
+            presets: ['@babel/preset-env', '@babel/preset-typescript'],
+            plugins: ['@babel/proposal-class-properties', '@babel/proposal-object-rest-spread'],
           },
         },
       },
