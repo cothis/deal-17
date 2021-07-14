@@ -1,0 +1,129 @@
+:root {
+  /* Color */
+  --black: #222222;
+  --grey1: #888888;
+  --grey2: #bbbbbb;
+  --grey3: #d7d7d7;
+  --off-white: #f6f6f6;
+  --white: #ffffff;
+  --primary1: #2ac1bc;
+  --primary2: #a0e1e0;
+  --primary3: #219a95;
+  --red: #f45452;
+
+  /* Size */
+  --large: 18px;
+  --medium: 16px;
+  --small: 14px;
+  --xsmall: 12px;
+  --large-line-height: 24px;
+  --medium-line-height: 22px;
+  --small-line-height: 20px;
+  --xsmall-line-height: 16px;
+
+  /* font weight */
+  --text-weight: 400;
+  --link-weight: 500;
+
+  /* border-radius */
+  --default-border-radius: 8px;
+  --category-border-radius: 999px;
+}
+
+/* Text */
+
+.text {
+  font-weight: var(--text-weight);
+  color: var(--black);
+}
+
+.text.large {
+  font-size: var(--large);
+  line-height: var(--large-line-height);
+}
+
+.text.medium {
+  font-size: var(--medium);
+  line-height: var(--medium-line-height);
+}
+
+.text.small {
+  font-size: var(--small);
+  line-height: var(--small-line-height);
+}
+
+.text.xsmall {
+  font-size: var(--xsmall);
+  line-height: var(--xsmall-line-height);
+}
+
+/* Link */
+
+.link {
+  font-weight: var(--link-weight);
+  color: var(--black);
+}
+
+.link.medium {
+  font-size: var(--medium);
+  line-height: var(--medium-line-height);
+}
+
+.link.small {
+  font-size: var(--small);
+  line-height: var(--small-line-height);
+}
+
+.link.xsmall {
+  font-size: var(--xsmall);
+  line-height: var(--xsmall-line-height);
+}
+
+/* button */
+.button {
+  background-color: var(--primary1);
+  color: var(--white);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 8px 16px;
+  border-radius: var(--default-border-radius);
+}
+
+.button:hover {
+  background-color: var(--primary3);
+}
+
+.button:focus {
+  background-color: var(--primary1);
+  border: 2px solid var(--primary2);
+}
+
+.button:disabled {
+  background-color: var(--primary2);
+}
+
+.button.large {
+  padding: 10px 16px;
+}
+
+/* Location */
+.button.location--add {
+  background-color: var(--white);
+  border: 1px solid var(--primary1);
+}
+
+.button.location-add span::after {
+  content: ''
+}
+
+/* Category */
+.button.category {
+  padding: 4px 16px;
+  border: 1px solid #d7d7d7;
+  box-sizing: border-box;
+  border-radius: 999px;
+}
+
+.button.category--active {
+}

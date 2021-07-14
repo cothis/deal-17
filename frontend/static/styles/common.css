@@ -1,0 +1,282 @@
+:root {
+  /* Color */
+  --black: #222222;
+  --grey1: #888888;
+  --grey2: #bbbbbb;
+  --grey3: #d7d7d7;
+  --grey5: #e0e0e0;
+  --off-white: #f6f6f6;
+  --white: #ffffff;
+  --primary1: #2ac1bc;
+  --primary2: #a0e1e0;
+  --primary3: #219a95;
+  --red: #f45452;
+
+  /* Size */
+  --large: 18px;
+  --medium: 16px;
+  --small: 14px;
+  --xsmall: 12px;
+  --large-line-height: 24px;
+  --medium-line-height: 22px;
+  --small-line-height: 20px;
+  --xsmall-line-height: 16px;
+
+  /* font weight */
+  --text-weight: 400;
+  --link-weight: 500;
+
+  /* border-radius */
+  --small-border-radius: 6px;
+  --default-border-radius: 8px;
+  --large-border-radius: 10px;
+  --circel-border-radius: 999px;
+
+  /* fab size */
+  --fab-size: 56px;
+
+  /* image box size */
+  --img-small: 40px;
+  --img-medium: 76px;
+  --img-large: 106px;
+  --img-full: 100vw;
+
+  /* image nav size */
+  --nav-size: 8px;
+}
+
+/* Text */
+
+.text {
+  font-weight: var(--text-weight);
+  color: var(--black);
+}
+
+.text.large {
+  font-size: var(--large);
+  line-height: var(--large-line-height);
+}
+
+.text.medium {
+  font-size: var(--medium);
+  line-height: var(--medium-line-height);
+}
+
+.text.small {
+  font-size: var(--small);
+  line-height: var(--small-line-height);
+}
+
+.text.xsmall {
+  font-size: var(--xsmall);
+  line-height: var(--xsmall-line-height);
+}
+
+/* Link */
+
+.link {
+  font-weight: var(--link-weight);
+  color: var(--black);
+}
+
+.link.medium {
+  font-size: var(--medium);
+  line-height: var(--medium-line-height);
+}
+
+.link.small {
+  font-size: var(--small);
+  line-height: var(--small-line-height);
+}
+
+.link.xsmall {
+  font-size: var(--xsmall);
+  line-height: var(--xsmall-line-height);
+}
+
+/* button */
+.button {
+  background-color: var(--primary1);
+  color: var(--white);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 8px 16px;
+  border-radius: var(--default-border-radius);
+}
+
+.button:hover {
+  background-color: var(--primary3);
+}
+
+.button:focus {
+  background-color: var(--primary1);
+  border: 2px solid var(--primary2);
+}
+
+.button:disabled {
+  background-color: var(--primary2);
+}
+
+.button.large {
+  padding: 10px 16px;
+}
+
+/* Location */
+.button.location--add,
+.button.location--inactive {
+  background-color: var(--white);
+  border: 1px solid var(--primary1);
+}
+
+.button.location--add span {
+  display: none;
+}
+
+.button.location--add span::after {
+  content: url('../images/icons/add.png');
+  color: var(--primary2);
+}
+
+.button.location--active span::after,
+.button.location--inactive span::after {
+  content: url('../images/icons/close.png');
+  color: var(--primary2);
+}
+
+/* Category */
+.button.category {
+  padding: 4px 16px;
+  border: 1px solid var(--grey3);
+  box-sizing: border-box;
+  border-radius: var(--circel-border-radius);
+  color: var(--grey1);
+}
+
+.button.category.active {
+  background-color: var(--primary1);
+  border: 0;
+  color: var(--white);
+}
+
+/* Tap */
+.button.tap {
+  padding: 0px 0px 18px;
+  border-radius: 0;
+  flex-direction: column;
+  align-items: flex-start;
+  color: var(--grey1);
+  border-bottom: solid 2px var(--white);
+}
+
+.button.tap.active {
+  border-bottom: solid 2px var(--primary1);
+}
+
+/* Status */
+/* TODO: element 보면서 수정해야 합니다. 스타일만 추가해뒀습니다. */
+.status {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 10px 16px;
+  border: 1px solid var(--grey5);
+  border-radius: var(--default-border-radius);
+  color: var(--black);
+}
+
+.button.fab {
+  background-color: var(--primary1);
+  width: var(--fab-size);
+  height: var(--fab-size);
+}
+
+.button.fab:hover {
+  background-color: var(--primary3);
+}
+
+.button.fab:focus {
+  background-color: var(--primary1);
+  border: 2px solid var(--primary2);
+}
+
+.button.fab:disabled {
+  background-color: var(--primary2);
+}
+
+/* Text Input */
+.input {
+  background-color: var(--white);
+  border: 1px solid var(--grey3);
+  border-radius: var(--default-border-radius);
+  color: var(--black);
+  display: flex;
+  align-items: flex-start;
+}
+
+.input::placeholder {
+  color: var(--grey1);
+}
+
+.input:focus {
+  border: 1px solid var(--primary1);
+}
+
+.input.medium {
+  font-size: var(--small);
+  line-height: var(--small-line-height);
+  padding: 8px;
+}
+
+.input.large {
+  font-size: var(--medium);
+  line-height: var(--medium-line-height);
+  padding: 10px 16px 8px;
+}
+
+/* ImgBox */
+.imgbox {
+  width: var(--img-small);
+  height: var(--img-small);
+  border-radius: var(--small-border-radius);
+  background-color: var(--off-white);
+  border: 1px solid var(--grey3);
+}
+
+.imgbox.medium {
+  width: var(--img-medium);
+  height: var(--img-medium);
+  border-radius: var(--defualt-border-radius);
+}
+
+.imgbox.large {
+  width: var(--img-large);
+  height: var(--img-large);
+  border-radius: var(--large-border-radius);
+}
+
+/* TODO: 캐러셀 구현하면서 다시 확인 */
+.image.gradient {
+  width: var(--img-full);
+  height: var(--img-full);
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.24) 0%,
+    rgba(0, 0, 0, 0) 16.52%,
+    rgba(0, 0, 0, 0) 87.36%,
+    rgba(0, 0, 0, 0.24) 100%
+  );
+  border: 0;
+}
+
+/* ImgNav */
+.imgnav {
+  width: var(--nav-size);
+  height: var(--nav-size);
+  border: 1px solid var(--white);
+  background-color: transparent;
+}
+
+.imgnav.active {
+  background-color: var(--white);
+}
