@@ -1,4 +1,5 @@
 import View from '../core/view';
+import Store from '../store';
 
 const template = `
 <div>
@@ -9,12 +10,14 @@ const template = `
 `;
 
 export default class TestView extends View {
-  constructor(containerId: string) {
+  store: Store;
+  constructor(containerId: string, store: Store) {
     super(containerId, template);
+    this.store = store;
   }
 
   render() {
-    this.setTemplateData('test', 'hi');
+    this.setTemplateData('test', this.store.user?.email ?? 'undefined Email');
 
     this.updateView();
   }

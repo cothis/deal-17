@@ -11,7 +11,7 @@ module.exports = {
     port: 3000,
     historyApiFallback: true,
   },
-  entry: './frontend/app.ts',
+  entry: './app.ts',
   output: {
     path: path.resolve(__dirname, 'dist'),
     publicPath: '/dist/',
