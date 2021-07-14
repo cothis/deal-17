@@ -1,6 +1,17 @@
 import View from '../frontend/core/view'
 
-export interface Usesr {
+export interface UserStore {
+    user: User;
+    auth: string;
+}
+
+export interface ProductStore {
+    getAllProducts: () => Product[];
+    getProduct: () => Product;
+    currentPage: number;
+}
+
+export interface User {
     readonly id: number;
     readonly email: string;
 }
@@ -21,6 +32,12 @@ export interface Product {
     state: number;
     views: number;
     readonly createdAt: Date;
+
+    // db 외 정보
+    pictures: Picture[];
+    userWish: boolean;
+    wishes: number;
+    chatRooms: number;
 }
 
 export interface ChatRoom {
