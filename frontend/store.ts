@@ -17,6 +17,7 @@ export default class Store implements UserStore, ProductStore {
   private _auth: string;
   private _currentPage: number;
   private products: Product[];
+
   constructor() {
     this._user = null;
     this._auth = '';
@@ -34,6 +35,10 @@ export default class Store implements UserStore, ProductStore {
 
   get user(): User | null {
     return this._user;
+  }
+
+  set user(user: User | null) {
+    this._user = user;
   }
 
   get auth(): string {

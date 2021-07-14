@@ -2,11 +2,11 @@
   "name": "deal-17",
   "version": "1.0.0",
   "description": "우아마켓",
-  "main": "index.ts",
+  "main": "./frontend/app.ts",
   "scripts": {
     "build": "webpack",
     "devserver": "webpack-dev-server --open --progress",
-    "start": "nodemon server.ts"
+    "start": "nodemon ./backend/server.ts"
   },
   "repository": {
     "type": "git",
