@@ -9,4 +9,4 @@ const testAnotherView = new TestAnotherView('app');
 router.setDefaultPage(testView);
 
 router.addRoutePath('another', testAnotherView);
-router.route('');
+router.route();
