@@ -6,5 +6,4 @@
  * content.ts
  * seller-info.ts
  * footer.ts 
- * good luck!
  */
