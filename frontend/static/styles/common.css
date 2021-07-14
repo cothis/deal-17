@@ -1,0 +1,577 @@
+:root {
+  /* Color */
+  --black: #222222;
+  --grey1: #888888;
+  --grey2: #bbbbbb;
+  --grey3: #d7d7d7;
+  --grey5: #e0e0e0;
+  --off-white: #f6f6f6;
+  --white: #ffffff;
+  --primary1: #2ac1bc;
+  --primary2: #a0e1e0;
+  --primary3: #219a95;
+  --red: #f45452;
+
+  /* Size */
+  --large: 18px;
+  --medium: 16px;
+  --small: 14px;
+  --xsmall: 12px;
+  --large-line-height: 24px;
+  --medium-line-height: 22px;
+  --small-line-height: 20px;
+  --xsmall-line-height: 16px;
+
+  /* font weight */
+  --text-weight: 400;
+  --link-weight: 500;
+
+  /* border-radius */
+  --small-border-radius: 6px;
+  --default-border-radius: 8px;
+  --large-border-radius: 10px;
+  --circel-border-radius: 999px;
+
+  /* fab size */
+  --fab-size: 56px;
+
+  /* image box size */
+  --img-small: 40px;
+  --img-medium: 76px;
+  --img-large: 106px;
+  --img-full: 100vw;
+
+  /* image nav size */
+  --nav-size: 8px;
+
+  /* box shadow */
+  --custom-shadow: box-shadow: 0px 0px 4px rgba(204, 204, 204, 0.5), 0px 2px 4px rgba(0, 0, 0, 0.25);
+
+  /* Text Input size */
+  --input-medium: 256px;
+  --input-large: 290px;
+
+  /* header height */
+  --header-height: 56px;
+
+  /* info saler height */
+  --info-saler-height: 48px;
+
+  /* location bar height */
+  --location-bar-height: 48px;
+
+  /* product bar height */
+  --product-bar-height: 48px;
+
+  /* category list item height */
+  --category-list-height: 140px;
+
+  /* full width */
+  --full-width: 100%;
+
+}
+
+/* Text */
+
+.text {
+  font-weight: var(--text-weight);
+  color: var(--black);
+}
+
+.text.large {
+  font-size: var(--large);
+  line-height: var(--large-line-height);
+}
+
+.text.medium {
+  font-size: var(--medium);
+  line-height: var(--medium-line-height);
+}
+
+.text.small {
+  font-size: var(--small);
+  line-height: var(--small-line-height);
+}
+
+.text.xsmall {
+  font-size: var(--xsmall);
+  line-height: var(--xsmall-line-height);
+}
+
+/* Link */
+
+.link {
+  font-weight: var(--link-weight);
+  color: var(--black);
+}
+
+.link.medium {
+  font-size: var(--medium);
+  line-height: var(--medium-line-height);
+}
+
+.link.small {
+  font-size: var(--small);
+  line-height: var(--small-line-height);
+}
+
+.link.xsmall {
+  font-size: var(--xsmall);
+  line-height: var(--xsmall-line-height);
+}
+
+/* button */
+.button {
+  background-color: var(--primary1);
+  color: var(--white);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 8px 16px;
+  border-radius: var(--default-border-radius);
+}
+
+.button:hover {
+  background-color: var(--primary3);
+}
+
+.button:focus {
+  background-color: var(--primary1);
+  border: 2px solid var(--primary2);
+}
+
+.button:disabled {
+  background-color: var(--primary2);
+}
+
+.button.large {
+  padding: 10px 16px;
+}
+
+/* Location */
+.button.location--add,
+.button.location--inactive {
+  background-color: var(--white);
+  border: 1px solid var(--primary1);
+}
+
+.button.location--add span {
+  display: none;
+}
+
+.button.location--add span::after {
+  content: url('../images/icons/add.png');
+  color: var(--primary2);
+}
+
+.button.location--active span::after,
+.button.location--inactive span::after {
+  content: url('../images/icons/close.png');
+  color: var(--primary2);
+}
+
+/* Category */
+.button.category {
+  padding: 4px 16px;
+  border: 1px solid var(--grey3);
+  box-sizing: border-box;
+  border-radius: var(--circel-border-radius);
+  color: var(--grey1);
+}
+
+.button.category.active {
+  background-color: var(--primary1);
+  border: 0;
+  color: var(--white);
+}
+
+/* Tap */
+.button.tap {
+  padding: 0px 0px 18px;
+  border-radius: 0;
+  flex-direction: column;
+  align-items: flex-start;
+  color: var(--grey1);
+  border-bottom: solid 2px var(--white);
+}
+
+.button.tap.active {
+  border-bottom: solid 2px var(--primary1);
+}
+
+/* Status */
+/* TODO: element 보면서 수정해야 합니다. 스타일만 추가해뒀습니다. */
+.status {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 10px 16px;
+  border: 1px solid var(--grey5);
+  border-radius: var(--default-border-radius);
+  color: var(--black);
+}
+
+.button.fab {
+  background-color: var(--primary1);
+  width: var(--fab-size);
+  height: var(--fab-size);
+}
+
+.button.fab:hover {
+  background-color: var(--primary3);
+}
+
+.button.fab:focus {
+  background-color: var(--primary1);
+  border: 2px solid var(--primary2);
+}
+
+.button.fab:disabled {
+  background-color: var(--primary2);
+}
+
+/* Text Input */
+.input {
+  background-color: var(--white);
+  border: 1px solid var(--grey3);
+  border-radius: var(--default-border-radius);
+  color: var(--black);
+  display: flex;
+  align-items: flex-start;
+}
+
+.input::placeholder {
+  color: var(--grey1);
+}
+
+.input:focus {
+  border: 1px solid var(--primary1);
+}
+
+.input.medium {
+  width: 256px;
+  font-size: var(--small);
+  line-height: var(--small-line-height);
+  padding: 8px;
+}
+
+.input.large {
+  width: 290px;
+  font-size: var(--medium);
+  line-height: var(--medium-line-height);
+  padding: 10px 16px 8px;
+}
+
+/* ImgBox */
+.img-box {
+  width: var(--img-small);
+  height: var(--img-small);
+  border-radius: var(--small-border-radius);
+  background-color: var(--off-white);
+  border: 1px solid var(--grey3);
+}
+
+.img-box.medium {
+  width: var(--img-medium);
+  height: var(--img-medium);
+  border-radius: var(--defualt-border-radius);
+}
+
+.img-box.large {
+  width: var(--img-large);
+  height: var(--img-large);
+  border-radius: var(--large-border-radius);
+}
+
+/* TODO: 캐러셀 구현하면서 다시 확인 */
+.image.gradient {
+  width: var(--img-full);
+  height: var(--img-full);
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.24) 0%,
+    rgba(0, 0, 0, 0) 16.52%,
+    rgba(0, 0, 0, 0) 87.36%,
+    rgba(0, 0, 0, 0.24) 100%
+  );
+  border: 0;
+}
+
+/* ImgNav */
+/* TODO: 상위 요소 작성할 때 맞춰서 수정하기(margin 등) */
+.img-nav {
+  width: var(--nav-size);
+  height: var(--nav-size);
+  border: 1px solid var(--white);
+  border-radius: var(--circel-border-radius);
+  background-color: transparent;
+  margin: 0 8px;
+}
+
+.img-nav.active {
+  background-color: var(--white);
+}
+
+/* ChatBubble */
+.chat-bubble {
+  display: flex;
+  align-items: flex-start;
+  padding: 8px;
+  background-color: var(--white);
+  border: 1px solid var(--primary1);
+  border-radius: 0px 8px 8px 8px;
+  padding: 8px;
+  color: var(--black);
+  font-size: var(--small);
+}
+
+.chat-bubble.fill {
+  background-color: var(--primary1);
+  border-radius: 8px 0px 8px 8px;
+  color: var(--white);
+}
+
+/* ChatBadge */
+.chat-badge {
+  display: flex;
+  align-items: flex-start;
+  padding: 4px;
+  border-radius: var(--circel-border-radius);
+  background-color: var(--primary3);
+  color: var(--white);
+  font-size: var(--xsmall);
+}
+
+/* CategoryListItem */
+.category-list-item {
+  font-size: var(--xsmall);
+}
+
+.category-list-item:hover:focus {
+  color: var(--primary1);
+}
+
+/* ImgButton */
+.img-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--grey1);
+  font-size: var(--xsmall);
+}
+
+/* Dropdown */
+/* TODO: select와 함께 사용할지, 직접 구현할지 고민하기 */
+.dropdown {
+  display: flex;
+  align-items: flex-start;
+  padding: 16px;
+  background-color: var(--off-white);
+  flex-grow: 0;
+  margin: 1px 0px;
+  font-size: var(--small);
+}
+
+.dropdown:first-child {
+  border-radius: 10px 10px 0px 0px;
+}
+
+.dropdown:last-child {
+  border-radius: 0px 0px 10px 10px;
+}
+
+/* Hearder */
+.header {
+  position: fixed;
+  top: 0px;
+  width: var(--full-width);
+  height: var(--header-height);
+  display: flex;
+  align-items: center;
+  color: var(--white);
+  background-color: var(--primary1);
+  border-radius: 0px 0px 16px 16px;
+}
+
+.header.white {
+  color: var(--black);
+  background-color: var(--white);
+}
+
+.header.offwhite {
+  color: var(--black);
+  background-color: var(--off-white);
+}
+
+.header.invisible {
+  color: var(--white);
+  background-color: transparent;
+}
+
+/* TapBar */
+.tap-bar {
+  display: flex;
+  align-items: flex-start;
+  padding: 16px 16px 0px;
+  width: var(--full-width);
+  height: 50px;
+  background-color: var(--off-white);
+  box-shadow: inset 0px -1px 0px var(--grey3);
+}
+
+/* ImgNavigation */
+/* TODO: background color는 아마 캐러셀에서 줄듯하다! 모든 수치는 임시 수치임 */
+.img-navigation {
+  position: absolute;
+  bottom: 48px; /* 임시 수치, 추후에 수정 */
+  background-color: var(--grey3); /* 임시 수치, 추후에 수정 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* InfoSaler */
+.info-saler {
+  display: flex;
+  align-items: center;
+  width: var(--full-width);
+  padding: 16px;
+  height: var(--info-saler-height);
+  font-size: var(--medium);
+}
+
+/* LocationBar */
+.location-bar {
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  height: var(--location-bar-height);
+}
+
+/* ProductBar */
+.product-bar {
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  height: var(--product-bar-height);
+}
+
+/* InfoProduct */
+.info-product {
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  height: var(--info-product-height);
+}
+
+/* ProducListItem */
+.location-bar {
+  display: flex;
+  align-items: center;
+  padding: 16px;
+  height: var(--product-list-item-height);
+}
+
+/* ChatListItem */
+.chat-list-item {
+  width: var(--full-width);
+  display: flex;
+  justify-content: space-between;
+  padding: 16px;
+  gap: 16px;
+  background-color: var(--white);
+}
+
+.chat-list-item .item__left {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.chat-list-item .item__left .namebar {
+  width: var(--full-width);
+  display: flex;
+  justify-content: space-between;
+}
+
+.chat-list-item .item__left .messagebar {
+  display: flex;
+  gap: 16px;
+}
+
+.chat-list-item .message {
+  flex-grow: 1;
+}
+
+.chat-list-item .unread-count {
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  padding: 4px;
+  background-color: var(--primary3);
+  color: var(--white);
+}
+
+/* ChatBar */
+.chatbar {
+  width: var(--full-width);
+  padding: 8px 16px 8px 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.chatbar > .input::after {
+  content:url("../images/icons/send.png");
+  width: 20px;
+  height: 20px;
+  color: var(--grey1);
+}
+
+.chatbar.filled > .input::after {
+  color: var(--primary1);
+}
+
+/* Popup & Alert*/
+.popup {
+  width: 288px;
+  padding: 16px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  background-color: var(--off-white);
+  box-shadow: var(--custom-shadow);
+  backdrop-filter: blur(4px);
+  border-radius: var(--large-border-radius);
+}
+
+.popup .button-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: var(--black);
+}
+
+.popup .button-bar > button:last-child {
+  color: var(--grey1);
+}
+
+.popup.filled .button-bar > button:last-child {
+  color: var(--primary1);
+}
+
+.popup.alert .button-bar > button:last-child {
+  color: var(--red);
+}
+
+.popup.input--wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.popup.input--wrapper > label {
+  margin-left: 4px;
+}
