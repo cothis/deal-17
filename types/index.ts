@@ -1,66 +1,66 @@
 import View from '../frontend/core/view'
 
 export interface Usesr {
-    id: number;
-    email: string;
+    readonly id: number;
+    readonly email: string;
 }
 
 export interface Category {
-    id: number;
-    name: string;
-    imagePath: string;
+    readonly id: number;
+    readonly name: string;
+    readonly imagePath: string;
 }
 
 export interface Product {
-    id: number;
+    readonly id: number;
     subject: string;
     categoryId: number;
-    price: number | null;
-    content: string | null;
-    sellerId: number;
+    price?: number;
+    content?: string;
+    readonly sellerId: number;
     state: number;
     views: number;
-    createdAt: Date;
+    readonly createdAt: Date;
 }
 
 export interface ChatRoom {
-    id: number;
-    productId: number;
-    sellerId: number;
-    customerId: number
+    readonly id: number;
+    readonly productId: number;
+    readonly sellerId: number;
+    readonly customerId: number
 }
 
 export interface Town {
-    id: number;
-    name: string;
+    readonly id: number;
+    readonly name: string;
 }
 
 export interface UserTown {
-    id: number;
-    userId: number;
-    townId: number;
+    readonly id: number;
+    readonly userId: number;
+    readonly townId: number;
 }
 
 export interface Picture {
-    id: number;
-    path: string;
-    productId: number;
+    readonly id: number;
+    readonly path: string;
+    readonly productId: number;
 }
 
 export interface Wish {
-    id: number;
-    userId: number;
-    productId: number;
+    readonly id: number;
+    readonly userId: number;
+    readonly productId: number;
     isChecked: boolean;
 }
 
 export interface Message {
-    id: number;
-    chatRoomId: number;
-    userId: number;
-    content: string;
+    readonly id: number;
+    readonly chatRoomId: number;
+    readonly userId: number;
+    readonly content: string;
     isRead: boolean;
-    createdAt: Date;
+    readonly createdAt: Date;
 }
 
 export interface RouteInfo {
