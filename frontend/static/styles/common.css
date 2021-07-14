@@ -43,6 +43,32 @@
 
   /* image nav size */
   --nav-size: 8px;
+
+  /* box shadow */
+  --custom-shadow: box-shadow: 0px 0px 4px rgba(204, 204, 204, 0.5), 0px 2px 4px rgba(0, 0, 0, 0.25);
+
+  /* Text Input size */
+  --input-medium: 256px;
+  --input-large: 290px;
+
+  /* header height */
+  --header-height: 56px;
+
+  /* info saler height */
+  --info-saler-height: 48px;
+
+  /* location bar height */
+  --location-bar-height: 48px;
+
+  /* product bar height */
+  --product-bar-height: 48px;
+
+  /* category list item height */
+  --category-list-height: 140px;
+
+  /* full width */
+  --full-width: 100%;
+
 }
 
 /* Text */
@@ -223,19 +249,21 @@
 }
 
 .input.medium {
+  width: 256px;
   font-size: var(--small);
   line-height: var(--small-line-height);
   padding: 8px;
 }
 
 .input.large {
+  width: 290px;
   font-size: var(--medium);
   line-height: var(--medium-line-height);
   padding: 10px 16px 8px;
 }
 
 /* ImgBox */
-.imgbox {
+.img-box {
   width: var(--img-small);
   height: var(--img-small);
   border-radius: var(--small-border-radius);
@@ -243,13 +271,13 @@
   border: 1px solid var(--grey3);
 }
 
-.imgbox.medium {
+.img-box.medium {
   width: var(--img-medium);
   height: var(--img-medium);
   border-radius: var(--defualt-border-radius);
 }
 
-.imgbox.large {
+.img-box.large {
   width: var(--img-large);
   height: var(--img-large);
   border-radius: var(--large-border-radius);
@@ -270,13 +298,280 @@
 }
 
 /* ImgNav */
-.imgnav {
+/* TODO: 상위 요소 작성할 때 맞춰서 수정하기(margin 등) */
+.img-nav {
   width: var(--nav-size);
   height: var(--nav-size);
   border: 1px solid var(--white);
+  border-radius: var(--circel-border-radius);
+  background-color: transparent;
+  margin: 0 8px;
+}
+
+.img-nav.active {
+  background-color: var(--white);
+}
+
+/* ChatBubble */
+.chat-bubble {
+  display: flex;
+  align-items: flex-start;
+  padding: 8px;
+  background-color: var(--white);
+  border: 1px solid var(--primary1);
+  border-radius: 0px 8px 8px 8px;
+  padding: 8px;
+  color: var(--black);
+  font-size: var(--small);
+}
+
+.chat-bubble.fill {
+  background-color: var(--primary1);
+  border-radius: 8px 0px 8px 8px;
+  color: var(--white);
+}
+
+/* ChatBadge */
+.chat-badge {
+  display: flex;
+  align-items: flex-start;
+  padding: 4px;
+  border-radius: var(--circel-border-radius);
+  background-color: var(--primary3);
+  color: var(--white);
+  font-size: var(--xsmall);
+}
+
+/* CategoryListItem */
+.category-list-item {
+  font-size: var(--xsmall);
+}
+
+.category-list-item:hover:focus {
+  color: var(--primary1);
+}
+
+/* ImgButton */
+.img-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--grey1);
+  font-size: var(--xsmall);
+}
+
+/* Dropdown */
+/* TODO: select와 함께 사용할지, 직접 구현할지 고민하기 */
+.dropdown {
+  display: flex;
+  align-items: flex-start;
+  padding: 16px;
+  background-color: var(--off-white);
+  flex-grow: 0;
+  margin: 1px 0px;
+  font-size: var(--small);
+}
+
+.dropdown:first-child {
+  border-radius: 10px 10px 0px 0px;
+}
+
+.dropdown:last-child {
+  border-radius: 0px 0px 10px 10px;
+}
+
+/* Hearder */
+.header {
+  position: fixed;
+  top: 0px;
+  width: var(--full-width);
+  height: var(--header-height);
+  display: flex;
+  align-items: center;
+  color: var(--white);
+  background-color: var(--primary1);
+  border-radius: 0px 0px 16px 16px;
+}
+
+.header.white {
+  color: var(--black);
+  background-color: var(--white);
+}
+
+.header.offwhite {
+  color: var(--black);
+  background-color: var(--off-white);
+}
+
+.header.invisible {
+  color: var(--white);
   background-color: transparent;
 }
 
-.imgnav.active {
+/* TapBar */
+.tap-bar {
+  display: flex;
+  align-items: flex-start;
+  padding: 16px 16px 0px;
+  width: var(--full-width);
+  height: 50px;
+  background-color: var(--off-white);
+  box-shadow: inset 0px -1px 0px var(--grey3);
+}
+
+/* ImgNavigation */
+/* TODO: background color는 아마 캐러셀에서 줄듯하다! 모든 수치는 임시 수치임 */
+.img-navigation {
+  position: absolute;
+  bottom: 48px; /* 임시 수치, 추후에 수정 */
+  background-color: var(--grey3); /* 임시 수치, 추후에 수정 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* InfoSaler */
+.info-saler {
+  display: flex;
+  align-items: center;
+  width: var(--full-width);
+  padding: 16px;
+  height: var(--info-saler-height);
+  font-size: var(--medium);
+}
+
+/* LocationBar */
+.location-bar {
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  height: var(--location-bar-height);
+}
+
+/* ProductBar */
+.product-bar {
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  height: var(--product-bar-height);
+}
+
+/* InfoProduct */
+.info-product {
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  height: var(--info-product-height);
+}
+
+/* ProducListItem */
+.location-bar {
+  display: flex;
+  align-items: center;
+  padding: 16px;
+  height: var(--product-list-item-height);
+}
+
+/* ChatListItem */
+.chat-list-item {
+  width: var(--full-width);
+  display: flex;
+  justify-content: space-between;
+  padding: 16px;
+  gap: 16px;
   background-color: var(--white);
+}
+
+.chat-list-item .item__left {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.chat-list-item .item__left .namebar {
+  width: var(--full-width);
+  display: flex;
+  justify-content: space-between;
+}
+
+.chat-list-item .item__left .messagebar {
+  display: flex;
+  gap: 16px;
+}
+
+.chat-list-item .message {
+  flex-grow: 1;
+}
+
+.chat-list-item .unread-count {
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  padding: 4px;
+  background-color: var(--primary3);
+  color: var(--white);
+}
+
+/* ChatBar */
+.chatbar {
+  width: var(--full-width);
+  padding: 8px 16px 8px 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.chatbar > .input::after {
+  content:url("../images/icons/send.png");
+  width: 20px;
+  height: 20px;
+  color: var(--grey1);
+}
+
+.chatbar.filled > .input::after {
+  color: var(--primary1);
+}
+
+/* Popup & Alert*/
+.popup {
+  width: 288px;
+  padding: 16px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  background-color: var(--off-white);
+  box-shadow: var(--custom-shadow);
+  backdrop-filter: blur(4px);
+  border-radius: var(--large-border-radius);
+}
+
+.popup .button-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: var(--black);
+}
+
+.popup .button-bar > button:last-child {
+  color: var(--grey1);
+}
+
+.popup.filled .button-bar > button:last-child {
+  color: var(--primary1);
+}
+
+.popup.alert .button-bar > button:last-child {
+  color: var(--red);
+}
+
+.popup.input--wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.popup.input--wrapper > label {
+  margin-left: 4px;
 }
