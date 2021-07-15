@@ -1,16 +1,17 @@
 import { Product } from '../../types';
-import FabButton from '../components/main/fab-button';
 import View from '../core/view';
 import Store from '../core/store';
 import { ProductApi } from '../core/api';
+
 import Header from '../components/common/header';
-import { ProductComponent } from '../components/common/product';
+import ProductList from '../components/common/product-list';
+import FabButton from '../components/main/fab-button';
 
 const template = `
 <div>
-  <div id="header"></div>
-  <div id="products">{{__products__}}</div>
-  <div id="MainView__FabButton"></div>
+  <div id="mainView__header"></div>
+  <div id="mainView__productList"></div>
+  <div id="mainView__fabButton"></div>
 </div>
 `;
 
@@ -27,14 +28,10 @@ export default class MainView extends View {
   render() {
     this.api.getAllProducts().then((products: Product[]) => {
       this.updateView();
-
-      new Header('#header', this.store).render();
-
-      products.forEach((product) => {
-        new ProductComponent('#products', this.store, { product }).render();
-      });
-
-      new FabButton('#MainView__FabButton', this.store, {}).render();
+      new Header('#mainView__header', this.store).render();
+      console.log(products)
+      new ProductList('#mainView__productList', this.store, { products }).render();
+      new FabButton('#mainView__fabButton', this.store, {}).render();
     });
   }
 }

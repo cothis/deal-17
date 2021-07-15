@@ -41,7 +41,6 @@ export class ProductComponent extends View {
   render() {
     // this.setTemplateData('image-path', this.product.pictures[0].path);
     this.setTemplateData('subject', this.product.subject);
-
     this.updateView();
   }
 }
