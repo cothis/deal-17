@@ -11,7 +11,7 @@ const server: http.Server = http.createServer(app);
 app.set('port', process.env.PORT || 8000);
 app.use(express.json());
 app.use(cors());
-app.use('/static', express.static(path.join(__dirname, '../frontend/static')));
+app.use('/static', express.static(path.join(__dirname, '../static')));
 app.use('/dist', express.static(path.join(__dirname, '../dist')));
 app.get('/', (req, res) => res.sendFile(path.join(__dirname, '../dist/index.html')));
 app.use('/api/v0/products', ProductController);
