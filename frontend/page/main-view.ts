@@ -2,6 +2,7 @@ import { Product } from '../../types';
 import FabButton from '../components/main/fab-button';
 import View from '../core/view';
 import Store from '../store';
+import { ProductApi } from '../core/api';
 
 const template = `
 <div>
@@ -16,28 +17,27 @@ const template = `
 
 export default class MainView extends View {
   private store: Store;
+  private api: ProductApi;
 
   constructor(containerId: string, store: Store) {
     super(containerId, template);
     this.store = store;
+    this.api = new ProductApi('/api/v0/products');
   }
 
   render() {
-    fetch('http://localhost:8000/api/v0/products')
-      .then((res) => res.json())
-      .then((products: Product[]) => {
-        products.forEach((product) => {
-          this.addHtml(`
-          <div>${product.subject}</div>          
+    this.api.getAllProducts().then((products: Product[]) => {
+      products.forEach((product) => {
+        this.addHtml(`
+          <div>${product.subject}</div>
           `);
-        });
-        this.setTemplateData('products', this.getHtml());
-        this.updateView();
-
-        for (let i = 1; i <= 4; i++) {
-          const fabButton = new FabButton('MainView__FabButton' + i, this.store, {});
-          fabButton.render();
-        }
       });
+      this.setTemplateData('products', this.getHtml());
+      this.updateView();
+      for (let i = 1; i <= 4; i++) {
+        const fabButton = new FabButton('MainView__FabButton' + i, this.store, {});
+        fabButton.render();
+      }
+    });
   }
 }
