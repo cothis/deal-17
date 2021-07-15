@@ -382,7 +382,7 @@
 
 /* Hearder */
 .header {
-  position: fixed;
+  position: sticky;
   top: 0px;
   width: var(--full-width);
   height: var(--header-height);
@@ -465,7 +465,7 @@
 }
 
 /* ProducListItem */
-.location-bar {
+.product-list-item {
   display: flex;
   align-items: center;
   padding: 16px;
