@@ -6,7 +6,7 @@ import { ProductApi } from '../core/api';
 
 const template = `
 <div>
-  <h1>메인 뷰 입니다.</h1>
+  <div id="header" class="header">{{__header__}}</div>
   <div id="MainView__FabButton1"></div>
   <div id="MainView__FabButton2"></div>
   <div id="MainView__FabButton3"></div>
@@ -19,8 +19,8 @@ export default class MainView extends View {
   private store: Store;
   private api: ProductApi;
 
-  constructor(containerId: string, store: Store) {
-    super(containerId, template);
+  constructor(selector: string, store: Store) {
+    super(selector, template);
     this.store = store;
     this.api = new ProductApi('/api/v0/products');
   }
@@ -35,7 +35,7 @@ export default class MainView extends View {
       this.setTemplateData('products', this.getHtml());
       this.updateView();
       for (let i = 1; i <= 4; i++) {
-        const fabButton = new FabButton('MainView__FabButton' + i, this.store, {});
+        const fabButton = new FabButton('#MainView__FabButton' + i, this.store, {});
         fabButton.render();
       }
     });
