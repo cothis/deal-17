@@ -16,29 +16,42 @@ export default abstract class View {
       this.renderTemplate = template;
       this.htmlList = [];
     }
-  
-    protected updateView(): void {
-      this.container.innerHTML = this.renderTemplate;
-      this.renderTemplate = this.template;
-    }
-  
-    protected addHtml(htmlString: string): void {
-      this.htmlList.push(htmlString);
-    }
-  
-    protected getHtml(): string {
-      const snapshot = this.htmlList.join('');
-      this.clearHtmlList();
-      return snapshot;
-    }
-  
-    protected setTemplateData(key: string, value: string): void {
-      this.renderTemplate = this.renderTemplate.replace(`{{__${key}__}}`, value);
-    }
-  
-    private clearHtmlList(): void {
-      this.htmlList = [];
-    }
-  
-    abstract render(): void;
+
+    this.container = containerElement;
+    this.template = template;
+    this.renderTemplate = template;
+    this.htmlList = [];
   }
+
+  protected updateView(): void {
+    this.container.innerHTML = this.renderTemplate;
+    this.renderTemplate = this.template;
+  }
+
+  appendView(): void {
+    const $div = document.createElement('div');
+    $div.innerHTML = this.renderTemplate;
+    this.renderTemplate = this.template;
+    Array.from($div.children).forEach((child) => this.container.appendChild(child));
+  }
+
+  protected addHtml(htmlString: string): void {
+    this.htmlList.push(htmlString);
+  }
+
+  protected getHtml(): string {
+    const snapshot = this.htmlList.join('');
+    this.clearHtmlList();
+    return snapshot;
+  }
+
+  protected setTemplateData(key: string, value: string): void {
+    this.renderTemplate = this.renderTemplate.replace(`{{__${key}__}}`, value);
+  }
+
+  private clearHtmlList(): void {
+    this.htmlList = [];
+  }
+
+  abstract render(): void;
+}
