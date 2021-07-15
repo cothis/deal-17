@@ -3,8 +3,18 @@ import Store from '../../core/store';
 // import { ProductApi } from '../core/api';
 
 const template = `
-<div class="header">
-    hi
+<div class="header-container flex grow">
+    <div class="header-center link medium white flex ai-center jc-center">
+      <img src="/frontend/static/images/icons/map-pin.png">
+      <div>장소</div>
+    </div>
+    <div class="header-left">
+      <img src="/frontend/static/images/icons/category.png">
+    </div>
+    <div class="header-right flex">
+      <img src="/frontend/static/images/icons/user.png">
+      <img src="/frontend/static/images/icons/menu.png">
+    </div>
 </div>
 `;
 

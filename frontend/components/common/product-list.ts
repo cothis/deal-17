@@ -26,11 +26,10 @@ export default class ProductList extends View {
 
   render() {
     this.updateView();
-    this.props.products.forEach((product, i) => {
+    this.props.products.forEach((_, i) => {
       this.addHtml(`<div id="mainView__product${i}"></div>`);
     });
     const html = this.getHtml()
-    console.log(html)
     this.setTemplateData('product', html);
     this.updateView();
     this.props.products.forEach((product, i) => {

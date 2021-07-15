@@ -8,8 +8,8 @@ import ProductList from '../components/common/product-list';
 import FabButton from '../components/main/fab-button';
 
 const template = `
-<div>
-  <div id="mainView__header"></div>
+<div class="MainView">
+  <div id="mainView__header" class="header"></div>
   <div id="mainView__productList"></div>
   <div id="mainView__fabButton"></div>
 </div>
