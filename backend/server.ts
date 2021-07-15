@@ -3,7 +3,7 @@ import express from 'express';
 import cors from 'cors';
 import 'dotenv-defaults/config';
 import ProductController from './products/product.controller';
-
+console.log(process.env);
 const app = express();
 const server: http.Server = http.createServer(app);
 
