@@ -1,3 +1,4 @@
+import { Product } from '../../types';
 import FabButton from '../components/main/fab-button';
 import View from '../core/view';
 import Store from '../store';
@@ -22,12 +23,21 @@ export default class MainView extends View {
   }
 
   render() {
-    this.setTemplateData('products', this.store.getAllProducts().toString());
-    this.updateView();
+    fetch('http://localhost:8000/api/v0/products')
+      .then((res) => res.json())
+      .then((products: Product[]) => {
+        products.forEach((product) => {
+          this.addHtml(`
+          <div>${product.subject}</div>          
+          `);
+        });
+        this.setTemplateData('products', this.getHtml());
+        this.updateView();
 
-    for (let i = 1; i <= 4; i++) {
-      const fabButton = new FabButton('MainView__FabButton' + i, this.store, {});
-      fabButton.render();
-    }
+        for (let i = 1; i <= 4; i++) {
+          const fabButton = new FabButton('MainView__FabButton' + i, this.store, {});
+          fabButton.render();
+        }
+      });
   }
 }
