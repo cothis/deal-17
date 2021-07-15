@@ -10,7 +10,7 @@ import {
   Picture,
   Wish,
   Message,
-} from '../types';
+} from '../../types';
 
 export default class Store implements UserStore, ProductStore {
   private _user: User | null;

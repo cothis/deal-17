@@ -4,6 +4,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 require('dotenv-defaults').config();
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const { env } = require('process');
+const { json } = require('express');
 
 module.exports = {
   devtool: env.mode === 'development' ? 'cheap-eval-source-map' : '',
@@ -46,7 +47,14 @@ module.exports = {
       },
     ],
   },
-  plugins: [new HtmlWebpackPlugin({ template: './index.html' }), new CleanWebpackPlugin()],
+  plugins: [
+    new HtmlWebpackPlugin({ template: './index.html' }),
+    new CleanWebpackPlugin(),
+    new webpack.DefinePlugin({
+      'process.env.API_URL': JSON.stringify(process.env.API_URL),
+    }),
+    new webpack.EnvironmentPlugin(['API_URL']),
+  ],
   optimization: {
     splitChunks: {
       chunks: 'async',
