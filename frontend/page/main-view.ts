@@ -1,7 +1,7 @@
 import { Product } from '../../types';
 import FabButton from '../components/main/fab-button';
 import View from '../core/view';
-import Store from '../store';
+import Store from '../core/store';
 import { ProductApi } from '../core/api';
 
 const template = `

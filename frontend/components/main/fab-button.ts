@@ -1,5 +1,5 @@
 import View from '../../core/view';
-import Store from '../../store';
+import Store from '../../core/store';
 
 const template = `
 <button id="FabButton{{__id__}}" class="button fab"></button>
