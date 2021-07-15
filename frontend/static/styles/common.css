@@ -215,6 +215,7 @@
   background-color: var(--primary1);
   width: var(--fab-size);
   height: var(--fab-size);
+  border-radius: 50%;
 }
 
 .button.fab:hover {

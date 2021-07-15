@@ -10,10 +10,7 @@ const template = `
 <div>
   <div id="header"></div>
   <div id="products">{{__products__}}</div>
-  <div id="MainView__FabButton1"></div>
-  <div id="MainView__FabButton2"></div>
-  <div id="MainView__FabButton3"></div>
-  <div id="MainView__FabButton4"></div>
+  <div id="MainView__FabButton"></div>
 </div>
 `;
 
@@ -30,15 +27,14 @@ export default class MainView extends View {
   render() {
     this.api.getAllProducts().then((products: Product[]) => {
       this.updateView();
-      for (let i = 1; i <= 4; i++) {
-        new FabButton('#MainView__FabButton' + i, this.store, {}).render();
-      }
 
       new Header('#header', this.store).render();
 
       products.forEach((product) => {
         new ProductComponent('#products', this.store, { product }).render();
       });
+
+      new FabButton('#MainView__FabButton', this.store, {}).render();
     });
   }
 }
