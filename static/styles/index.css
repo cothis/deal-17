@@ -84,6 +84,8 @@
     width: 100%;
     z-index: 200;
     background-color: var(--white);
+    overflow: hidden;
+    
 }
 
 .login-view__visible {
