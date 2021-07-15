@@ -6,7 +6,7 @@ const store = new Store();
 
 const router = new Router();
 
-const mainView = new MainView('app', store);
+const mainView = new MainView('#app', store);
 
 router.setDefaultPage(mainView);
 
