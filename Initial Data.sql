@@ -23,3 +23,5 @@ insert into PRODUCT(SUBJECT, CATEGORY_ID, PRICE, CONTENT, SELLER_ID)
 values('생활가전 유저1', 2, 3000, '가전입니다', 1);   
 insert into PRODUCT(SUBJECT, CATEGORY_ID, PRICE, CONTENT, SELLER_ID)
 values('생활가전 유저1 가격미정', 1, null, '디지털기기 팔아요', 1);   
+insert into PRODUCT(SUBJECT, CATEGORY_ID, PRICE, CONTENT, SEELER_ID)
+values('디지털가전 팔아요', 1, 5000, '디지털가전이 진짜 쌉니다', 1);
