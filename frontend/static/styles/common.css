@@ -269,7 +269,7 @@
 /* FAB */
 
 .button.fab::before {
-  background-image: url('/frontend/static/images/icons/add.png');
+  background-image: url('/static/images/icons/add.png');
   background-size: 45% 45%;
   background-position: center center;
   background-repeat: no-repeat;

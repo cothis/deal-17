@@ -11,7 +11,7 @@ const template: string = `
     <div class="product-info flex column">
       <div class="product-info-title">
         <div class="link medium flex grow">{{__subject__}}</div>
-        <img class="" src="/frontend/static/images/icons/heart.png" alter="아이콘">
+        <img class="" src="/static/images/icons/heart.png" alter="아이콘">
       </div>
       <div class="product-content flex ai-center text small grey1">
         <div>역삼동</div>
@@ -24,11 +24,11 @@ const template: string = `
       <div class="product-icon-section flex grow text small grey1">
         <div class="product-icon-box grow flex">
           <div class="flex ai-center">
-            <img class="product-bottom-icon" src="/frontend/static/images/icons/message-square.png" alter="아이콘">
+            <img class="product-bottom-icon" src="/static/images/icons/message-square.png" alter="아이콘">
             <div>1</div>
           </div>
           <div class="flex ai-center">
-            <img class="product-bottom-icon" src="/frontend/static/images/icons/heart.png" alter="아이콘">
+            <img class="product-bottom-icon" src="/static/images/icons/heart.png" alter="아이콘">
             <div>1</div>
           </div>
         </div>
@@ -50,7 +50,10 @@ export class ProductComponent extends View {
 
   render() {
     // TODO: image path 수정해야함
-    this.setTemplateData('image-path', 'https://pds.joins.com/news/component/htmlphoto_mmdata/201912/02/e157f4c7-2dc7-416c-8a88-d1a3dbfff9e8.jpg');
+    this.setTemplateData(
+      'image-path',
+      'https://pds.joins.com/news/component/htmlphoto_mmdata/201912/02/e157f4c7-2dc7-416c-8a88-d1a3dbfff9e8.jpg'
+    );
     this.setTemplateData('subject', this.product.subject);
     this.setTemplateData('price', convertToMarketPrice(this.product.price));
     this.updateView();
