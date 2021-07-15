@@ -49,7 +49,8 @@ export class ProductComponent extends View {
   }
 
   render() {
-    // this.setTemplateData('image-path', this.product.pictures[0].path);
+    // TODO: image path 수정해야함
+    this.setTemplateData('image-path', 'https://pds.joins.com/news/component/htmlphoto_mmdata/201912/02/e157f4c7-2dc7-416c-8a88-d1a3dbfff9e8.jpg');
     this.setTemplateData('subject', this.product.subject);
     this.setTemplateData('price', convertToMarketPrice(this.product.price));
     this.updateView();

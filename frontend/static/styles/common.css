@@ -338,6 +338,12 @@
   border-radius: var(--small-border-radius);
   background-color: var(--off-white);
   border: 1px solid var(--grey3);
+  overflow: hidden;
+}
+
+.img-box img {
+  width: 100%;
+  object-fit: cover;
 }
 
 .img-box.medium {
