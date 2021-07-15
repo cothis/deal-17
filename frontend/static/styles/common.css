@@ -706,3 +706,8 @@
 .align-self-center {
   align-self: center;
 }
+
+.icon-wrapper {
+  width: 24px;
+  height: 24px;
+}
