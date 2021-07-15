@@ -1,5 +1,6 @@
 import Router from './frontend/core/router';
 import { TestView, TestAnotherView } from './frontend/page';
+import MainView from './frontend/page/main-view';
 import Store from './frontend/store';
 import { User } from './types';
 
@@ -10,10 +11,11 @@ store.user = {
 };
 
 const router = new Router();
+const mainView = new MainView('app', store);
 const testView = new TestView('app', store);
 const testAnotherView = new TestAnotherView('app', store);
 
-router.setDefaultPage(testView);
+router.setDefaultPage(mainView);
 
 router.addRoutePath('another', testAnotherView);
 router.route();
