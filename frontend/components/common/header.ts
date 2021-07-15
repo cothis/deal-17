@@ -13,7 +13,7 @@ const template = `
     </div>
     <div class="header-right flex">
       <img src="/frontend/static/images/icons/user.png">
-      <img src="/frontend/static/images/icons/menu.png">
+      <img id="headerMenu" src="/frontend/static/images/icons/menu.png">
     </div>
 </div>
 `;
@@ -28,7 +28,14 @@ export default class Header extends View {
     // this.api = new ProductApi('/api/v0/products');
   }
 
+  onMenuClickHandler() {
+    alert('menu');
+  }
+
   render() {
     this.updateView();
+
+    const headerMenu = document.querySelector('#headerMenu');
+    headerMenu!.addEventListener('click', this.onMenuClickHandler)
   }
 }
