@@ -1,5 +1,5 @@
 import View from '../../core/view';
-import Store from '../../store';
+import Store from '../../core/store';
 import IdInputComponent from './id-input';
 import JoinButtonComponent from './join-button';
 import LoginButtonComponent from './login-button';

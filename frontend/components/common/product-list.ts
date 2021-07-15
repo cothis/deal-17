@@ -29,7 +29,7 @@ export default class ProductList extends View {
     this.props.products.forEach((_, i) => {
       this.addHtml(`<div id="mainView__product${i}"></div>`);
     });
-    const html = this.getHtml()
+    const html = this.getHtml();
     this.setTemplateData('product', html);
     this.updateView();
     this.props.products.forEach((product, i) => {

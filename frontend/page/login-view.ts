@@ -1,7 +1,7 @@
 import InputFormComponent from '../components/login/input-form';
 import LoginHeaderComponent from '../components/login/login-header';
 import View from '../core/view';
-import Store from '../store';
+import Store from '../core/store';
 
 const template: string = `
 <div id="header" class="header offwhite p-5"></div>

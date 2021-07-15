@@ -10,7 +10,7 @@ const router = new Router();
 const mainView = new MainView('#app', store);
 
 const loginView = new LoginView('#app', store);
-router.setDefaultPage(loginView);
+router.setDefaultPage(mainView);
 
 // router.addRoutePath('another', testAnotherView);
 router.route();
