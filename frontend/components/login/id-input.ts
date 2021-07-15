@@ -1,5 +1,5 @@
 import View from '../../core/view';
-import Store from '../../store';
+import Store from '../../core/store';
 
 const template = `
 <input type="text" class="input large my-2" placeholder="아이디를 입력하세요.">

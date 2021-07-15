@@ -1,5 +1,5 @@
 import View from '../../core/view';
-import Store from '../../store';
+import Store from '../../core/store';
 
 const template = `
 <button type="button" class="button large link medium my-2">로그인</button>

@@ -1,5 +1,5 @@
 import View from '../../core/view';
-import Store from '../../store';
+import Store from '../../core/store';
 
 const template = `
 <button type="button" class="bg-transparent my-5 align-self-center">회원가입</button>
