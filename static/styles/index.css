@@ -74,3 +74,19 @@
     height: 16px;
     margin: 0 5px 0 16px; 
 }
+
+.login-view {
+    transition: 0.2s ease-out ;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 100%;
+    width: 100%;
+    z-index: 200;
+    background-color: var(--white);
+}
+
+.login-view__visible {
+    transition: 0.2s ease-in;
+    transform: translateX(-100%);
+}
