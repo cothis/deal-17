@@ -1,2 +1,1 @@
-export { default as TestView } from './test-view';
-export { default as TestAnotherView } from './test-another';
+export { default as MainView } from './main-view';

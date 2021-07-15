@@ -12,6 +12,9 @@
   --primary3: #219a95;
   --red: #f45452;
 
+  /* Filter */
+  --filter-white: invert(99%) sepia(40%) saturate(0%) hue-rotate(177deg) brightness(114%) contrast(100%);
+
   /* Size */
   --large: 18px;
   --medium: 16px;
@@ -66,10 +69,47 @@
   /* category list item height */
   --category-list-height: 140px;
 
+  /* product list item height */
+  --product-list-item-height: 140px;
+
   /* full width */
   --full-width: 100%;
 
 }
+
+/* Flex */
+.flex {
+  display: flex;
+}
+
+.flex.column {
+  flex-direction: column;
+}
+
+.flex.shrink {
+  flex-shrink: 1;
+}
+
+.flex.grow {
+  flex-grow: 1;
+}
+
+.flex.no-shrink {
+  flex-shrink: 0;
+}
+
+.flex.no-grow {
+  flex-grow: 0;
+}
+
+.flex.jc-center {
+  justify-content: center;
+}
+
+.flex.ai-center {
+  align-items: center;
+}
+
 
 /* Text */
 
@@ -98,6 +138,10 @@
   line-height: var(--xsmall-line-height);
 }
 
+.text.grey1 {
+  color: var(--grey1);
+}
+
 /* Link */
 
 .link {
@@ -119,6 +163,11 @@
   font-size: var(--xsmall);
   line-height: var(--xsmall-line-height);
 }
+
+.link.white {
+  color: var(--white);
+}
+
 
 /* button */
 .button {
@@ -211,10 +260,30 @@
   color: var(--black);
 }
 
+/* FAB */
+
+.button.fab::before {
+  background-image: url('/frontend/static/images/icons/add.png');
+  background-size: 45% 45%;
+  background-position: center center;
+  background-repeat: no-repeat;
+  filter: var(--filter-white);
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
 .button.fab {
   background-color: var(--primary1);
   width: var(--fab-size);
   height: var(--fab-size);
+  border-radius: 50%;
+  position: fixed;
+  bottom: 16px;
+  right: 16px;
 }
 
 .button.fab:hover {
@@ -269,6 +338,12 @@
   border-radius: var(--small-border-radius);
   background-color: var(--off-white);
   border: 1px solid var(--grey3);
+  overflow: hidden;
+}
+
+.img-box img {
+  width: 100%;
+  object-fit: cover;
 }
 
 .img-box.medium {
@@ -365,7 +440,7 @@
 .dropdown {
   display: flex;
   align-items: flex-start;
-  padding: 16px;
+  padding: 0 16px;
   background-color: var(--off-white);
   flex-grow: 0;
   margin: 1px 0px;
@@ -382,7 +457,8 @@
 
 /* Hearder */
 .header {
-  position: fixed;
+  padding: 16px;
+  position: sticky;
   top: 0px;
   width: var(--full-width);
   height: var(--header-height);
@@ -465,7 +541,7 @@
 }
 
 /* ProducListItem */
-.location-bar {
+.product-list-item {
   display: flex;
   align-items: center;
   padding: 16px;

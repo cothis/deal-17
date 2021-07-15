@@ -1,5 +1,5 @@
 import View from '../../core/view';
-import Store from '../../store';
+import Store from '../../core/store';
 
 const template = `
 <button id="FabButton{{__id__}}" class="button fab"></button>
@@ -28,7 +28,7 @@ export default class FabButton extends View {
     this.setTemplateData('id', String(this.id));
     this.updateView();
 
-    const root = document.getElementById(`FabButton${this.id}`);
+    const root = document.querySelector(`#FabButton${this.id}`);
     if (!root) throw 'root가 없습니다';
 
     root.addEventListener('click', this.onClickHandler);

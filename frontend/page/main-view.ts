@@ -1,17 +1,17 @@
 import { Product } from '../../types';
-import FabButton from '../components/main/fab-button';
 import View from '../core/view';
-import Store from '../store';
+import Store from '../core/store';
 import { ProductApi } from '../core/api';
 
+import Header from '../components/common/header';
+import ProductList from '../components/common/product-list';
+import FabButton from '../components/main/fab-button';
+
 const template = `
-<div>
-  <h1>메인 뷰 입니다.</h1>
-  <div id="MainView__FabButton1"></div>
-  <div id="MainView__FabButton2"></div>
-  <div id="MainView__FabButton3"></div>
-  <div id="MainView__FabButton4"></div>
-  <div>{{__products__}}</div>
+<div class="MainView">
+  <div id="mainView__header" class="header"></div>
+  <div id="mainView__productList"></div>
+  <div id="mainView__fabButton"></div>
 </div>
 `;
 
@@ -19,25 +19,18 @@ export default class MainView extends View {
   private store: Store;
   private api: ProductApi;
 
-  constructor(containerId: string, store: Store) {
-    super(containerId, template);
+  constructor(selector: string, store: Store) {
+    super(selector, template);
     this.store = store;
     this.api = new ProductApi('/api/v0/products');
   }
 
   render() {
     this.api.getAllProducts().then((products: Product[]) => {
-      products.forEach((product) => {
-        this.addHtml(`
-          <div>${product.subject}</div>
-          `);
-      });
-      this.setTemplateData('products', this.getHtml());
       this.updateView();
-      for (let i = 1; i <= 4; i++) {
-        const fabButton = new FabButton('MainView__FabButton' + i, this.store, {});
-        fabButton.render();
-      }
+      new Header('#mainView__header', this.store).render();
+      new ProductList('#mainView__productList', this.store, { products }).render();
+      new FabButton('#mainView__fabButton', this.store, {}).render();
     });
   }
 }
