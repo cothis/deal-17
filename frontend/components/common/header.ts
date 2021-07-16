@@ -1,6 +1,6 @@
 import View from '../../core/view';
 import Store from '../../core/store';
-// import { ProductApi } from '../core/api';
+import { SideViewType } from '../../page/main-view';
 
 const template = `
 <div class="header-container flex grow">
@@ -12,30 +12,41 @@ const template = `
       <img src="/static/images/icons/category.png">
     </div>
     <div class="header-right flex">
-      <img src="/static/images/icons/user.png">
-      <img id="headerMenu" src="/static/images/icons/menu.png">
+      <img id="headerUserButton" src="/static/images/icons/user.png">
+      <img id="headerMenuButton" src="/static/images/icons/menu.png">
     </div>
 </div>
 `;
 
+interface Props {
+  showSideView: (type: SideViewType) => void
+}
+
 export default class Header extends View {
   private store: Store;
-  //   private api: ProductApi;
+  private props: Props;
 
-  constructor(selector: string, store: Store) {
+  constructor(selector: string, store: Store, props: Props) {
     super(selector, template);
     this.store = store;
-    // this.api = new ProductApi('/api/v0/products');
+    this.props = props;
+  }
+
+  onUserClickHandler() {
+    this.props.showSideView(SideViewType.USER)
   }
 
   onMenuClickHandler() {
-    alert('menu');
+    this.props.showSideView(SideViewType.MENU)
   }
 
   render() {
     this.updateView();
 
-    const headerMenu = document.querySelector('#headerMenu');
-    headerMenu!.addEventListener('click', this.onMenuClickHandler);
+    const headerUserButton = document.querySelector('#headerUserButton');
+    headerUserButton!.addEventListener('click', () => this.onUserClickHandler());
+
+    // const headerMenuButton = document.querySelector('#headerMenuButton');
+    // headerMenuButton!.addEventListener('click', this.onMenuClickHandler);
   }
 }
