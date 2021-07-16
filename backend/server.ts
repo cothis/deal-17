@@ -4,10 +4,8 @@ import cors from 'cors';
 import 'dotenv-defaults/config';
 import ProductController from './products/product.controller';
 import * as path from 'path';
-console.log(process.env);
 const app = express();
 const server: http.Server = http.createServer(app);
-
 app.set('port', process.env.PORT || 8000);
 app.use(express.json());
 app.use(cors());

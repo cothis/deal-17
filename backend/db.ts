@@ -1,14 +1,7 @@
 import mysql from 'mysql2';
+import 'dotenv-defaults/config';
 
-const pool = mysql.createPool({
-  host: 'localhost',
-  user: 'root',
-  password: 'root1234',
-  database: 'test',
-  waitForConnections: true,
-  connectionLimit: 10,
-  queueLimit: 0,
-  port: 3306,
-});
+const DB_INFO = JSON.parse(process.env.DB_INFO!);
+const pool = mysql.createPool(DB_INFO);
 
 export const promisePool = pool.promise();
