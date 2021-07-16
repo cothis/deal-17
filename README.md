@@ -4,7 +4,7 @@
 ## 프로젝트 소개
 ### 🔗 link
 - [Deal 배포 링크](http://3.36.112.110:8000/)
-- [데모 영상 링크]()
+- [1차 데모 영상 링크](https://youtu.be/LTHUpJ8iWNA)
 
 ## 팀 소개
 ### [김채은](https://github.com/chaeeun037)
