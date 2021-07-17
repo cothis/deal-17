@@ -1,8 +1,11 @@
+import { AnimateType } from '../../types';
+
 export default abstract class View {
   private template: string;
   private renderTemplate: string;
   private container: HTMLElement;
   private htmlList: string[];
+  private element?: HTMLElement;
 
   constructor(selector: string, template: string) {
     const containerElement = <HTMLElement>document.querySelector(selector);
@@ -48,4 +51,5 @@ export default abstract class View {
   }
 
   abstract render(): void;
+  remove(): void {}
 }
