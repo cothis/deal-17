@@ -35,11 +35,13 @@ export class RouterEvent {
 }
 
 export class Router {
+  private history: string[];
   private routeTable: Map<string, View>;
   private defaultRoute: View | null;
 
   constructor() {
     this.routeTable = new Map();
+    this.history = [];
     this.defaultRoute = null;
 
     new RouterEvent();
@@ -74,12 +76,18 @@ export class Router {
 
   private registerPopstateEvent() {
     window.addEventListener('popstate', (e) => {
-      this.route(location.pathname);
+      const lastpath = this.history.pop();
+      if (lastpath) {
+        const newPath = this.history.length > 0 ? this.history[this.history.length - 1] : '/';
+        history.replaceState({}, 'view', newPath);
+        this.routeTable.get(lastpath)?.remove();
+      }
     });
   }
 
   private routeDefault() {
     if (this.defaultRoute) {
+      history.replaceState({}, 'home', '/');
       this.defaultRoute.render();
     } else {
       throw new Error('Default page가 없습니다');
