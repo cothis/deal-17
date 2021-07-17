@@ -165,7 +165,7 @@ export default class Carousel extends View {
     console.log(this.props.pictures);
     let i = 0;
     this.props.pictures.forEach((picture) => {
-      this.addHtml(`<span class="slide"></span>`);
+      this.addHtml(`<img src="${picture.path}" class="slide" />`);
     });
     const html = this.getHtml();
     console.log(html);
