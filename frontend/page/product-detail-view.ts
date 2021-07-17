@@ -34,8 +34,7 @@ export default class ProductDetailView extends View {
   render() {
     this.pictureApi.getPicturesById(1).then((pictures: Picture[]) => {
       this.updateView();
-      console.log(pictures);
-      new Carousel('#productDetailView__carousel', this.store, {}).render();
+      new Carousel('#productDetailView__carousel', this.store, { pictures }).render();
     });
   }
 }
