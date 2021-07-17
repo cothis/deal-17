@@ -29,8 +29,8 @@ export default class Carousel extends View {
   private slideSize?: number;
   private firstSlide?: Element;
   private lastSlide?: Element;
-  private cloneFirst?: Node;
-  private cloneLast?: Node;
+  // private cloneFirst?: Node;
+  // private cloneLast?: Node;
   private index: number = 0;
   private allowShift: boolean = true;
   private slider?: HTMLElement | null;
@@ -48,11 +48,11 @@ export default class Carousel extends View {
     this.slideSize = (this.sliderItems!.getElementsByClassName('slide')[0] as HTMLElement).offsetWidth;
     this.firstSlide = this.slides[0];
     this.lastSlide = this.slides[this.slidesLength - 1];
-    this.cloneFirst = this.firstSlide.cloneNode(true);
-    this.cloneLast = this.lastSlide.cloneNode(true);
+    // this.cloneFirst = this.firstSlide.cloneNode(true);
+    // this.cloneLast = this.lastSlide.cloneNode(true);
 
-    this.sliderItems!.appendChild(this.cloneFirst);
-    this.sliderItems!.insertBefore(this.cloneLast, this.firstSlide);
+    // this.sliderItems!.appendChild(this.cloneFirst);
+    // this.sliderItems!.insertBefore(this.cloneLast, this.firstSlide);
     warpper.classList.add('loaded');
 
     // mouse events
@@ -93,8 +93,13 @@ export default class Carousel extends View {
       this.posX2 = this.posX1 - (e as MouseEvent).clientX;
       this.posX1 = (e as MouseEvent).clientX;
     }
-    // console.log(this.posX2, this.sliderItems!.offsetLeft)
-    this.sliderItems!.style.left = this.sliderItems!.offsetLeft - this.posX2 + 'px';
+    if (this.sliderItems!.offsetLeft > 0) {
+      this.sliderItems!.style.left = 0 + 'px';
+    } else if (this.sliderItems!.offsetLeft < window.screen.width * -1 * (this.slidesLength! - 1)) {
+      this.sliderItems!.style.left = window.screen.width * -1 * (this.slidesLength! - 1) + 'px';
+    } else {
+      this.sliderItems!.style.left = this.sliderItems!.offsetLeft - this.posX2 + 'px';
+    }
   }
 
   dragEnd(e: TouchEvent | MouseEvent) {
@@ -126,7 +131,7 @@ export default class Carousel extends View {
         this.sliderItems!.style.left = this.posInitial + this.slideSize! + 'px';
         this.index--;
       }
-      console.log(this.posInitial, this.slideSize)
+      console.log(this.posInitial, this.slideSize);
     }
 
     this.allowShift = false;
