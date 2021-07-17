@@ -93,8 +93,11 @@ export class Router {
     }
 
     const page = this.routeTable.get(path);
-    if (page) page.render();
-    else throw new Error('해당 경로에 매칭되는 View Element가 없습니다.');
+    if (page) {
+      page.render();
+      if (isReplace) history.replaceState({}, 'view', path);
+      else history.pushState({}, 'view', path);
+    } else throw new Error('해당 경로에 매칭되는 View Element가 없습니다.');
   }
 
   setDefaultPage(page: View): void {
