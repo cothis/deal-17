@@ -84,3 +84,11 @@ export interface RouteInfo {
   path: string;
   page: View;
 }
+
+export enum AnimateType {
+  UP = 'up',
+  DOWN = 'down',
+  LEFT = 'left',
+  RIGHT = 'right',
+  FADE = 'fade',
+}
