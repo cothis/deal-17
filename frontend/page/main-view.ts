@@ -31,7 +31,7 @@ export default class MainView extends View {
   constructor(selector: string, store: Store) {
     super(selector, template);
     this.store = store;
-    this.api = new ProductApi('/api/v0/products');
+    this.api = new ProductApi();
   }
 
   showSideView(type: SideViewType) {
