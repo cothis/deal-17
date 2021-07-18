@@ -12,7 +12,7 @@ const template = `
       <img src="/static/images/icons/category.png">
     </div>
     <div class="header-right flex">
-      <img id="headerUserButton" src="/static/images/icons/user.png">
+      <a href="/login"><img id="headerUserButton" src="/static/images/icons/user.png"></a>
       <img id="headerMenuButton" src="/static/images/icons/menu.png">
     </div>
 </div>
@@ -43,8 +43,8 @@ export default class Header extends View {
   render() {
     this.updateView();
 
-    const headerUserButton = document.querySelector('#headerUserButton');
-    headerUserButton!.addEventListener('click', () => this.onUserClickHandler());
+    // const headerUserButton = document.querySelector('#headerUserButton');
+    // headerUserButton!.addEventListener('click', () => this.onUserClickHandler());
 
     // const headerMenuButton = document.querySelector('#headerMenuButton');
     // headerMenuButton!.addEventListener('click', this.onMenuClickHandler);

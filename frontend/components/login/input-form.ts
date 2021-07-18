@@ -17,8 +17,8 @@ export default class InputFormComponent extends View {
   }
 
   render() {
-    new IdInputComponent(this.containerId, this.store).appendView();
-    new LoginButtonComponent(this.containerId, this.store).appendView();
-    new JoinButtonComponent(this.containerId, this.store).appendView();
+    new IdInputComponent(this.containerId, this.store).render();
+    new LoginButtonComponent(this.containerId, this.store).render();
+    new JoinButtonComponent(this.containerId, this.store).render();
   }
 }

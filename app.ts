@@ -13,6 +13,6 @@ const mainView = new MainView('#app', store);
 
 const loginView = new LoginView('#app', store);
 router.setDefaultPage(mainView);
-
+router.addRoutePath('/login', loginView);
 // router.addRoutePath('another', testAnotherView);
 router.route('');

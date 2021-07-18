@@ -1,3 +1,4 @@
+import { request } from 'express';
 import { AnimateType } from '../../types';
 
 export default abstract class View {
@@ -5,7 +6,9 @@ export default abstract class View {
   private renderTemplate: string;
   private container: HTMLElement;
   private htmlList: string[];
-  private element?: HTMLElement;
+  private pageContainer?: HTMLElement;
+  private renderAnimate?: AnimateType;
+  private removeAnimate?: AnimateType;
 
   constructor(selector: string, template: string) {
     const containerElement = <HTMLElement>document.querySelector(selector);
@@ -25,7 +28,28 @@ export default abstract class View {
     this.renderTemplate = this.template;
   }
 
-  appendView(): void {
+  protected appendView(renderAnimate?: AnimateType, removeAnimate?: AnimateType): void {
+    this.renderAnimate = renderAnimate;
+    this.removeAnimate = removeAnimate;
+
+    this.pageContainer = document.createElement('section');
+    this.pageContainer.innerHTML = this.renderTemplate;
+    this.renderTemplate = this.template;
+
+    this.pageContainer.classList.add('page-container');
+    if (this.renderAnimate) {
+      this.pageContainer.classList.add(`animate-${this.renderAnimate.toString()}`);
+    }
+    this.container.appendChild(this.pageContainer);
+
+    if (this.renderAnimate) {
+      requestAnimationFrame(() => {
+        this.pageContainer?.classList.remove(`animate-${this.renderAnimate?.toString()}`);
+      });
+    }
+  }
+
+  protected appendComponent(): void {
     const $div = document.createElement('div');
     $div.innerHTML = this.renderTemplate;
     this.renderTemplate = this.template;
@@ -51,5 +75,12 @@ export default abstract class View {
   }
 
   abstract render(): void;
-  remove(): void {}
+  remove(): void {
+    if (this.removeAnimate) {
+      this.pageContainer?.addEventListener('transitionend', this.pageContainer.remove);
+      this.pageContainer?.classList.add(`animate-${this.removeAnimate.toString()}`);
+    } else {
+      this.pageContainer?.remove();
+    }
+  }
 }

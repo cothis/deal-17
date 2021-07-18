@@ -16,6 +16,6 @@ export default class LoginButtonComponent extends View {
   }
 
   render() {
-    this.updateView();
+    this.appendComponent();
   }
 }
