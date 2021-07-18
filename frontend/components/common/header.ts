@@ -19,7 +19,7 @@ const template = `
 `;
 
 interface Props {
-  showSideView: (type: SideViewType) => void;
+  // showSideView: (type: SideViewType) => void;
 }
 
 export default class Header extends View {
@@ -32,13 +32,13 @@ export default class Header extends View {
     this.props = props;
   }
 
-  onUserClickHandler() {
-    this.props.showSideView(SideViewType.USER);
-  }
+  // onUserClickHandler() {
+  //   this.props.showSideView(SideViewType.USER);
+  // }
 
-  onMenuClickHandler() {
-    this.props.showSideView(SideViewType.MENU);
-  }
+  // onMenuClickHandler() {
+  //   this.props.showSideView(SideViewType.MENU);
+  // }
 
   render() {
     this.updateView();

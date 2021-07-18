@@ -1,25 +1,35 @@
-import { Product } from '../../types';
+import { Product, Picture } from '../../types';
 
-const API_URL: string = process.env.API_URL ?? 'http://localhost:8000';
+const BASE_URL: string = process.env.API_URL ?? 'http://localhost:8000';
 
 export class Api {
-  url: string;
+  private basePath: string;
 
-  constructor(url: string) {
-    this.url = url;
+  constructor(basePath: string) {
+    this.basePath = basePath;
   }
 
-  get<AjaxResponse>(OPTION?: RequestInit | undefined): Promise<AjaxResponse> {
-    return fetch(API_URL + this.url, OPTION).then((response) => response.json());
+  get<AjaxResponse>(path: string, OPTION?: RequestInit | undefined): Promise<AjaxResponse> {
+    return fetch(`${BASE_URL}${this.basePath}${path}`, OPTION).then((response) => response.json());
   }
 }
 
 export class ProductApi extends Api {
-  constructor(url: string) {
-    super(url);
+  constructor() {
+    super('/api/v0/products');
   }
 
   getAllProducts(): Promise<Product[]> {
-    return this.get<Product[]>();
+    return this.get<Product[]>('');
+  }
+}
+
+export class PictureApi extends Api {
+  constructor() {
+    super('/api/v0/pictures');
+  }
+
+  getPicturesByProductId(productId: number): Promise<Picture[]> {
+    return this.get<Picture[]>(`/${productId}`);
   }
 }
