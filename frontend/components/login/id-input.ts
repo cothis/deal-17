@@ -2,20 +2,36 @@ import View from '../../core/view';
 import Store from '../../core/store';
 
 const template = `
-<input type="text" class="input large my-2" placeholder="아이디를 입력하세요.">
+<div class="my-2 d-flex col">
+  {{__label__}}
+  <input type="text" class="input large my-2" placeholder="{{__placeholder__}}">
+</div>
 `;
 
-export default class IdInputComponent extends View {
+interface Props {
+  placeholder: string;
+  label?: string;
+}
+
+export default class InputComponent extends View {
   containerId: string;
   store: Store;
+  props: Props;
 
-  constructor(containerId: string, store: Store) {
+  constructor(containerId: string, store: Store, props: Props) {
     super(containerId, template);
     this.containerId = containerId;
     this.store = store;
+    this.props = props;
   }
 
   render() {
+    this.setTemplateData('placeholder', this.props.placeholder);
+    if (this.props.label) {
+      this.setTemplateData('label', `<label>${this.props.label}</label>`);
+    } else {
+      this.setTemplateData('label', '');
+    }
     this.appendComponent();
   }
 }
