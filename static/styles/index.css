@@ -2,10 +2,6 @@
   position: relative;
 }
 
-.header {
-  z-index: 100;
-}
-
 .header-container {
   position: relative;
 }
