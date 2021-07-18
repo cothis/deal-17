@@ -12,14 +12,14 @@ const template = `
       <img src="/static/images/icons/category.png">
     </div>
     <div class="header-right flex">
-      <img id="headerUserButton" src="/static/images/icons/user.png">
+      <a href="/login"><img id="headerUserButton" src="/static/images/icons/user.png"></a>
       <img id="headerMenuButton" src="/static/images/icons/menu.png">
     </div>
 </div>
 `;
 
 interface Props {
-  showSideView: (type: SideViewType) => void
+  showSideView: (type: SideViewType) => void;
 }
 
 export default class Header extends View {
@@ -33,18 +33,18 @@ export default class Header extends View {
   }
 
   onUserClickHandler() {
-    this.props.showSideView(SideViewType.USER)
+    this.props.showSideView(SideViewType.USER);
   }
 
   onMenuClickHandler() {
-    this.props.showSideView(SideViewType.MENU)
+    this.props.showSideView(SideViewType.MENU);
   }
 
   render() {
     this.updateView();
 
-    const headerUserButton = document.querySelector('#headerUserButton');
-    headerUserButton!.addEventListener('click', () => this.onUserClickHandler());
+    // const headerUserButton = document.querySelector('#headerUserButton');
+    // headerUserButton!.addEventListener('click', () => this.onUserClickHandler());
 
     // const headerMenuButton = document.querySelector('#headerMenuButton');
     // headerMenuButton!.addEventListener('click', this.onMenuClickHandler);

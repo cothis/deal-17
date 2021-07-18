@@ -55,8 +55,8 @@ export default class MainView extends View {
       new ProductList('#mainView__productList', this.store, { products }).render();
       new FabButton('#mainView__fabButton', this.store, {}).render();
 
-      this.loginView = new LoginView('#mainView__sidePanel', this.store);
-      this.loginView!.render();
+      // this.loginView = new LoginView('#mainView__sidePanel', this.store);
+      // this.loginView!.render();
     });
   }
 }

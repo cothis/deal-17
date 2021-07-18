@@ -36,7 +36,7 @@ export default abstract class View {
     this.pageContainer.innerHTML = this.renderTemplate;
     this.renderTemplate = this.template;
 
-    this.pageContainer.classList.add('container');
+    this.pageContainer.classList.add('page-container');
     if (this.renderAnimate) {
       this.pageContainer.classList.add(`animate-${this.renderAnimate.toString()}`);
     }

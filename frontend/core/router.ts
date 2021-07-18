@@ -22,6 +22,7 @@ export class RouterEvent {
   }
 
   static dispatchEvent(pathname: string | null = '', isReplace: boolean = false) {
+    console.log(pathname, isReplace);
     if (pathname === null) {
       throw new Error('pathname이 null입니다. href 속성을 확인해보세요.');
     }
@@ -50,7 +51,7 @@ export class Router {
   }
 
   private registerRouteEvent() {
-    window.addEventListener(EVENT_NAME, (e) => {
+    document.body.addEventListener(EVENT_NAME, (e) => {
       const pathname: string = (<CustomEvent>e).detail.pathname;
       const isReplace: boolean = (<CustomEvent>e).detail.isReplace ?? false;
       if (this.isMethod(pathname)) {
@@ -102,9 +103,10 @@ export class Router {
 
     const page = this.routeTable.get(path);
     if (page) {
-      page.render();
       if (isReplace) history.replaceState({}, 'view', path);
       else history.pushState({}, 'view', path);
+      page.render();
+      this.history.push(path);
     } else throw new Error('해당 경로에 매칭되는 View Element가 없습니다.');
   }
 

@@ -3,6 +3,7 @@ import LoginHeaderComponent from '../components/login/login-header';
 import View from '../core/view';
 import Store from '../core/store';
 import { SideViewType } from './main-view';
+import { AnimateType } from '../../types';
 
 const template: string = `
 <div id="loginView" class="login-view">
@@ -27,15 +28,15 @@ export default class LoginView extends View {
   }
 
   hide() {
-    this.root!.classList.remove('login-view__visible')
+    this.root!.classList.remove('login-view__visible');
   }
 
   render() {
-    this.updateView();
+    this.appendView(AnimateType.RIGHT, AnimateType.RIGHT);
     new LoginHeaderComponent('#loginView__header', this.store).render();
     new InputFormComponent('#loginView__inputForm', this.store).render();
 
     this.root = document.querySelector('#loginView');
-    this.root!.addEventListener('click', () => this.hide())
+    this.root!.addEventListener('click', () => this.hide());
   }
 }
