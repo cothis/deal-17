@@ -48,15 +48,15 @@ export default class MainView extends View {
 
   render() {
     this.api.getAllProducts().then((products: Product[]) => {
-      this.updateView();
+      this.appendView();
       new Header('#mainView__header', this.store, {
         showSideView: this.showSideView.bind(this),
       }).render();
       new ProductList('#mainView__productList', this.store, { products }).render();
       new FabButton('#mainView__fabButton', this.store, {}).render();
 
-      this.loginView = new LoginView('#mainView__sidePanel', this.store);
-      this.loginView!.render();
+      // this.loginView = new LoginView('#mainView__sidePanel', this.store);
+      // this.loginView!.render();
     });
   }
 }

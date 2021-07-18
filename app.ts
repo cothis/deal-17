@@ -1,6 +1,8 @@
-import Router from './frontend/core/router';
 import { MainView, LoginView, ProductDetailView } from './frontend/page';
+import { Router } from './frontend/core/router';
 import Store from './frontend/core/store';
+import { Link } from './frontend/helper/router-link/router-link';
+window.customElements.define('router-link', Link);
 
 const store = new Store();
 
@@ -12,5 +14,7 @@ const productDetailView = new ProductDetailView('#app', store)
 
 // TODO: 커밋하기 전에 mainView로 바꿔놓기!!!
 router.setDefaultPage(productDetailView);
+// router.setDefaultPage(mainView);
 
-router.route();
+router.addRoutePath('/login', loginView);
+router.route('');
