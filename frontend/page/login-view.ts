@@ -23,20 +23,9 @@ export default class LoginView extends View {
     this.store = store;
   }
 
-  show() {
-    this.root!.classList.add('login-view__visible');
-  }
-
-  hide() {
-    this.root!.classList.remove('login-view__visible');
-  }
-
   render() {
     this.appendView(AnimateType.RIGHT, AnimateType.RIGHT);
-    new LoginHeaderComponent('#loginView__header', this.store).render();
+    new LoginHeaderComponent('#loginView__header', this.store, { title: '로그인' }).render();
     new InputFormComponent('#loginView__inputForm', this.store).render();
-
-    this.root = document.querySelector('#loginView');
-    this.root!.addEventListener('click', () => this.hide());
   }
 }
