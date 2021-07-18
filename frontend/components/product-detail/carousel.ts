@@ -6,7 +6,10 @@ const template = `
 <div id="carouselComponent" class="slider">
     <div class="wrapper">
         <div id="slides" class="slides">
-            {{__slide__}}
+          {{__slide__}}
+        </div>
+        <div id="indicators" class="img-navigation">
+          {{__indicator__}}
         </div>
     <div>
 </div>
@@ -35,6 +38,8 @@ export default class Carousel extends View {
   private allowShift: boolean = true;
   private slider?: HTMLElement | null;
   private sliderItems?: HTMLElement | null;
+  private indicators?: HTMLElement | null;
+  private indicator?: HTMLCollectionOf<Element>;
 
   constructor(selector: string, store: Store, props: Props) {
     super(selector, template);
@@ -48,6 +53,8 @@ export default class Carousel extends View {
     this.slideSize = (this.sliderItems!.getElementsByClassName('slide')[0] as HTMLElement).offsetWidth;
     this.firstSlide = this.slides[0];
     this.lastSlide = this.slides[this.slidesLength - 1];
+    this.indicator = this.indicators!.getElementsByClassName('img-nav');
+
     // this.cloneFirst = this.firstSlide.cloneNode(true);
     // this.cloneLast = this.lastSlide.cloneNode(true);
 
@@ -67,6 +74,9 @@ export default class Carousel extends View {
 
     // transition events
     this.sliderItems!.addEventListener('transitionend', this.checkIndex.bind(this));
+
+    // indicator event
+    this.indicators!.addEventListener('click', this.clickIndicator.bind(this));
   }
 
   dragStart(e: TouchEvent | MouseEvent) {
@@ -93,12 +103,19 @@ export default class Carousel extends View {
       this.posX2 = this.posX1 - (e as MouseEvent).clientX;
       this.posX1 = (e as MouseEvent).clientX;
     }
-    if (this.sliderItems!.offsetLeft > 0) {
-      this.sliderItems!.style.left = 0 + 'px';
-    } else if (this.sliderItems!.offsetLeft < window.screen.width * -1 * (this.slidesLength! - 1)) {
-      this.sliderItems!.style.left = window.screen.width * -1 * (this.slidesLength! - 1) + 'px';
+
+    const maxLeft = 0;
+    const maxRight = -window.innerWidth * (this.slidesLength! - 1);
+    const isOverLeft = this.sliderItems!.offsetLeft > maxLeft;
+    const isOverRight = this.sliderItems!.offsetLeft < maxRight;
+    const nextX = this.sliderItems!.offsetLeft - this.posX2;
+
+    if (isOverLeft) {
+      this.sliderItems!.style.left = `${maxLeft}px`;
+    } else if (isOverRight) {
+      this.sliderItems!.style.left = `${maxRight}px`;
     } else {
-      this.sliderItems!.style.left = this.sliderItems!.offsetLeft - this.posX2 + 'px';
+      this.sliderItems!.style.left = `${nextX}px`;
     }
   }
 
@@ -111,29 +128,30 @@ export default class Carousel extends View {
     } else {
       this.sliderItems!.style.left = this.posInitial + 'px';
     }
-    // console.log(this.posInitial)
     document.onmouseup = null;
     document.onmousemove = null;
   }
 
-  shiftSlide(dir: number, action: string) {
-    this.sliderItems?.classList.add('shifting');
+  clickIndicator(e: Event) {
+    const indicatorIndex = Number((e.target as HTMLElement).dataset.index);
+    if (!indicatorIndex || indicatorIndex === this.index) {
+      return;
+    }
+    this.shiftSlide(indicatorIndex - this.index, '');
+  }
 
+  shiftSlide(step: number, action: string) {
+    this.sliderItems?.classList.add('shifting');
     if (this.allowShift) {
       if (!action) {
         this.posInitial = this.sliderItems!.offsetLeft;
       }
 
-      if (dir == 1) {
-        this.sliderItems!.style.left = this.posInitial - this.slideSize! + 'px';
-        this.index++;
-      } else if (dir == -1) {
-        this.sliderItems!.style.left = this.posInitial + this.slideSize! + 'px';
-        this.index--;
-      }
-      console.log(this.posInitial, this.slideSize);
+      this.sliderItems!.style.left = this.posInitial - step * this.slideSize! + 'px';
+      this.indicators?.getElementsByClassName('img-nav')[this.index].classList.remove('active');
+      this.index += step;
+      this.indicators?.getElementsByClassName('img-nav')[this.index].classList.add('active');
     }
-
     this.allowShift = false;
   }
 
@@ -156,20 +174,25 @@ export default class Carousel extends View {
   initCarousel() {
     this.slider = document.getElementById('carouselComponent');
     this.sliderItems = document.getElementById('slides');
-    console.log(this.sliderItems);
+    this.indicators = document.getElementById('indicators');
+    this.indicators?.getElementsByClassName('img-nav')[this.index].classList.add('active');
 
     this.slide(this.slider!);
   }
 
   render() {
-    console.log(this.props.pictures);
     let i = 0;
     this.props.pictures.forEach((picture) => {
       this.addHtml(`<img src="${picture.path}" class="slide" />`);
     });
-    const html = this.getHtml();
-    console.log(html);
-    this.setTemplateData('slide', html);
+    const slide = this.getHtml();
+    this.setTemplateData('slide', slide);
+
+    this.props.pictures.forEach((_, i) => {
+      this.addHtml(`<div data-index=${i} class="img-nav"></div>`);
+    });
+    const indicator = this.getHtml();
+    this.setTemplateData('indicator', indicator);
     this.updateView();
 
     this.initCarousel();
