@@ -48,7 +48,7 @@ export default class MainView extends View {
 
   render() {
     this.api.getAllProducts().then((products: Product[]) => {
-      this.updateView();
+      this.appendView();
       new Header('#mainView__header', this.store, {
         showSideView: this.showSideView.bind(this),
       }).render();
