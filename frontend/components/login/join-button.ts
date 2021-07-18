@@ -16,6 +16,6 @@ export default class JoinButtonComponent extends View {
   }
 
   render() {
-    this.updateView();
+    this.appendView();
   }
 }
