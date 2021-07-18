@@ -18,4 +18,5 @@ router.setDefaultPage(productDetailView);
 
 router.addRoutePath('/login', loginView);
 router.addRoutePath('/join', joinView);
+router.addRoutePath('/product', productDetailView);
 router.route('');

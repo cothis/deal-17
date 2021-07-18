@@ -96,15 +96,11 @@
 
 :root {
   --slider-width: 100vw;
-  --slider-height: 300px;
+  --slider-height: 100vw;
   --slides-width: 10000px;
 }
 
 .slider {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
   width: var(--slider-width);
   height: var(--slider-height);
   box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);
