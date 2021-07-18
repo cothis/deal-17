@@ -34,24 +34,22 @@ export default class MainView extends View {
     this.api = new ProductApi();
   }
 
-  showSideView(type: SideViewType) {
-    switch (type) {
-      case SideViewType.USER:
-        this.loginView!.show();
-        break;
-      case SideViewType.MENU:
-        break;
-      case SideViewType.CATEGORY:
-        break;
-    }
-  }
+  // showSideView(type: SideViewType) {
+  //   switch (type) {
+  //     case SideViewType.USER:
+  //       this.loginView!.show();
+  //       break;
+  //     case SideViewType.MENU:
+  //       break;
+  //     case SideViewType.CATEGORY:
+  //       break;
+  //   }
+  // }
 
   render() {
     this.api.getAllProducts().then((products: Product[]) => {
       this.appendView();
-      new Header('#mainView__header', this.store, {
-        showSideView: this.showSideView.bind(this),
-      }).render();
+      new Header('#mainView__header', this.store, {}).render();
       new ProductList('#mainView__productList', this.store, { products }).render();
       new FabButton('#mainView__fabButton', this.store, {}).render();
 

@@ -1,6 +1,6 @@
 import View from '../../core/view';
 import Store from '../../core/store';
-import IdInputComponent from './id-input';
+import InputComponent from './id-input';
 import JoinButtonComponent from './join-button';
 import LoginButtonComponent from './login-button';
 
@@ -17,8 +17,8 @@ export default class InputFormComponent extends View {
   }
 
   render() {
-    new IdInputComponent(this.containerId, this.store).render();
-    new LoginButtonComponent(this.containerId, this.store).render();
+    new InputComponent(this.containerId, this.store, { placeholder: '아이디를 입력하세요.' }).render();
+    new LoginButtonComponent(this.containerId, this.store, { title: '로그인' }).render();
     new JoinButtonComponent(this.containerId, this.store).render();
   }
 }
