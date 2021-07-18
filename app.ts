@@ -2,6 +2,8 @@ import { Router } from './frontend/core/router';
 import LoginView from './frontend/page/login-view';
 import { MainView } from './frontend/page';
 import Store from './frontend/core/store';
+import { Link } from './frontend/helper/router-link/router-link';
+window.customElements.define('router-link', Link);
 
 const store = new Store();
 
