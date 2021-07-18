@@ -25,7 +25,7 @@ export default abstract class View {
     this.renderTemplate = this.template;
   }
 
-  protected appendView(): void {
+  protected appendComponent(): void {
     const $div = document.createElement('div');
     $div.innerHTML = this.renderTemplate;
     this.renderTemplate = this.template;

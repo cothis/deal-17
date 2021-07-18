@@ -16,6 +16,6 @@ export default class IdInputComponent extends View {
   }
 
   render() {
-    this.appendView();
+    this.appendComponent();
   }
 }
