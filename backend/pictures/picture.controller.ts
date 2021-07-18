@@ -1,11 +1,11 @@
 import { Router } from 'express';
-import { getPicturesById } from './picture.service';
+import { getPicturesByProductId } from './picture.service';
 
 const router = Router();
 
-router.get('/:id', async (req, res) => {
+router.get('/:productId', async (productId, res) => {
   try {
-    const pictures = await getPicturesById(req);
+    const pictures = await getPicturesByProductId(productId);
 
     res.json(pictures);
   } catch (e) {

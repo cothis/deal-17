@@ -29,7 +29,7 @@ export class PictureApi extends Api {
     super('/api/v0/pictures');
   }
 
-  getPicturesById(productId: number): Promise<Picture[]> {
+  getPicturesByProductId(productId: number): Promise<Picture[]> {
     return this.get<Picture[]>(`/${productId}`);
   }
 }
