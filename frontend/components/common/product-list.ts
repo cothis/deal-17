@@ -27,7 +27,7 @@ export default class ProductList extends View {
   render() {
     this.updateView();
     this.props.products.forEach((_, i) => {
-      this.addHtml(`<div id="mainView__product${i}"></div>`);
+      this.addHtml(`<router-link to="/product/1" id="mainView__product${i}"></router-link>`);
     });
     const html = this.getHtml();
     this.setTemplateData('product', html);

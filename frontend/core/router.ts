@@ -102,12 +102,16 @@ export class Router {
       return;
     }
 
-    const page = this.routeTable.get(path);
+    const secondSlashIndex = path.substr(1).indexOf('/');
+    const url = path.substr(0, secondSlashIndex + 1);
+    const remainUrl = path.substr(secondSlashIndex + 1);
+
+    const page = this.routeTable.get(url);
     if (page) {
-      if (isReplace) history.replaceState({}, 'view', path);
-      else history.pushState({}, 'view', path);
-      page.render();
-      this.history.push(path);
+      if (isReplace) history.replaceState({}, 'view', url);
+      else history.pushState({}, 'view', url);
+      page.render(remainUrl);
+      this.history.push(url);
     } else throw new Error('해당 경로에 매칭되는 View Element가 없습니다.');
   }
 
