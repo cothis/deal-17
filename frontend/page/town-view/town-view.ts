@@ -1,7 +1,6 @@
 import View from '../../core/view';
 import Store from '../../core/store';
 import { AnimateType } from '../../../types';
-import './category-view.css';
 
 const template: string = `
 <div class="flex column grow">
@@ -9,7 +8,7 @@ const template: string = `
     <router-link to="@back" class="icon-wrapper">
       <i class="wmi wmi-chevron-left large"></i>
     </router-link>  
-    <span class="text medium">내 동제 설정하기</span>
+    <span class="text medium">내 동네 설정하기</span>
     <button type="button" class="icon-wrapper"></button>  
   </div>
   

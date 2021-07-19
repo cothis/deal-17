@@ -6,7 +6,8 @@ const template = `
 <div class="header-container flex grow">
     <div class="header-center link medium white flex ai-center jc-center">
       <i class="wmi wmi-map-pin small"></i>
-      <div>장소</div>
+      <router-link to="/town">장소</router-link>
+      <!-- todo 임시로 페이지 이동되게 만들어둠. 추후 셀렉트 옵션에서 이동되야함 -->
     </div>
     <div class="header-left">
       <router-link to="/category">
