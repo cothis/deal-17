@@ -1,9 +1,10 @@
-import InputFormComponent from '../components/login/input-form';
 import LoginHeaderComponent from '../components/login/login-header';
 import View from '../core/view';
 import Store from '../core/store';
-import { SideViewType } from './main-view';
 import { AnimateType } from '../../types';
+import InputComponent from '../components/login/id-input';
+import LoginButtonComponent from '../components/login/login-button';
+import JoinButtonComponent from '../components/login/join-button';
 
 const template: string = `
 <div id="loginView" class="login-view">
@@ -26,6 +27,8 @@ export default class LoginView extends View {
   render() {
     this.appendView(AnimateType.RIGHT, AnimateType.RIGHT);
     new LoginHeaderComponent('#loginView__header', this.store, { title: '로그인' }).render();
-    new InputFormComponent('#loginView__inputForm', this.store).render();
+    new InputComponent('#loginView__inputForm', this.store, { placeholder: '아이디를 입력하세요.' }).render();
+    new LoginButtonComponent('#loginView__inputForm', this.store, { title: '로그인' }).render();
+    new JoinButtonComponent('#loginView__inputForm', this.store).render();
   }
 }
