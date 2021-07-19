@@ -6,7 +6,7 @@ export class Link extends HTMLElement {
     super();
 
     this.addEventListener('click', function () {
-      RouterEvent.dispatchEvent(this.getAttribute('to'), true);
+      RouterEvent.dispatchEvent(this.getAttribute('to'), false);
     });
   }
 }
