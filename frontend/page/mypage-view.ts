@@ -13,7 +13,7 @@ const template: string = `
   <div id="mypageView__header" class="header offwhite p-5"></div>
   <div class="container">
     <div id="myPage" class="d-flex col p-5">
-      <span>{{__username__}}</span>
+      <div class="text-center my-5">{{__username__}}</div>
     </div>
   </div>
 </div>
