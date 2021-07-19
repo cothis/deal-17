@@ -10,7 +10,8 @@ const template = `
 `;
 
 interface Props {
-  items: Array<{ label: string; color: string | null; disabled: boolean }>;
+  items: Array<{ id: number; label: string; color: string | null; disabled: boolean }>;
+  onClick: (id: number) => void;
 }
 
 export default class SelectPopup extends View {
@@ -30,6 +31,7 @@ export default class SelectPopup extends View {
 
   onClickEventHandler(e: Event) {
     e.stopPropagation();
+    this.props.onClick(Number((e.target as HTMLElement).dataset.id));
   }
 
   show() {
@@ -43,7 +45,7 @@ export default class SelectPopup extends View {
   render() {
     this.setTemplateData('id', this.id);
     this.props.items.forEach((item) => {
-      this.addHtml(`<div class="dropdown link ${item.color}">${item.label}</div>`);
+      this.addHtml(`<div data-id="${item.id}" class="dropdown link ${item.color}">${item.label}</div>`);
     });
     const labels = this.getHtml();
     this.setTemplateData('labels', labels);

@@ -17,6 +17,11 @@ const template = `
 </div>
 `;
 
+enum Action {
+  EDIT = 1,
+  DELETE = 2,
+}
+
 interface Props {}
 
 export default class HeaderInvisible extends View {
@@ -42,13 +47,28 @@ export default class HeaderInvisible extends View {
     }
   }
 
+  onClick(id: number) {
+    this.selectPopup.hide();
+    switch (id) {
+      case Action.EDIT:
+        // 수정
+        console.log('수정하기 클릭');
+        break;
+      case Action.DELETE:
+        // 삭제
+        console.log('삭제 클릭');
+        break;
+    }
+  }
+
   render() {
     this.appendComponent();
     this.selectPopup = new SelectPopup('#headerInvisibleComponent__state-dropdown', this.store, {
       items: [
-        { label: '수정하기', color: '', disabled: false },
-        { label: '삭제하기', color: 'red', disabled: false },
+        { id: 1, label: '수정하기', color: '', disabled: false },
+        { id: 2, label: '삭제하기', color: 'red', disabled: false },
       ],
+      onClick: this.onClick.bind(this),
     });
     this.selectPopup.render();
     document
