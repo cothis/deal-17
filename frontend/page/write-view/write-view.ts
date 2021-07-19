@@ -87,8 +87,6 @@ export default class WriteView extends View {
       textarea.style.height = textarea.scrollHeight + 'px';
     });
 
-    console.log(this.pageContainer);
-
     this.pageContainer?.querySelector('.img-button.delete::after')?.addEventListener('click', (e) => {
       console.log('clicked');
     });
