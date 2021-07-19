@@ -22,6 +22,10 @@ export class ProductApi extends Api {
   getAllProducts(): Promise<Product[]> {
     return this.get<Product[]>('');
   }
+
+  getProductById(id: number): Promise<Product> {
+    return this.get<Product>(`/${id}`);
+  }
 }
 
 export class PictureApi extends Api {

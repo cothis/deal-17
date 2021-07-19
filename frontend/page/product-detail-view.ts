@@ -11,7 +11,7 @@
 import { Product, Picture } from '../../types';
 import View from '../core/view';
 import Store from '../core/store';
-import { PictureApi } from '../core/api';
+import { PictureApi, ProductApi } from '../core/api';
 import { AnimateType } from '../../types';
 
 import Carousel from '../components/product-detail/carousel';
@@ -37,19 +37,26 @@ const template = `
 export default class ProductDetailView extends View {
   private store: Store;
   private pictureApi: PictureApi;
+  private productApi: ProductApi;
 
   constructor(selector: string, store: Store) {
     super(selector, template);
     this.store = store;
     this.pictureApi = new PictureApi();
+    this.productApi = new ProductApi();
   }
 
   render(remainUrl?: string) {
     console.log(remainUrl);
+    const productId = Number(remainUrl?.substr(1, 1));
+    console.log(productId);
     this.appendView(AnimateType.RIGHT, AnimateType.RIGHT);
     this.pictureApi.getPicturesByProductId(1).then((pictures: Picture[]) => {
       new Carousel('#productDetailView__carousel', this.store, { pictures }).render();
-      new State('#productDetailView__state', this.store, {}).render();
+    });
+    this.productApi.getProductById(productId).then((product: Product) => {
+      console.log(product[0]);
+      new State('#productDetailView__state', this.store, { state: product[0].state }).render();
       new Title('#productDetailView__title', this.store, {}).render();
       new Content('#productDetailView__content', this.store, {}).render();
       new SellerInfo('#productDetailView__seller-info', this.store, {}).render();
