@@ -37,7 +37,7 @@ export default class HeaderInvisible extends View {
     this.isDropdownShow = false;
   }
 
-  onClickHandler(e: Event) {
+  onClickEventHandler(e: Event) {
     e.stopPropagation();
     this.isDropdownShow = !this.isDropdownShow;
     if (!this.isDropdownShow) {
@@ -63,6 +63,7 @@ export default class HeaderInvisible extends View {
 
   render() {
     this.appendComponent();
+
     this.selectPopup = new SelectPopup('#headerInvisibleComponent__state-dropdown', this.store, {
       items: [
         { id: 1, label: '수정하기', color: '', disabled: false },
@@ -71,8 +72,9 @@ export default class HeaderInvisible extends View {
       onClick: this.onClick.bind(this),
     });
     this.selectPopup.render();
+    
     document
       .querySelector('#headerInvisibleComponent__detail')
-      ?.addEventListener('click', this.onClickHandler.bind(this));
+      ?.addEventListener('click', this.onClickEventHandler.bind(this));
   }
 }

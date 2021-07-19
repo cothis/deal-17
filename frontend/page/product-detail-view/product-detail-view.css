@@ -13,6 +13,12 @@
   right: 16px;
 }
 
+#stateComponent__state-dropdown {
+  position: absolute;
+  top: calc(var(--header-height) - 8px);
+  left: 0;
+}
+
 .product-detail__arrow {
   margin-left: 12px;
 }

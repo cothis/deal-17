@@ -4,13 +4,13 @@ import Store from '../../core/store';
 import '../../page/product-detail-view/product-detail-view.css';
 
 const template = `
-<div id="{{__id__}}" class="display-none">
+<div id="{{__id__}}" class="dropdown-container display-none">
  {{__labels__}}
 </div>
 `;
 
 interface Props {
-  items: Array<{ id: number; label: string; color: string | null; disabled: boolean }>;
+  items: Array<{ id: number; label: string; color?: string | null; disabled?: boolean; show?: boolean }>;
   onClick: (id: number) => void;
 }
 
@@ -45,6 +45,9 @@ export default class SelectPopup extends View {
   render() {
     this.setTemplateData('id', this.id);
     this.props.items.forEach((item) => {
+      if (item.show === false) {
+        return;
+      }
       this.addHtml(`<div data-id="${item.id}" class="dropdown link ${item.color}">${item.label}</div>`);
     });
     const labels = this.getHtml();
