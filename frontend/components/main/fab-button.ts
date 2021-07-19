@@ -1,5 +1,6 @@
 import View from '../../core/view';
 import Store from '../../core/store';
+import { RouterEvent } from '../../core/router';
 
 const template = `
 <button id="FabButton{{__id__}}" class="button fab"></button>
@@ -21,7 +22,7 @@ export default class FabButton extends View {
   }
 
   onClickHandler() {
-    alert('Fab button');
+    RouterEvent.dispatchEvent('/write');
   }
 
   render() {

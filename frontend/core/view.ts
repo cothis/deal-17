@@ -6,7 +6,7 @@ export default abstract class View {
   private renderTemplate: string;
   protected container: HTMLElement;
   private htmlList: string[];
-  private pageContainer?: HTMLElement;
+  protected pageContainer?: HTMLElement;
   private renderAnimate?: AnimateType;
   private removeAnimate?: AnimateType;
 

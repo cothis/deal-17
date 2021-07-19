@@ -1,0 +1,41 @@
+hr {
+  width: 100%;
+}
+
+.border-y {
+  border-top: 1px solid var(--grey1);
+  border-bottom: 1px solid var(--grey1);
+}
+
+.category-list {
+  display: flex;
+  flex-wrap: nowrap;
+  column-gap: 8px;
+  overflow-x: scroll;
+}
+
+.category-list li {
+  flex-shrink: 0;
+}
+
+.category-list-item {
+  border: 1px solid var(--grey1);
+  border-radius: 999px;
+  padding: 8px;
+  color: var(--grey1);
+}
+
+.write-input {
+  padding: 16px 0;
+  border: 1px solid transparent;
+  width: 100%;
+}
+
+.textarea {
+  overflow-y: hidden;
+  resize: vertical;
+}
+
+.border-bottom {
+  border-bottom: 1px solid var(--grey2);
+}
