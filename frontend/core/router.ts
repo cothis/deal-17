@@ -103,8 +103,12 @@ export class Router {
     }
 
     const secondSlashIndex = path.substr(1).indexOf('/');
-    const url = path.substr(0, secondSlashIndex + 1);
-    const remainUrl = path.substr(secondSlashIndex + 1);
+    let url = path;
+    let remainUrl = '';
+    if (secondSlashIndex >= 0) {
+      url = path.substr(0, secondSlashIndex + 1);
+      remainUrl = path.substr(secondSlashIndex + 1);
+    }
 
     const page = this.routeTable.get(url);
     if (page) {
