@@ -13,6 +13,7 @@ import View from '../core/view';
 import Store from '../core/store';
 import { PictureApi, ProductApi } from '../core/api';
 import { AnimateType } from '../../types';
+import { convertToMarketPrice } from '../helper/numberHelper';
 
 import Carousel from '../components/product-detail/carousel';
 import State from '../components/product-detail/state';
@@ -20,6 +21,8 @@ import Title from '../components/product-detail/title';
 import Content from '../components/product-detail/content';
 import SellerInfo from '../components/product-detail/seller-info';
 import Footer from '../components/product-detail/footer';
+
+import '../../static/styles/product-detail.css';
 
 const template = `
  <div class="ProductDetailView">
@@ -47,20 +50,29 @@ export default class ProductDetailView extends View {
   }
 
   render(remainUrl?: string) {
-    console.log(remainUrl);
     const productId = Number(remainUrl?.substr(1, 1));
-    console.log(productId);
     this.appendView(AnimateType.RIGHT, AnimateType.RIGHT);
     this.pictureApi.getPicturesByProductId(1).then((pictures: Picture[]) => {
       new Carousel('#productDetailView__carousel', this.store, { pictures }).render();
     });
     this.productApi.getProductById(productId).then((product: Product) => {
-      console.log(product[0]);
-      new State('#productDetailView__state', this.store, { state: product[0].state }).render();
-      new Title('#productDetailView__title', this.store, {}).render();
-      new Content('#productDetailView__content', this.store, {}).render();
-      new SellerInfo('#productDetailView__seller-info', this.store, {}).render();
-      new Footer('#productDetailView__footer', this.store, {}).render();
+      console.log(product);
+      new State('#productDetailView__state', this.store, { state: product.state }).render();
+      new Title('#productDetailView__title', this.store, {
+        subject: product.subject,
+        category: '기타 중고물품',
+        createdAt: '4시간 전',
+      }).render();
+      new Content('#productDetailView__content', this.store, { content: product.content ?? '' }).render();
+      new SellerInfo('#productDetailView__seller-info', this.store, {
+        sellerEmail: '테스트유저',
+        sellerTown: '역삼동',
+      }).render();
+      new Footer('#productDetailView__footer', this.store, {
+        isWish: false,
+        price: convertToMarketPrice(product.price) ?? '가격미정',
+        chatRoomCount: 2,
+      }).render();
     });
   }
 }

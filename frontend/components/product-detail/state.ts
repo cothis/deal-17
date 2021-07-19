@@ -39,7 +39,6 @@ export default class State extends View {
 
     }
     this.setTemplateData('state', this.state);
-
     this.appendComponent();
   }
 }

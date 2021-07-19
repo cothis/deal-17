@@ -3,11 +3,15 @@ import Store from '../../core/store';
 
 const template = `
 <div id="titleComponent">
-{{__title__}}
+  <div class="text large">{{__subject__}}</div>
+  <div class="text xsmall grey1 x-mt-8">{{__category__}} &middot; {{__createdAt__}}</div>
 </div>
 `;
 
 interface Props {
+  subject: string;
+  category: string;
+  createdAt: string;
 }
 
 export default class State extends View {
@@ -21,11 +25,9 @@ export default class State extends View {
   }
 
   render() {
-    this.addHtml('<div class="text large">빈티지 롤러 스케이트</div>');
-    this.addHtml('<div class="text xsmall grey1 x-mt-8">기타 중고물품&middot;4시간 전</div>');
-    const title = this.getHtml();
-    this.setTemplateData('title', title);
-
+    this.setTemplateData('subject', this.props.subject);
+    this.setTemplateData('category', this.props.category);
+    this.setTemplateData('createdAt', this.props.createdAt);
     this.appendComponent();
   }
 }
