@@ -6,8 +6,8 @@ const template = `
     <div class="info-saler">
         <div class="link small flex grow w-20">판매자 정보</div>
         <div class="flex ai-center grow w-20">
-            <div class="link small">{{__sellerEmail__}}</div>
-            <div class="text xsmall gray3">{{__sellerTown__}}</div>
+            <div class="product-detail__seller flex grow link small">{{__sellerEmail__}}</div>
+            <div class="flex jc-end text xsmall gray3">{{__sellerTown__}}</div>
         </div>
     </div>
 </div>

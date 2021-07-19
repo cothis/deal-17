@@ -2,8 +2,9 @@ import View from '../../core/view';
 import Store from '../../core/store';
 
 const template = `
-<div id="stateComponent" class="status link small">
-{{__state__}}
+<div id="stateComponent" class="status">
+  <div class="link small">{{__state__}}</div>
+  <i class="wmi wmi-chevron-down product-detail__arrow grey1 small"></i>
 </div>
 `;
 
@@ -24,8 +25,6 @@ export default class State extends View {
   }
 
   render() {
-    // this.addHtml('');
-    // const state = this.getHtml();
     switch(this.props.state) {
       case 0:
         this.state = '판매중';

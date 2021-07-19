@@ -141,24 +141,5 @@
   justify-content: center;
   transition: all 1s;
   position: relative;
-  background: #ffcf47;
   border-radius: 2px;
-}
-
-.slider.loaded .slide:nth-child(1) {
-  background: #7adcef;
-}
-
-.slider.loaded .slide:nth-child(2) {
-  background: #ffcf47;
-}
-
-.slider.loaded .slide:nth-child(3) {
-  background: #3cff96;
-}
-.slider.loaded .slide:nth-child(4) {
-  background: #a78df5;
-}
-.slider.loaded .slide:nth-child(5) {
-  background: #ff8686;
 }

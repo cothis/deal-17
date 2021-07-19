@@ -4,16 +4,12 @@ import Store from '../../core/store';
 import '../../page/product-detail-view/product-detail-view.css';
 
 const template = `
-<div id="footerComponent">
-    <div class="product-bar">
-        <div class="flex ai-center grow w-20">
-            <i class="wmi wmi-heart large grey1 bold"></i>
-            <div class="product-detail__bar"></div>
-            <div>{{__price__}}</div>
-        </div>
-        <div class="flex grow jc-end w-20">
-            <div class="button link small">채팅 목록 보기</div>
-        </div>
+<div id="headerInvisibleComponent" class="header invisible">
+    <div class="product-detail__header-icon">
+        <i class="wmi wmi-chevron-left large"></i>
+    </div>
+    <div class="product-detail__header-icon">
+        <i class="wmi wmi-more-vertical large"></i>
     </div>
 </div>
 `;
@@ -24,7 +20,7 @@ interface Props {
   chatRoomCount: number;
 }
 
-export default class Footer extends View {
+export default class HeaderInvisible extends View {
   private store: Store;
   private props: Props;
 
