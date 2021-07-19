@@ -8,8 +8,10 @@ hr {
 }
 
 .category-list {
-  overflow-x: scroll;
+  display: flex;
   flex-wrap: nowrap;
+  column-gap: 8px;
+  overflow-x: scroll;
 }
 
 .category-list li {
@@ -21,4 +23,19 @@ hr {
   border-radius: 999px;
   padding: 8px;
   color: var(--grey1);
+}
+
+.write-input {
+  padding: 16px 0;
+  border: 1px solid transparent;
+  width: 100%;
+}
+
+.textarea {
+  overflow-y: hidden;
+  resize: vertical;
+}
+
+.border-bottom {
+  border-bottom: 1px solid var(--grey2);
 }

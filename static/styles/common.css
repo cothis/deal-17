@@ -34,7 +34,7 @@
   --small-border-radius: 6px;
   --default-border-radius: 8px;
   --large-border-radius: 10px;
-  --circel-border-radius: 999px;
+  --circle-border-radius: 999px;
 
   /* fab size */
   --fab-size: 56px;
@@ -279,7 +279,7 @@
   padding: 4px 16px;
   border: 1px solid var(--grey3);
   box-sizing: border-box;
-  border-radius: var(--circel-border-radius);
+  border-radius: var(--circle-border-radius);
   color: var(--grey1);
 }
 
@@ -431,7 +431,7 @@
   width: var(--nav-size);
   height: var(--nav-size);
   border: 1px solid var(--white);
-  border-radius: var(--circel-border-radius);
+  border-radius: var(--circle-border-radius);
   background-color: transparent;
   margin: 0 8px;
 }
@@ -464,7 +464,7 @@
   display: flex;
   align-items: flex-start;
   padding: 4px;
-  border-radius: var(--circel-border-radius);
+  border-radius: var(--circle-border-radius);
   background-color: var(--primary3);
   color: var(--white);
   font-size: var(--xsmall);
@@ -498,6 +498,7 @@
   display: inline-block;
   padding: 4px;
   border-radius: 50%;
+  color: var(--grey3);
   background-color: var(--black);
   content: "\f107";
   font-family: woowa-market-icons;
@@ -510,6 +511,7 @@
   vertical-align: -.125em;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  cursor: pointer;
 }
 
 .img-button img {
@@ -887,10 +889,6 @@
 .icon-wrapper {
   width: 24px;
   height: 24px;
-}
-
-.h-full {
-  height: calc(100vh - calc(var(--header-height) * 2));
 }
 
 .h-100 {
