@@ -3,7 +3,14 @@
 }
 
 .product-detail__header-icon {
+  position: relative;
   padding: 16px;
+}
+
+#headerInvisibleComponent__state-dropdown {
+  position: absolute;
+  top: calc(var(--header-height) - 8px);
+  right: 16px;
 }
 
 .product-detail__arrow {

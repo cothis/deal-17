@@ -1,10 +1,13 @@
 import View from '../../core/view';
 import Store from '../../core/store';
 
+import SelectPopup from '../common/select-popup';
+
 const template = `
 <div id="stateComponent" class="status">
   <div class="link small">{{__state__}}</div>
   <i class="wmi wmi-chevron-down product-detail__arrow grey1 small"></i>
+  <div id="productDetailView__state-dropdown"></div>
 </div>
 `;
 

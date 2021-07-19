@@ -73,6 +73,10 @@
   /* product list item height */
   --product-list-item-height: 140px;
 
+  /* dropdown size */
+  --dropdown-height: 48px;
+  --dropdown-width: 165px;
+
   /* full width */
   --full-width: 100%;
 
@@ -222,6 +226,10 @@
 
 .link.white {
   color: var(--white);
+}
+
+.link.red {
+  color: var(--red);
 }
 
 /* button */
@@ -527,10 +535,11 @@
 }
 
 /* Dropdown */
-/* TODO: select와 함께 사용할지, 직접 구현할지 고민하기 */
 .dropdown {
+  width: var(--dropdown-width);
+  height: var(--dropdown-height);
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   padding: 0 16px;
   background-color: var(--off-white);
   flex-grow: 0;

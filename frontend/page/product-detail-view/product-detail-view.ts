@@ -5,6 +5,8 @@ import { PictureApi, ProductApi } from '../../core/api';
 import { AnimateType } from '../../../types';
 import { convertToMarketPrice } from '../../helper/numberHelper';
 
+import SelectPopup from '../../components/common/select-popup';
+
 import HeaderInvisible from '../../components/product-detail/header-invisible';
 import Carousel from '../../components/product-detail/carousel';
 import State from '../../components/product-detail/state';
