@@ -624,6 +624,7 @@
   align-items: center;
   padding: 0 16px;
   height: var(--product-bar-height);
+  box-shadow: inset 0px 1px 0px var(--gray3);
 }
 
 /* InfoProduct */

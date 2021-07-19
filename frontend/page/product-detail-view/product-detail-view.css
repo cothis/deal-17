@@ -1,0 +1,12 @@
+.product-detail__content {
+  white-space: break-spaces;
+}
+
+.product-detail__bar {
+  padding: 0 16px;
+  height: 36px;
+  background-color: var(--grey3);
+}
+
+.product-detail__footer {
+}

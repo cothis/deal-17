@@ -1,6 +1,8 @@
 import View from '../../core/view';
 import Store from '../../core/store';
 
+import '../../page/product-detail-view.css';
+
 const template = `
 <div id="footerComponent">
     <div class="product-bar">
