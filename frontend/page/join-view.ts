@@ -3,6 +3,8 @@ import View from '../core/view';
 import Store from '../core/store';
 import { AnimateType } from '../../types';
 import JoinInputFormComponent from '../components/join/join-input-form';
+import InputComponent from '../components/login/id-input';
+import LoginButtonComponent from '../components/login/login-button';
 
 const template: string = `
 <div id="joinView" class="joiv-view">
@@ -24,6 +26,16 @@ export default class JoinView extends View {
   render() {
     this.appendView(AnimateType.RIGHT, AnimateType.RIGHT);
     new LoginHeaderComponent('#joinView__header', this.store, { title: '회원가입' }).render();
-    new JoinInputFormComponent('#joinView__inputForm', this.store).render();
+    new InputComponent('#joinView__inputForm', this.store, {
+      label: '아이디',
+      placeholder: '영문, 숫자 조합 20자 이하',
+    }).render();
+
+    new InputComponent('#joinView__inputForm', this.store, {
+      label: '우리 동네',
+      placeholder: '시•구 제외, 동만 입력',
+    }).render();
+
+    new LoginButtonComponent('#joinView__inputForm', this.store, { title: '회원가입' }).render();
   }
 }
