@@ -24,7 +24,7 @@ const template: string = `
       <div class="product-icon-section flex grow text small grey1">
         <div class="product-icon-box grow flex">
           <div class="flex ai-center">
-          <i class="wmi wmi-message-square small"></i>
+            <i class="wmi wmi-message-square small"></i>
             <div>1</div>
           </div>
           <div class="flex ai-center">
