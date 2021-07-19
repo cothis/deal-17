@@ -71,10 +71,8 @@
   justify-content: flex-end;
 }
 
-.product-bottom-icon {
-  width: 16px;
-  height: 16px;
-  margin: 0 5px 0 16px;
+.product-icon-box i {
+  margin: 0 6px 0 16px;
 }
 /* 
 .login-view {

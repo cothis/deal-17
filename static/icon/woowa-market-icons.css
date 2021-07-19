@@ -20,13 +20,19 @@ url("./fonts/woowa-market-icons.woff?e32faba8e24800ca60e2618c5a372da7") format("
 
 :root {
   --font-large: 24px;
-  --font-medium: 18px;
+  --font-medium: 20px;
   --font-small: 16px;
 }
+
+/* size */
 
 .wmi.large { font-size: var(--font-large); }
 .wmi.medium { font-size: var(--font-medium); }
 .wmi.small { font-size: var(--font-small); }
+
+
+/* color */
+.wmi.grey1 { color: var(--grey1); }
 
 .wmi-add::before { content: "\f101"; }
 .wmi-category::before { content: "\f102"; }
