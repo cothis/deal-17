@@ -19,7 +19,7 @@ const template: string = `
 </div>
 `;
 
-export default class MyPageView extends View {
+export default class MypageView extends View {
   private store: Store;
 
   constructor(containerId: string, store: Store) {

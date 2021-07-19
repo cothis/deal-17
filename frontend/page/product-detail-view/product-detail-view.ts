@@ -1,32 +1,24 @@
-/**
- * 컴포넌트 순서
- * carousel.ts
- * state.ts
- * title.ts
- * content.ts
- * seller-info.ts
- * footer.ts
- */
+import { Product, Picture } from '../../../types';
+import View from '../../core/view';
+import Store from '../../core/store';
+import { PictureApi, ProductApi } from '../../core/api';
+import { AnimateType } from '../../../types';
+import { convertToMarketPrice } from '../../helper/numberHelper';
 
-import { Product, Picture } from '../../types';
-import View from '../core/view';
-import Store from '../core/store';
-import { PictureApi, ProductApi } from '../core/api';
-import { AnimateType } from '../../types';
-import { convertToMarketPrice } from '../helper/numberHelper';
+import HeaderInvisible from '../../components/product-detail/header-invisible';
+import Carousel from '../../components/product-detail/carousel';
+import State from '../../components/product-detail/state';
+import Title from '../../components/product-detail/title';
+import Content from '../../components/product-detail/content';
+import SellerInfo from '../../components/product-detail/seller-info';
+import Footer from '../../components/product-detail/footer';
 
-import Carousel from '../components/product-detail/carousel';
-import State from '../components/product-detail/state';
-import Title from '../components/product-detail/title';
-import Content from '../components/product-detail/content';
-import SellerInfo from '../components/product-detail/seller-info';
-import Footer from '../components/product-detail/footer';
-
-import '../../static/styles/product-detail.css';
+import '../../page/product-detail-view/product-detail-view.css';
 
 const template = `
- <div class="ProductDetailView">
+ <div class="product-detail">
    <div id="productDetailView__carousel" class="overflow-hidden"></div>
+   <div id="productDetailView__header-invisible"></div>
    <div class="x-py-24 x-px-16">
     <div id="productDetailView__state"></div>
     <div id="productDetailView__title" class="x-mt-16"></div>
@@ -54,6 +46,7 @@ export default class ProductDetailView extends View {
     this.appendView(AnimateType.RIGHT, AnimateType.RIGHT);
     this.pictureApi.getPicturesByProductId(1).then((pictures: Picture[]) => {
       new Carousel('#productDetailView__carousel', this.store, { pictures }).render();
+      new HeaderInvisible('#productDetailView__header-invisible', this.store, {}).render();
     });
     this.productApi.getProductById(productId).then((product: Product) => {
       console.log(product);

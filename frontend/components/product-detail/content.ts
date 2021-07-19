@@ -1,12 +1,12 @@
 import View from '../../core/view';
 import Store from '../../core/store';
 
-import '../../../static/styles/product-detail.css';
+import '../../page/product-detail-view/product-detail-view.css';
 
 const template = `
 <div id="contentComponent">
   <pre class="product-detail__content text large">{{__content__}}</pre>
-  <div class="text xsmall grey1 x-mt-8">채팅 {{__chatRoomCount__}} &middot; 관심 {{__wishCount__}} &middot; 조회 {{__viewCount__}}</div>
+  <div class="text xsmall grey1 x-mt-24">채팅 {{__chatRoomCount__}} &middot; 관심 {{__wishCount__}} &middot; 조회 {{__viewCount__}}</div>
 </div>
 `;
 
