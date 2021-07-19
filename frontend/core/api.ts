@@ -1,4 +1,4 @@
-import { Product, Picture } from '../../types';
+import { Product, Picture, ChatRoom, Wish, User } from '../../types';
 
 const BASE_URL: string = process.env.API_URL ?? 'http://localhost:8000';
 
@@ -31,5 +31,35 @@ export class PictureApi extends Api {
 
   getPicturesByProductId(productId: number): Promise<Picture[]> {
     return this.get<Picture[]>(`/${productId}`);
+  }
+}
+
+export class UserApi extends Api {
+  constructor() {
+    super('/api/v0/users');
+  }
+
+  getUserById(id: number): Promise<User[]> {
+    return this.get<User[]>(`/${id}`);
+  }
+}
+
+export class WishApi extends Api {
+  constructor() {
+    super('/api/v0/wishes');
+  }
+
+  getWishesByUserId(userId: number): Promise<Wish[]> {
+    return this.get<Wish[]>(`/${userId}`);
+  }
+}
+
+export class ChatRoomApi extends Api {
+  constructor() {
+    super('/api/v0/chat-rooms');
+  }
+
+  getChatRoomByProductId(productId: number): Promise<ChatRoom[]> {
+    return this.get<ChatRoom[]>(`/${productId}`);
   }
 }
