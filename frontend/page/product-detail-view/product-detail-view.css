@@ -1,0 +1,29 @@
+.product-detail {
+  padding-bottom: var(--product-bar-height);
+}
+
+.product-detail__header-icon {
+  padding: 16px;
+}
+
+.product-detail__arrow {
+  margin-left: 12px;
+}
+
+.product-detail__content {
+  white-space: break-spaces;
+}
+
+.product-detail__bar {
+  margin: 0 16px;
+  width: 1px;
+  height: 36px;
+  background-color: var(--grey3);
+}
+
+.product-detail__seller  {
+  margin: 0 8px;
+}
+
+.product-detail__footer {
+}
