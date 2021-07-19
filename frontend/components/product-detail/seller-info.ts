@@ -6,14 +6,16 @@ const template = `
     <div class="info-saler">
         <div class="link small flex grow w-20">판매자 정보</div>
         <div class="flex ai-center grow w-20">
-            <div class="link small">{{__userName__}}</div>
-            <div class="text xsmall gray3">{{__location__}}</div>
+            <div class="link small">{{__sellerEmail__}}</div>
+            <div class="text xsmall gray3">{{__sellerTown__}}</div>
         </div>
     </div>
 </div>
 `;
 
 interface Props {
+  sellerEmail: string;
+  sellerTown: string;
 }
 
 export default class SellerInfo extends View {
@@ -27,9 +29,8 @@ export default class SellerInfo extends View {
   }
 
   render() {
-    this.addHtml('');
-    const sellerInfo = this.getHtml();
-    this.setTemplateData('sellerInfo', sellerInfo);
+    this.setTemplateData('sellerEmail', this.props.sellerEmail);
+    this.setTemplateData('sellerTown', this.props.sellerTown);
 
     this.appendComponent();
   }

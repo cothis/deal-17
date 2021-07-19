@@ -1,3 +1,4 @@
+import { RowDataPacket } from 'mysql2';
 import View from '../frontend/core/view';
 
 export interface UserStore {
@@ -22,7 +23,7 @@ export interface Category {
   readonly imagePath: string;
 }
 
-export interface Product {
+export interface Product extends RowDataPacket {
   readonly id: number;
   subject: string;
   categoryId: number;

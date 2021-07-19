@@ -5,9 +5,9 @@ const template = `
 <div id="footerComponent">
     <div class="product-bar">
         <div class="flex grow w-20">
-            <div>하트</div>
+            <i class="wmi wmi-heart large grey1"></i>
             <div>|</div>
-            <div>가격</div>
+            <div>{{__price__}}</div>
         </div>
         <div class="flex grow jc-end w-20">
             <div class="button link small">채팅 목록 보기</div>
@@ -17,6 +17,9 @@ const template = `
 `;
 
 interface Props {
+  isWish: boolean;
+  price: string;
+  chatRoomCount: number;
 }
 
 export default class Footer extends View {
@@ -30,9 +33,7 @@ export default class Footer extends View {
   }
 
   render() {
-    this.addHtml('');
-    const footer = this.getHtml();
-    this.setTemplateData('footer', footer);
+    this.setTemplateData('price', this.props.price);
 
     this.appendComponent();
   }
