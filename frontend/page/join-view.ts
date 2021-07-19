@@ -35,6 +35,6 @@ export default class JoinView extends View {
       placeholder: '시•구 제외, 동만 입력',
     }).render();
 
-    new LoginButtonComponent('#joinView__inputForm', this.store, { title: '회원가입' }).render();
+    new LoginButtonComponent('#joinView__inputForm', this.store, { title: '회원가입', id: 'join' }).render();
   }
 }

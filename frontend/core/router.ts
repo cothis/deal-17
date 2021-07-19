@@ -52,7 +52,6 @@ export class Router {
 
   private registerRouteEvent() {
     document.body.addEventListener(EVENT_NAME, (e) => {
-      console.log('hihi');
       const pathname: string = (<CustomEvent>e).detail.pathname;
       const isReplace: boolean = (<CustomEvent>e).detail.isReplace ?? false;
       if (this.isMethod(pathname)) {

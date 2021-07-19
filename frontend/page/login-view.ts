@@ -5,6 +5,7 @@ import { AnimateType } from '../../types';
 import InputComponent from '../components/login/id-input';
 import LoginButtonComponent from '../components/login/login-button';
 import JoinButtonComponent from '../components/login/join-button';
+import { RouterEvent } from '../core/router';
 
 const template: string = `
 <div id="loginView" class="login-view">
@@ -17,7 +18,6 @@ const template: string = `
 
 export default class LoginView extends View {
   private store: Store;
-  private root: HTMLElement | null = null;
 
   constructor(containerId: string, store: Store) {
     super(containerId, template);
@@ -28,7 +28,11 @@ export default class LoginView extends View {
     this.appendView(AnimateType.RIGHT, AnimateType.RIGHT);
     new HeaderComponent('#loginView__header', this.store, { title: '로그인' }).render();
     new InputComponent('#loginView__inputForm', this.store, { placeholder: '아이디를 입력하세요.' }).render();
-    new LoginButtonComponent('#loginView__inputForm', this.store, { title: '로그인' }).render();
+    new LoginButtonComponent('#loginView__inputForm', this.store, { title: '로그인', id: 'login' }).render();
     new JoinButtonComponent('#loginView__inputForm', this.store).render();
+
+    this.container.querySelector('#login')?.addEventListener('click', (e) => {
+      RouterEvent.dispatchEvent('/mypage');
+    });
   }
 }
