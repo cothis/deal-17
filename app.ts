@@ -1,4 +1,4 @@
-import { MainView, LoginView, JoinView, ProductDetailView, MyPageView, WriteView, MypageView, CategoryView } from './frontend/page';
+import { MainView, LoginView, JoinView, ProductDetailView, WriteView, MypageView, CategoryView } from './frontend/page';
 import { Router } from './frontend/core/router';
 import Store from './frontend/core/store';
 import { Link } from './frontend/helper/router-link/router-link';
@@ -23,7 +23,7 @@ router.addRoutePath('/login', loginView);
 router.addRoutePath('/join', joinView);
 router.addRoutePath('/product', productDetailView);
 router.addRoutePath('/write', writeView);
-router.addRoutePath('/mypage', myPageView);
+router.addRoutePath('/mypage', mypageView);
 router.addRoutePath('/category', categoryView);
 
 router.route('');
