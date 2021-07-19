@@ -3,7 +3,7 @@ import Store from '../../core/store';
 
 const template = `
 <a href="@back" class="icon-wrapper">
-  <img src="./static/images/icons/chevron-left.png">
+  <i class="wmi wmi-chevron-left large"></i>
 </a>  
 <span class="text medium">{{__title__}}</span>
 <button type="button" class="icon-wrapper"></button>

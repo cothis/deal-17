@@ -220,7 +220,6 @@
   color: var(--white);
 }
 
-
 /* button */
 .button {
   background-color: var(--primary1);
@@ -261,6 +260,8 @@
 .button.location--add span {
   display: none;
 }
+
+/* [0719] chaeeun037: button location 현재 사용되지 않는것 같아 web font 변경하지 않았습니다. */
 
 .button.location--add span::after {
   content: url('../images/icons/add.png');

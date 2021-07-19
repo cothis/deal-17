@@ -11,7 +11,7 @@ const template: string = `
     <div class="product-info flex column">
       <div class="product-info-title">
         <div class="link medium flex grow">{{__subject__}}</div>
-        <img class="" src="/static/images/icons/heart.png" alter="아이콘">
+        <i class="wmi wmi-heart large grey1"></i>
       </div>
       <div class="product-content flex ai-center text small grey1">
         <div>역삼동</div>
@@ -24,11 +24,11 @@ const template: string = `
       <div class="product-icon-section flex grow text small grey1">
         <div class="product-icon-box grow flex">
           <div class="flex ai-center">
-            <img class="product-bottom-icon" src="/static/images/icons/message-square.png" alter="아이콘">
+            <i class="wmi wmi-message-square small"></i>
             <div>1</div>
           </div>
           <div class="flex ai-center">
-            <img class="product-bottom-icon" src="/static/images/icons/heart.png" alter="아이콘">
+            <i class="wmi wmi-heart small"></i>
             <div>1</div>
           </div>
         </div>

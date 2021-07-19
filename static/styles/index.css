@@ -9,10 +9,6 @@
   position: relative;
 }
 
-.header {
-  z-index: 100;
-}
-
 .header-container {
   position: relative;
 }
@@ -32,9 +28,15 @@
   width: 100%;
 }
 
+.header-center i {
+  margin-right: 4px;
+}
+
 .header-left {
   position: absolute;
   left: 0;
+  top: 0;
+  bottom: 0;
 }
 
 .header-right {
@@ -42,7 +44,7 @@
   right: 0;
 }
 
-.header-right img {
+.header-right i {
   margin-left: 16px;
 }
 
@@ -76,10 +78,8 @@
   justify-content: flex-end;
 }
 
-.product-bottom-icon {
-  width: 16px;
-  height: 16px;
-  margin: 0 5px 0 16px;
+.product-icon-box i {
+  margin: 0 6px 0 16px;
 }
 /* 
 .login-view {

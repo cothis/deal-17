@@ -5,15 +5,15 @@ import { SideViewType } from '../../page/main-view';
 const template = `
 <div class="header-container flex grow">
     <div class="header-center link medium white flex ai-center jc-center">
-      <img src="/static/images/icons/map-pin.png">
+      <i class="wmi wmi-map-pin small"></i>
       <div>장소</div>
     </div>
     <div class="header-left">
-      <img src="/static/images/icons/category.png">
+    <i class="wmi wmi-category large"></i>
     </div>
     <div class="header-right flex">
-      <a href="/login"><img id="headerUserButton" src="/static/images/icons/user.png"></a>
-      <img id="headerMenuButton" src="/static/images/icons/menu.png">
+      <a href="/login"><i class="wmi wmi-user large"></i></a>
+      <i class="wmi wmi-menu large"></i>
     </div>
 </div>
 `;
