@@ -1,4 +1,4 @@
-import LoginHeaderComponent from '../components/login/login-header';
+import HeaderComponent from '../components/login/login-header';
 import View from '../core/view';
 import Store from '../core/store';
 import { AnimateType } from '../../types';
@@ -26,7 +26,7 @@ export default class LoginView extends View {
 
   render() {
     this.appendView(AnimateType.RIGHT, AnimateType.RIGHT);
-    new LoginHeaderComponent('#loginView__header', this.store, { title: '로그인' }).render();
+    new HeaderComponent('#loginView__header', this.store, { title: '로그인' }).render();
     new InputComponent('#loginView__inputForm', this.store, { placeholder: '아이디를 입력하세요.' }).render();
     new LoginButtonComponent('#loginView__inputForm', this.store, { title: '로그인' }).render();
     new JoinButtonComponent('#loginView__inputForm', this.store).render();
