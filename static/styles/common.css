@@ -164,6 +164,11 @@
   overflow: hidden;
 }
 
+/* display */
+.display-none {
+  display: none;
+}
+
 /* Text */
 
 .text {

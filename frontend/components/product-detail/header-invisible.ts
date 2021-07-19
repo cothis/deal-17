@@ -10,7 +10,7 @@ const template = `
     <div class="product-detail__header-icon">
         <i class="wmi wmi-chevron-left large"></i>
     </div>
-    <div class="product-detail__header-icon">
+    <div id="headerInvisibleComponent__detail" class="product-detail__header-icon">
         <i class="wmi wmi-more-vertical large"></i>
         <div id="headerInvisibleComponent__state-dropdown"></div>
     </div>
@@ -23,6 +23,7 @@ export default class HeaderInvisible extends View {
   private store: Store;
   private props: Props;
   private isDropdownShow: boolean;
+  private selectPopup!: SelectPopup;
 
   constructor(selector: string, store: Store, props: Props) {
     super(selector, template);
@@ -31,21 +32,27 @@ export default class HeaderInvisible extends View {
     this.isDropdownShow = false;
   }
 
-  onClickHandler = () => {
+  onClickHandler(e: Event) {
+    e.stopPropagation();
     this.isDropdownShow = !this.isDropdownShow;
-  };
+    if (!this.isDropdownShow) {
+      this.selectPopup.hide();
+    } else {
+      this.selectPopup.show();
+    }
+  }
 
   render() {
     this.appendComponent();
-    new SelectPopup('#headerInvisibleComponent__state-dropdown', this.store, {
+    this.selectPopup = new SelectPopup('#headerInvisibleComponent__state-dropdown', this.store, {
       items: [
         { label: '수정하기', color: '', disabled: false },
         { label: '삭제하기', color: 'red', disabled: false },
       ],
-    }).render();
-    this.pageContainer!.querySelector('##headerInvisibleComponent__state-dropdown')?.addEventListener(
-      'click',
-      this.onClickHandler
-    );
+    });
+    this.selectPopup.render();
+    document
+      .querySelector('#headerInvisibleComponent__detail')
+      ?.addEventListener('click', this.onClickHandler.bind(this));
   }
 }
