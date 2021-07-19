@@ -1,0 +1,9 @@
+.category-container {
+  flex-wrap: wrap;
+  justify-content: space-between;
+  /* padding: 20px; */
+}
+
+.category-item {
+  flex-basis: 33.333%;
+}

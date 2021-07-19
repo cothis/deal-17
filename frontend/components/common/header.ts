@@ -9,7 +9,9 @@ const template = `
       <div>장소</div>
     </div>
     <div class="header-left">
-    <i class="wmi wmi-category large"></i>
+      <router-link to="/category">
+        <i class="wmi wmi-category large"></i>
+      </router-link>
     </div>
     <div class="header-right flex">
       <a href="/login"><i class="wmi wmi-user large"></i></a>
