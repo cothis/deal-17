@@ -74,7 +74,7 @@ export default abstract class View {
     this.htmlList = [];
   }
 
-  abstract render(): void;
+  abstract render(remainUrl?: string): void;
   remove(): void {
     if (this.removeAnimate) {
       this.pageContainer?.addEventListener('transitionend', this.pageContainer.remove);

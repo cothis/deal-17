@@ -44,14 +44,15 @@ export default class ProductDetailView extends View {
     this.pictureApi = new PictureApi();
   }
 
-  render() {
+  render(remainUrl?: string) {
+    console.log(remainUrl);
     this.appendView(AnimateType.RIGHT, AnimateType.RIGHT);
     this.pictureApi.getPicturesByProductId(1).then((pictures: Picture[]) => {
       new Carousel('#productDetailView__carousel', this.store, { pictures }).render();
-      new State('#productDetailView__state', this.store, { }).render();
-      new Title('#productDetailView__title', this.store, { }).render();
-      new Content('#productDetailView__content', this.store, { }).render();
-      new SellerInfo('#productDetailView__seller-info', this.store, { }).render();
+      new State('#productDetailView__state', this.store, {}).render();
+      new Title('#productDetailView__title', this.store, {}).render();
+      new Content('#productDetailView__content', this.store, {}).render();
+      new SellerInfo('#productDetailView__seller-info', this.store, {}).render();
       new Footer('#productDetailView__footer', this.store, {}).render();
     });
   }
