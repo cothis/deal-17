@@ -13,9 +13,10 @@ const joinView = new JoinView('#app', store);
 const productDetailView = new ProductDetailView('#app', store)
 
 // TODO: 커밋하기 전에 mainView로 바꿔놓기!!!
-router.setDefaultPage(productDetailView);
-// router.setDefaultPage(mainView);
+// router.setDefaultPage(productDetailView);
+router.setDefaultPage(mainView);
 
 router.addRoutePath('/login', loginView);
 router.addRoutePath('/join', joinView);
+router.addRoutePath('/product', productDetailView);
 router.route('');

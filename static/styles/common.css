@@ -11,6 +11,7 @@
   --primary2: #a0e1e0;
   --primary3: #219a95;
   --red: #f45452;
+  --gray3: #828282;
 
   /* Filter */
   --filter-white: invert(99%) sepia(40%) saturate(0%) hue-rotate(177deg) brightness(114%) contrast(100%);
@@ -81,6 +82,12 @@
   --space-3: calc(var(--space-1) * 3);
   --space-4: calc(var(--space-1) * 4);
   --space-5: calc(var(--space-1) * 5);
+
+  /* 8단위 */
+  --s1: 8px;
+  --s2: 16px;
+  --s3: 24px;
+  --s4: 32px;
 }
 
 /* Flex */
@@ -112,10 +119,46 @@
   justify-content: center;
 }
 
+.flex.jc-end {
+  justify-content: flex-end;
+}
+
 .flex.ai-center {
   align-items: center;
 }
 
+.flex.ai-end {
+  align-items: flex-end;
+}
+
+/* padding, margin */
+.x-py-24 {
+  padding-top: var(--s3);
+  padding-bottom: var(--s3);
+}
+.x-px-16 {
+  padding-left: var(--s2);
+  padding-right: var(--s2);
+}
+.x-mt-24 {
+  margin-top: var(--s3);
+}
+.x-mt-16 {
+  margin-top: var(--s2);
+}
+.x-mt-8 {
+  margin-top: var(--s1);
+}
+
+/* 고정 너비 */
+.w-20 {
+  width: 20px;
+}
+
+/* overflow hidden */
+.overflow-hidden {
+  overflow: hidden;
+}
 
 /* Text */
 
@@ -146,6 +189,9 @@
 
 .text.grey1 {
   color: var(--grey1);
+}
+.text.gray3 {
+  color: var(--gray3);
 }
 
 /* Link */
@@ -182,8 +228,9 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 8px 16px;
+  padding: 0 16px;
   border-radius: var(--default-border-radius);
+  height: 36px;
 }
 
 .button:hover {
@@ -200,7 +247,8 @@
 }
 
 .button.large {
-  padding: 10px 16px;
+  height: 40px;
+  padding: 0 16px;
 }
 
 /* Location */
@@ -257,8 +305,7 @@
 /* Status */
 /* TODO: element 보면서 수정해야 합니다. 스타일만 추가해뒀습니다. */
 .status {
-  display: flex;
-  flex-direction: row;
+  display: inline-flex;
   align-items: center;
   padding: 10px 16px;
   border: 1px solid var(--grey5);
@@ -520,9 +567,10 @@
   display: flex;
   align-items: center;
   width: var(--full-width);
-  padding: 16px;
+  padding: 0 16px;
   height: var(--info-saler-height);
   font-size: var(--medium);
+  background-color: var(--off-white);
 }
 
 /* LocationBar */
