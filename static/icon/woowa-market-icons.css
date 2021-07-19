@@ -1,0 +1,46 @@
+@font-face {
+  font-family: "woowa-market-icons";
+  src: url("./fonts/woowa-market-icons.woff2?e32faba8e24800ca60e2618c5a372da7") format("woff2"),
+url("./fonts/woowa-market-icons.woff?e32faba8e24800ca60e2618c5a372da7") format("woff");
+}
+
+[class^="wmi-"]::before,
+[class*=" wmi-"]::before {
+  display: inline-block;
+  font-family: woowa-market-icons !important;
+  font-style: normal;
+  font-weight: normal !important;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  vertical-align: -.125em;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+:root {
+  --font-large: 24px;
+  --font-medium: 18px;
+  --font-small: 16px;
+}
+
+.wmi.large { font-size: var(--font-large); }
+.wmi.medium { font-size: var(--font-medium); }
+.wmi.small { font-size: var(--font-small); }
+
+.wmi-add::before { content: "\f101"; }
+.wmi-category::before { content: "\f102"; }
+.wmi-check::before { content: "\f103"; }
+.wmi-chevron-down::before { content: "\f104"; }
+.wmi-chevron-left::before { content: "\f105"; }
+.wmi-chevron-right::before { content: "\f106"; }
+.wmi-close::before { content: "\f107"; }
+.wmi-heart::before { content: "\f108"; }
+.wmi-image::before { content: "\f109"; }
+.wmi-log-out::before { content: "\f10a"; }
+.wmi-map-pin::before { content: "\f10b"; }
+.wmi-menu::before { content: "\f10c"; }
+.wmi-message-square::before { content: "\f10d"; }
+.wmi-more-vertical::before { content: "\f10e"; }
+.wmi-send::before { content: "\f10f"; }
+.wmi-user::before { content: "\f110"; }
