@@ -99,19 +99,19 @@
   flex-direction: column;
 }
 
-.flex.shrink {
+.shrink {
   flex-shrink: 1;
 }
 
-.flex.grow {
+.grow {
   flex-grow: 1;
 }
 
-.flex.no-shrink {
+.no-shrink {
   flex-shrink: 0;
 }
 
-.flex.no-grow {
+.no-grow {
   flex-grow: 0;
 }
 
@@ -233,6 +233,7 @@
   justify-content: center;
   align-items: center;
   padding: 0 16px;
+  border: 1px solid var(--primary1);
   border-radius: var(--default-border-radius);
   height: 36px;
 }
@@ -262,20 +263,44 @@
   border: 1px solid var(--primary1);
 }
 
-.button.location--add span {
-  display: none;
+.button.location--active span,
+.button.location--inactive span {
+  flex-grow: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 /* [0719] chaeeun037: button location 현재 사용되지 않는것 같아 web font 변경하지 않았습니다. */
 
 .button.location--add span::after {
-  content: url('../images/icons/add.png');
+  content: "\f101";
+  font-family: woowa-market-icons;
+  font-style: normal;
+  font-weight: normal !important;
+  font-variant: normal;
+  text-transform: none;
+  font-size: 20px;
+  line-height: 1;
+  vertical-align: -.125em;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   color: var(--primary2);
 }
 
 .button.location--active span::after,
 .button.location--inactive span::after {
-  content: url('../images/icons/close.png');
+  content: "\f107";
+  font-family: woowa-market-icons;
+  font-style: normal;
+  font-weight: normal !important;
+  font-variant: normal;
+  text-transform: none;
+  font-size: 20px;
+  line-height: 1;
+  vertical-align: -.125em;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   color: var(--primary2);
 }
 
@@ -910,4 +935,8 @@
 
 .h-100 {
   height: 100%;
+}
+
+.flex-basis-50 {
+  flex-basis: 50%;
 }

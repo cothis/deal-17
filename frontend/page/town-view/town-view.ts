@@ -12,56 +12,20 @@ const template: string = `
     <button type="button" class="icon-wrapper"></button>  
   </div>
   
-  <ul class="category-container flex grow">
-    <li class="category-item flex column gap-4 jc-center ai-center">
-      <div class="img-box"></div>
-      <div>디지털기기</div>
-    </li>   
-    <li class="category-item flex column gap-4 jc-center ai-center">
-      <div class="img-box"></div>
-      <div>생활가전</div>
-    </li>   
-    <li class="category-item flex column gap-4 jc-center ai-center">
-      <div class="img-box"></div>
-      <div>가구/인테리어</div>
-    </li>   
-    <li class="category-item flex column gap-4 jc-center ai-center">
-      <div class="img-box"></div>
-      <div>게임/취미</div>
-    </li>   
-    <li class="category-item flex column gap-4 jc-center ai-center">
-      <div class="img-box"></div>
-      <div>생활/가공식품</div>
-    </li>   
-    <li class="category-item flex column gap-4 jc-center ai-center">
-      <div class="img-box"></div>
-      <div>스포츠/레저</div>
-    </li>   
-    <li class="category-item flex column gap-4 jc-center ai-center">
-      <div class="img-box"></div>
-      <div>여성패션/잡화</div>
-    </li>   
-    <li class="category-item flex column gap-4 jc-center ai-center">
-      <div class="img-box"></div>
-      <div>남성패션/잡화</div>
-    </li>   
-    <li class="category-item flex column gap-4 jc-center ai-center">
-      <div class="img-box"></div>
-      <div>유아동</div>
-    </li>   
-    <li class="category-item flex column gap-4 jc-center ai-center">
-      <div class="img-box"></div>
-      <div>뷰티/미용</div>
-    </li>   
-    <li class="category-item flex column gap-4 jc-center ai-center">
-      <div class="img-box"></div>
-      <div>반려동물</div>
-    </li>   
-    <li class="category-item flex column gap-4 jc-center ai-center">
-      <div class="img-box"></div>
-      <div>도서/티켓/음반</div>
-    </li>   
-  </ul>
+  <div class="flex column grow p-4">
+    <div class="flex column ai-center jc-center text medium grey1">
+      <span>지역은 최소 1개 이상</span>
+      <span>최대 2개까지 설정 가능해요.</span>
+    </div>
+    <div class="flex justify-between gap-4 x-mt-24">
+      <button class="button large location location--active flex-basis-50">
+        <span>역삼동</span>
+      </button>
+      <button class="button large location location--add flex-basis-50">
+        <span></span>
+      </button>
+    </div>
+  </div>
 </div>
 `;
 
