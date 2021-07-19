@@ -13,7 +13,7 @@ interface Props {
   title: string;
 }
 
-export default class LoginHeaderComponent extends View {
+export default class HeaderComponent extends View {
   props: Props;
 
   constructor(containerId: string, store: Store, props: Props) {

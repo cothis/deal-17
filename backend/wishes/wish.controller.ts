@@ -1,12 +1,12 @@
 import { Router } from 'express';
-import { getUserById } from './user.service';
+import { getWishesByUserId } from './wish.service';
 
 const router = Router();
 
-router.get('/:id', (req, res) => {
-  getUserById(Number(req.params.id))
-    .then((user) => {
-      res.json(user);
+router.get('/:userId', (req, res) => {
+  getWishesByUserId(Number(req.params.userId))
+    .then((wishes) => {
+      res.json(wishes);
     })
     .catch((e) => {
       console.error(e);

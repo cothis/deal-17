@@ -4,7 +4,7 @@ import { AnimateType } from '../../types';
 export default abstract class View {
   private template: string;
   private renderTemplate: string;
-  private container: HTMLElement;
+  protected container: HTMLElement;
   private htmlList: string[];
   protected pageContainer?: HTMLElement;
   private renderAnimate?: AnimateType;
