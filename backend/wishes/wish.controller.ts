@@ -5,8 +5,8 @@ const router = Router();
 
 router.get('/:userId', (req, res) => {
   getWishesByUserId(Number(req.params.userId))
-    .then((wish) => {
-      res.json(wish);
+    .then((wishes) => {
+      res.json(wishes);
     })
     .catch((e) => {
       console.error(e);
