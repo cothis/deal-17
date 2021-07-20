@@ -47,6 +47,10 @@ export class UserApi extends Api {
     return this.request<User[]>(`/${id}`);
   }
 
+  getUserByEmail(email: string): Promise<User> {
+    return this.request<User>(`/search?email=${email}`);
+  }
+
   join(email: string, town: string): Promise<{ userTownId: number }> {
     const option: RequestInit = {
       method: 'post',

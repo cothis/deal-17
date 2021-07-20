@@ -21,3 +21,16 @@ export const join = (email: string): Promise<number> => {
       throw new Error('아이디 중복이 발생했습니다.');
     });
 };
+
+export const getUserByEmail = (email: string): Promise<User> => {
+  return promisePool
+    .query('select * from user where email = ?', [email])
+    .then((res) => {
+      const user = (<User[]>res[0])[0];
+      if (user) return user;
+      else throw Error;
+    })
+    .catch((err) => {
+      throw new Error('아이디가 없습니다');
+    });
+};

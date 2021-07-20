@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { getUserById, join } from './user.service';
+import { getUserById, getUserByEmail, join } from './user.service';
 import { getOrAddTown } from '../town/town.service';
 import { Town, UserTown } from '../../types';
 import { addUserTown } from '../user-town/user-town.service';
@@ -7,14 +7,23 @@ import { addUserTown } from '../user-town/user-town.service';
 const router = Router();
 
 router.get('/:id', (req, res) => {
-  getUserById(Number(req.params.id))
-    .then((user) => {
-      res.json(user);
-    })
-    .catch((e) => {
-      console.error(e);
-      res.status(500).json({ error: 'SERVER_ERROR' });
-    });
+  if (req.params.id === 'search') {
+    getUserByEmail(String(req.query.email))
+      .then((user) => res.json(user))
+      .catch((err: Error) => {
+        console.error(err);
+        res.status(500).json({ error: err.message });
+      });
+  } else {
+    getUserById(Number(req.params.id))
+      .then((user) => {
+        res.json(user);
+      })
+      .catch((e) => {
+        console.error(e);
+        res.status(500).json({ error: 'SERVER_ERROR' });
+      });
+  }
 });
 
 router.post('/', (req, res) => {
