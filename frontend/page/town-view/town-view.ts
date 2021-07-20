@@ -17,12 +17,13 @@ const template: string = `
       <span>지역은 최소 1개 이상</span>
       <span>최대 2개까지 설정 가능해요.</span>
     </div>
-    <div class="flex justify-between gap-4 x-mt-24">
-      <button class="button large location location--active flex-basis-50">
+    <div id="button-wrapper" class="flex justify-between gap-4 x-mt-24">
+      <button class="button large flex-basis-50 justify-between location">
         <span>역삼동</span>
+        <i class="wmi wmi-close large cursor-pointer"></i>
       </button>
-      <button class="button large location location--add flex-basis-50">
-        <span></span>
+      <button class="button large flex-basis-50 button-white">
+        <i class="wmi wmi-add large cursor-pointer"></i>
       </button>
     </div>
   </div>
@@ -39,5 +40,12 @@ export default class TownView extends View {
 
   render() {
     this.appendView(AnimateType.LEFT, AnimateType.LEFT);
+
+    this.pageContainer?.querySelector('#button-wrapper')?.addEventListener('click', (e) => {
+      const target = (<HTMLElement>e.currentTarget!).closest('button');
+      if (!target) {
+        return;
+      }
+    });
   }
 }
