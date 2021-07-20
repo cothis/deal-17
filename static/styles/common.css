@@ -73,6 +73,10 @@
   /* product list item height */
   --product-list-item-height: 140px;
 
+  /* dropdown size */
+  --dropdown-height: 48px;
+  --dropdown-width: 165px;
+
   /* full width */
   --full-width: 100%;
 
@@ -160,6 +164,11 @@
   overflow: hidden;
 }
 
+/* display */
+.display-none {
+  display: none;
+}
+
 /* Text */
 
 .text {
@@ -222,6 +231,10 @@
 
 .link.white {
   color: var(--white);
+}
+
+.link.red {
+  color: var(--red);
 }
 
 /* button */
@@ -336,6 +349,7 @@
 /* Status */
 /* TODO: element 보면서 수정해야 합니다. 스타일만 추가해뒀습니다. */
 .status {
+  position: relative;
   display: inline-flex;
   align-items: center;
   padding: 10px 16px;
@@ -552,10 +566,19 @@
 }
 
 /* Dropdown */
-/* TODO: select와 함께 사용할지, 직접 구현할지 고민하기 */
+.dropdown-container {
+  background: var(--grey3);
+  box-shadow: 0px 0px 4px rgba(204, 204, 204, 0.5), 0px 2px 4px rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(4px);
+  border-radius: 10px;
+}
+
+
 .dropdown {
+  width: var(--dropdown-width);
+  height: var(--dropdown-height);
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   padding: 0 16px;
   background-color: var(--off-white);
   flex-grow: 0;

@@ -5,6 +5,8 @@ import { PictureApi, ProductApi } from '../../core/api';
 import { AnimateType } from '../../../types';
 import { convertToMarketPrice } from '../../helper/numberHelper';
 
+import SelectPopup from '../../components/common/select-popup';
+
 import HeaderInvisible from '../../components/product-detail/header-invisible';
 import Carousel from '../../components/product-detail/carousel';
 import State from '../../components/product-detail/state';
@@ -49,7 +51,6 @@ export default class ProductDetailView extends View {
       new HeaderInvisible('#productDetailView__header-invisible', this.store, {}).render();
     });
     this.productApi.getProductById(productId).then((product: Product) => {
-      console.log(product);
       new State('#productDetailView__state', this.store, { state: product.state }).render();
       new Title('#productDetailView__title', this.store, {
         subject: product.subject,
