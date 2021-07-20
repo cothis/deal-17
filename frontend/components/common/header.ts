@@ -15,14 +15,17 @@ const template = `
       </router-link>
     </div>
     <div class="header-right flex">
-      <a href="/login"><i class="wmi wmi-user large"></i></a>
-      <i class="wmi wmi-menu large"></i>
+      <router-link to="/login">
+        <i class="wmi wmi-user large"></i>
+      </router-link>
+      <router-link to="/menu">
+        <i class="wmi wmi-menu large"></i>
+      </router-link>
     </div>
 </div>
 `;
 
 interface Props {
-  // showSideView: (type: SideViewType) => void;
 }
 
 export default class Header extends View {
@@ -35,21 +38,7 @@ export default class Header extends View {
     this.props = props;
   }
 
-  // onUserClickHandler() {
-  //   this.props.showSideView(SideViewType.USER);
-  // }
-
-  // onMenuClickHandler() {
-  //   this.props.showSideView(SideViewType.MENU);
-  // }
-
   render() {
     this.updateView();
-
-    // const headerUserButton = document.querySelector('#headerUserButton');
-    // headerUserButton!.addEventListener('click', () => this.onUserClickHandler());
-
-    // const headerMenuButton = document.querySelector('#headerMenuButton');
-    // headerMenuButton!.addEventListener('click', this.onMenuClickHandler);
   }
 }
