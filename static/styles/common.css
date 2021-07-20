@@ -203,6 +203,14 @@
   color: var(--gray3);
 }
 
+.text.white {
+  color: var(--white);
+}
+
+.text.primary1 {
+  color: var(--primary1);
+}
+
 .text-center {
   text-align: center;
 }

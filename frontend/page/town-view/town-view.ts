@@ -18,13 +18,17 @@ const template: string = `
       <span>최대 2개까지 설정 가능해요.</span>
     </div>
     <div id="button-wrapper" class="flex justify-between gap-4 x-mt-24">
-      <button class="button large flex-basis-50 justify-between location">
+      <div class="button large flex-basis-50 justify-between location">
         <span>역삼동</span>
-        <i class="wmi wmi-close large cursor-pointer"></i>
-      </button>
-      <button class="button large flex-basis-50 button-white">
-        <i class="wmi wmi-add large cursor-pointer"></i>
-      </button>
+        <button type="button" class="text white">
+          <i class="wmi wmi-close large cursor-pointer"></i>
+        </button>
+      </div>
+      <div class="button large flex-basis-50 button-white">
+        <button type="button" class="text primary1">
+          <i class="wmi wmi-add large cursor-pointer"></i>
+        </button>
+      </div>
     </div>
   </div>
 </div>
@@ -42,10 +46,12 @@ export default class TownView extends View {
     this.appendView(AnimateType.LEFT, AnimateType.LEFT);
 
     this.pageContainer?.querySelector('#button-wrapper')?.addEventListener('click', (e) => {
-      const target = (<HTMLElement>e.currentTarget!).closest('button');
+      const target = (<HTMLElement>e.target).closest('i');
       if (!target) {
         return;
       }
+
+      console.log(target);
     });
   }
 }
