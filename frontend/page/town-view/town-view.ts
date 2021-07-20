@@ -1,6 +1,7 @@
 import View from '../../core/view';
 import Store from '../../core/store';
 import { AnimateType } from '../../../types';
+import './town-view.css';
 
 const template: string = `
 <div class="flex column grow">
@@ -17,13 +18,10 @@ const template: string = `
       <span>지역은 최소 1개 이상</span>
       <span>최대 2개까지 설정 가능해요.</span>
     </div>
-    <div class="flex justify-between gap-4 x-mt-24">
-      <button class="button large location location--active flex-basis-50">
-        <span>역삼동</span>
-      </button>
-      <button class="button large location location--add flex-basis-50">
-        <span></span>
-      </button>
+    <div id="button-wrapper" class="flex justify-between gap-4 x-mt-24">
+      <town-button state="active" name="역삼동"></town-button>
+      <town-button state="add"></town-button>
+      <town-button state="inactive" name="두두동"></town-button>
     </div>
   </div>
 </div>
@@ -34,10 +32,20 @@ export default class TownView extends View {
 
   constructor(containerId: string, store: Store) {
     super(containerId, template);
+
     this.store = store;
   }
 
   render() {
     this.appendView(AnimateType.LEFT, AnimateType.LEFT);
+
+    this.pageContainer?.querySelector('#button-wrapper')?.addEventListener('click', (e) => {
+      const button = (<HTMLElement>e.target).closest('button');
+      if (!button) {
+        return;
+      }
+
+      console.log(button);
+    });
   }
 }

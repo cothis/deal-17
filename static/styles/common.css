@@ -203,6 +203,14 @@
   color: var(--gray3);
 }
 
+.text.white {
+  color: var(--white);
+}
+
+.text.primary1 {
+  color: var(--primary1);
+}
+
 .text-center {
   text-align: center;
 }
@@ -251,8 +259,18 @@
   height: 36px;
 }
 
+.button.button-white {
+  background-color: var(--white);
+  color: var(--primary1);
+}
+
 .button:hover {
   background-color: var(--primary3);
+}
+
+.button.button-white:hover {
+  background-color: var(--white);
+  border: 1px solid var(--primary3);
 }
 
 .button:focus {
@@ -260,61 +278,22 @@
   border: 2px solid var(--primary2);
 }
 
+.button.button-white:focus {
+  background-color: var(--white);
+  border: 2px solid var(--primary2);
+}
+
 .button:disabled {
   background-color: var(--primary2);
+}
+
+.button.button-white:disabled {
+  background-color: var(--grey2);
 }
 
 .button.large {
   height: 40px;
   padding: 0 16px;
-}
-
-/* Location */
-.button.location--add,
-.button.location--inactive {
-  background-color: var(--white);
-  border: 1px solid var(--primary1);
-}
-
-.button.location--active span,
-.button.location--inactive span {
-  flex-grow: 1;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-/* [0719] chaeeun037: button location 현재 사용되지 않는것 같아 web font 변경하지 않았습니다. */
-
-.button.location--add span::after {
-  content: "\f101";
-  font-family: woowa-market-icons;
-  font-style: normal;
-  font-weight: normal !important;
-  font-variant: normal;
-  text-transform: none;
-  font-size: 20px;
-  line-height: 1;
-  vertical-align: -.125em;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  color: var(--primary2);
-}
-
-.button.location--active span::after,
-.button.location--inactive span::after {
-  content: "\f107";
-  font-family: woowa-market-icons;
-  font-style: normal;
-  font-weight: normal !important;
-  font-variant: normal;
-  text-transform: none;
-  font-size: 20px;
-  line-height: 1;
-  vertical-align: -.125em;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  color: var(--primary2);
 }
 
 /* Category */
@@ -962,4 +941,8 @@
 
 .flex-basis-50 {
   flex-basis: 50%;
+}
+
+.cursor-pointer {
+  cursor: pointer;
 }

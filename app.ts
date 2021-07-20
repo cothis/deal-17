@@ -12,8 +12,10 @@ import { Router } from './frontend/core/router';
 import Store from './frontend/core/store';
 import { Link } from './frontend/helper/router-link/router-link';
 import { CategoryItem } from './frontend/components/category/category-item.component';
+import { TownViewElement } from './frontend/page/town-view/town-view.custom';
 window.customElements.define('router-link', Link);
 window.customElements.define('category-item', CategoryItem);
+window.customElements.define('town-button', TownViewElement);
 
 const store = new Store();
 const router = new Router();
