@@ -14,54 +14,17 @@ const template: string = `
   </div>
   
   <ul class="category-container flex grow">
-    <li class="category-item flex column gap-4 jc-center ai-center">
-      <div class="img-box"></div>
-      <div>디지털기기</div>
-    </li>   
-    <li class="category-item flex column gap-4 jc-center ai-center">
-      <div class="img-box"></div>
-      <div>생활가전</div>
-    </li>   
-    <li class="category-item flex column gap-4 jc-center ai-center">
-      <div class="img-box"></div>
-      <div>가구/인테리어</div>
-    </li>   
-    <li class="category-item flex column gap-4 jc-center ai-center">
-      <div class="img-box"></div>
-      <div>게임/취미</div>
-    </li>   
-    <li class="category-item flex column gap-4 jc-center ai-center">
-      <div class="img-box"></div>
-      <div>생활/가공식품</div>
-    </li>   
-    <li class="category-item flex column gap-4 jc-center ai-center">
-      <div class="img-box"></div>
-      <div>스포츠/레저</div>
-    </li>   
-    <li class="category-item flex column gap-4 jc-center ai-center">
-      <div class="img-box"></div>
-      <div>여성패션/잡화</div>
-    </li>   
-    <li class="category-item flex column gap-4 jc-center ai-center">
-      <div class="img-box"></div>
-      <div>남성패션/잡화</div>
-    </li>   
-    <li class="category-item flex column gap-4 jc-center ai-center">
-      <div class="img-box"></div>
-      <div>유아동</div>
-    </li>   
-    <li class="category-item flex column gap-4 jc-center ai-center">
-      <div class="img-box"></div>
-      <div>뷰티/미용</div>
-    </li>   
-    <li class="category-item flex column gap-4 jc-center ai-center">
-      <div class="img-box"></div>
-      <div>반려동물</div>
-    </li>   
-    <li class="category-item flex column gap-4 jc-center ai-center">
-      <div class="img-box"></div>
-      <div>도서/티켓/음반</div>
-    </li>   
+    <category-item>디지털기기</category-item>
+    <category-item>가구/인테리어</category-item>
+    <category-item>게임/취미</category-item>
+    <category-item>생활/가공식품</category-item>
+    <category-item>스포츠/레저</category-item>
+    <category-item>여성패션/잡화</category-item>
+    <category-item>남성패션/잡화</category-item>
+    <category-item>유아동</category-item>
+    <category-item>뷰티/미용</category-item>
+    <category-item>반려동물</category-item>
+    <category-item>도서/티켓/음반</category-item>
   </ul>
 </div>
 `;
