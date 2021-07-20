@@ -5,6 +5,15 @@
   flex-basis: 50%;
 }
 
+.location > button {
+  color: var(--white);
+  cursor: pointer;
+}
+
+.location:not(.location--active) > button {
+  color: var(--primary1);
+}
+
 .location--add {
   justify-content: center;
 }

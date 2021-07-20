@@ -19,23 +19,9 @@ const template: string = `
       <span>최대 2개까지 설정 가능해요.</span>
     </div>
     <div id="button-wrapper" class="flex justify-between gap-4 x-mt-24">
-      <div class="button large location location--active">
-        <span>역삼동</span>
-        <button type="button" class="text white cursor-pointer">
-          <i class="wmi wmi-close large"></i>
-        </button>
-      </div>
-      <div class="button large location location--add">
-        <button type="button" class="text primary1 cursor-pointer">
-          <i class="wmi wmi-add large"></i>
-        </button>
-      </div>
-      <div class="button large location location--inactive">
-        <span>두두동</span>
-        <button type="button" class="text primary1 cursor-pointer">
-          <i class="wmi wmi-close large"></i>
-        </button>
-      </div>
+      <town-button state="active" name="역삼동"></town-button>
+      <town-button state="add"></town-button>
+      <town-button state="inactive" name="두두동"></town-button>
     </div>
   </div>
 </div>
@@ -46,6 +32,7 @@ export default class TownView extends View {
 
   constructor(containerId: string, store: Store) {
     super(containerId, template);
+
     this.store = store;
   }
 
@@ -53,12 +40,12 @@ export default class TownView extends View {
     this.appendView(AnimateType.LEFT, AnimateType.LEFT);
 
     this.pageContainer?.querySelector('#button-wrapper')?.addEventListener('click', (e) => {
-      const target = (<HTMLElement>e.target).closest('button');
-      if (!target) {
+      const button = (<HTMLElement>e.target).closest('button');
+      if (!button) {
         return;
       }
 
-      console.log(target);
+      console.log(button);
     });
   }
 }
