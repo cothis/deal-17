@@ -166,7 +166,7 @@
 
 /* display */
 .display-none {
-  display: none;
+  display: none !important;
 }
 
 /* Text */
@@ -612,6 +612,7 @@
   color: var(--black);
   background-color: var(--white);
   border-radius: 0;
+  border-bottom: solid 1px var(--grey5);
 }
 
 .header.offwhite {
@@ -711,6 +712,11 @@
   padding: 16px;
   gap: 16px;
   background-color: var(--white);
+  border-bottom: solid 1px var(--grey5);
+}
+
+.chat-list-item.unread {
+  background-color: var(--off-white);
 }
 
 .chat-list-item .item__left {
@@ -722,12 +728,11 @@
 .chat-list-item .item__left .namebar {
   width: var(--full-width);
   display: flex;
-  justify-content: space-between;
 }
 
 .chat-list-item .item__left .messagebar {
   display: flex;
-  gap: 16px;
+  flex-shrink: 0;
 }
 
 .chat-list-item .message {
@@ -738,11 +743,12 @@
   width: 20px;
   height: 20px;
   display: flex;
+  padding-top: 2px;
   align-items: center;
-  text-align: center;
-  padding: 4px;
+  justify-content: center;
   background-color: var(--primary3);
   color: var(--white);
+  border-radius: 50%;
 }
 
 /* ChatBar */
