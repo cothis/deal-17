@@ -8,6 +8,7 @@ const template = `
 interface Props {
   title: string;
   id: string;
+  onClick: () => void;
 }
 
 export default class LoginButtonComponent extends View {
@@ -22,9 +23,15 @@ export default class LoginButtonComponent extends View {
     this.props = props;
   }
 
+  onClick(e: Event) {
+    this.props.onClick();
+  }
+
   render() {
     this.setTemplateData('id', this.props.id);
     this.setTemplateData('title', this.props.title);
     this.appendComponent();
+
+    this.container.querySelector(`#${this.props.id}`)?.addEventListener('click', this.props.onClick);
   }
 }

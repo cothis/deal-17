@@ -11,6 +11,8 @@ const template = `
 interface Props {
   placeholder: string;
   label?: string;
+  regex?: RegExp;
+  setState: (value: string) => void;
 }
 
 export default class InputComponent extends View {
@@ -32,6 +34,11 @@ export default class InputComponent extends View {
     } else {
       this.setTemplateData('label', '');
     }
-    this.appendComponent();
+    this.updateView();
+
+    this.container.addEventListener('input', (e) => {
+      const value = (<HTMLInputElement>e.target).value;
+      this.props.setState(value);
+    });
   }
 }
