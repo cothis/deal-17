@@ -2,6 +2,7 @@ import View from '../../core/view';
 import Store from '../../core/store';
 import { AnimateType } from '../../../types';
 import './town-view.css';
+import PopupComponent from '../../popup-view/popup-component';
 
 const template: string = `
 <div class="flex column grow">
@@ -25,6 +26,7 @@ const template: string = `
     </div>
   </div>
 </div>
+<div id="town-popup" class="modal-wrapper display-none"></div>
 `;
 
 export default class TownView extends View {
@@ -45,7 +47,14 @@ export default class TownView extends View {
         return;
       }
 
-      console.log(button);
+      new PopupComponent('#town-popup', this.store, {
+        input: {
+          label: '현재 위치를 입력하세요.',
+          placeholder: '시 구 제외, 동만 입력',
+        },
+        okText: '확인',
+        okClickHandler: (e) => console.log(e.target),
+      }).render();
     });
   }
 }
