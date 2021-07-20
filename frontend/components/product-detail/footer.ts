@@ -12,7 +12,9 @@ const template = `
             <div>{{__price__}}</div>
         </div>
         <div class="flex grow jc-end w-20">
-            <div class="button link small">채팅 목록 보기</div>
+        <router-link to="/chat">
+          <div class="button link small">채팅 목록 보기</div>
+        </router-link>
         </div>
     </div>
 </div>

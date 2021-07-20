@@ -7,9 +7,9 @@ import '../../page/product-detail-view/product-detail-view.css';
 
 const template = `
 <div id="headerInvisibleComponent" class="header invisible">
-    <div class="product-detail__header-icon">
+    <router-link to="@back" class="product-detail__header-icon">
         <i class="wmi wmi-chevron-left large"></i>
-    </div>
+    </router-link>
     <div id="headerInvisibleComponent__detail" class="product-detail__header-icon">
         <i class="wmi wmi-more-vertical large"></i>
         <div id="headerInvisibleComponent__state-dropdown"></div>

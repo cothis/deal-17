@@ -51,7 +51,7 @@ export class UserApi extends Api {
     return this.request<User>(`/search?email=${email}`);
   }
 
-  join(email: string, town: string): Promise<number> {
+  join(email: string, town: string): Promise<{ userTownId: number }> {
     const option: RequestInit = {
       method: 'post',
       body: JSON.stringify({ email, town }),
@@ -59,7 +59,7 @@ export class UserApi extends Api {
         'Content-Type': 'application/json',
       },
     };
-    return this.request<number>('', option);
+    return this.request<{ userTownId: number }>('', option);
   }
 }
 

@@ -6,6 +6,7 @@ import InputComponent from '../components/login/id-input';
 import LoginButtonComponent from '../components/login/login-button';
 
 import { UserApi } from '../core/api';
+import { RouterEvent } from '../core/router';
 
 const template: string = `
 <div id="joinView" class="joiv-view">
@@ -61,7 +62,12 @@ export default class JoinView extends View {
       title: '회원가입',
       id: 'join',
       onClick: () => {
-        this.api.join(this.state.id, this.state.town).then(console.log);
+        this.api
+          .join(this.state.id, this.state.town)
+          .then(({ userTownId }) => {
+            RouterEvent.dispatchEvent('@back');
+          })
+          .catch(console.error);
       },
     }).render();
   }
