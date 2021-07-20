@@ -1,0 +1,20 @@
+.location {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-basis: 50%;
+}
+
+.location--add {
+  justify-content: center;
+}
+
+.location:not(.location--active) {
+  background-color: var(--white);
+  border: 1px solid var(--primary1);
+  color: var(--primary1);
+}
+
+.location:not(.location--active):hover {
+  border: 1px solid var(--primary2);
+}

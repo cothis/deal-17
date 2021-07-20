@@ -1,6 +1,7 @@
 import View from '../../core/view';
 import Store from '../../core/store';
 import { AnimateType } from '../../../types';
+import './town-view.css';
 
 const template: string = `
 <div class="flex column grow">
@@ -18,15 +19,21 @@ const template: string = `
       <span>최대 2개까지 설정 가능해요.</span>
     </div>
     <div id="button-wrapper" class="flex justify-between gap-4 x-mt-24">
-      <div class="button large flex-basis-50 justify-between location">
+      <div class="button large location location--active">
         <span>역삼동</span>
-        <button type="button" class="text white">
-          <i class="wmi wmi-close large cursor-pointer"></i>
+        <button type="button" class="text white cursor-pointer">
+          <i class="wmi wmi-close large"></i>
         </button>
       </div>
-      <div class="button large flex-basis-50 button-white">
-        <button type="button" class="text primary1">
-          <i class="wmi wmi-add large cursor-pointer"></i>
+      <div class="button large location location--add">
+        <button type="button" class="text primary1 cursor-pointer">
+          <i class="wmi wmi-add large"></i>
+        </button>
+      </div>
+      <div class="button large location location--inactive">
+        <span>두두동</span>
+        <button type="button" class="text primary1 cursor-pointer">
+          <i class="wmi wmi-close large"></i>
         </button>
       </div>
     </div>
@@ -46,7 +53,7 @@ export default class TownView extends View {
     this.appendView(AnimateType.LEFT, AnimateType.LEFT);
 
     this.pageContainer?.querySelector('#button-wrapper')?.addEventListener('click', (e) => {
-      const target = (<HTMLElement>e.target).closest('i');
+      const target = (<HTMLElement>e.target).closest('button');
       if (!target) {
         return;
       }
