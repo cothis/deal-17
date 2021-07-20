@@ -8,6 +8,7 @@ import Header from '../../components/common/header-white';
 import chattingListComponent from '../../components/common/chatting-list';
 
 import './chatting-list-view.css';
+import { RouterEvent } from '../../core/router';
 
 const template = `
  <div class="chatting-list">
@@ -26,6 +27,12 @@ export default class ChattingList extends View {
     this.chatRoomApi = new ChatRoomApi();
   }
 
+  onClickEventHandler(e: Event) {
+    e.stopPropagation();
+    console.log(e.target);
+    RouterEvent.dispatchEvent('/chat/detail/1');
+  }
+
   render(remainUrl?: string) {
     const productId = Number(remainUrl?.substr(1, 1));
     this.appendView(AnimateType.RIGHT, AnimateType.RIGHT);
@@ -33,7 +40,11 @@ export default class ChattingList extends View {
     new Header('#ChattingListView__header', this.store, { title: '채팅하기' }).render();
 
     this.chatRoomApi.getChatRoomByProductId(1).then((chatRooms: ChatRoom[]) => {
-      new chattingListComponent('#ChattingListView__content', this.store, { chatRooms }).render();
+      new chattingListComponent('#ChattingListView__content', this.store, {
+        chatRooms,
+      }).render();
     });
+
+    document.querySelector('#ChattingListView__content')?.addEventListener('click', this.onClickEventHandler);
   }
 }

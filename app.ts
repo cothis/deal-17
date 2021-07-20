@@ -45,8 +45,9 @@ router.addRoutePath('/write', writeView);
 router.addRoutePath('/mypage', mypageView);
 router.addRoutePath('/category', categoryView);
 router.addRoutePath('/town', townView);
+router.addRoutePath('/chat/detail', chattingDetailView);
 router.addRoutePath('/chat', chattingListView);
 router.addRoutePath('/menu', menuView);
-router.addRoutePath('/chat/detail', chattingDetailView);
+
 
 router.route('');
