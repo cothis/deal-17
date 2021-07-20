@@ -8,9 +8,12 @@ import SelectPopup from '../../components/common/select-popup';
 
 import Header from '../../components/common/header-offwhite';
 import MenuBar from '../../components/menu/menu-bar';
+import ProductList from '../../components/common/product-list';
+
+import './menu-view.css';
 
 const template = `
- <div>
+ <div class="menu-view">
    <div id="MenuView__header"></div>
    <div id="MenuView__menu-bar"></div>
    <div id="MenuView__content"></div>
@@ -73,5 +76,9 @@ export default class MenuView extends View {
       onClick: this.onClick.bind(this),
     });
     this.menuBar.render();
+
+    this.productApi.getAllProducts().then((products: Product[]) => {
+      new ProductList('#MenuView__content', this.store, { products }).render();
+    });
   }
 }
