@@ -35,7 +35,7 @@ const chattingListView = new ChattingListView('#app', store);
 const menuView = new MenuView('#app', store);
 const chattingDetailView = new ChattingDetailView('#app', store);
 
-router.setDefaultPage(chattingDetailView);
+router.setDefaultPage(mainView);
 // router.setDefaultPage(mainView);
 
 router.addRoutePath('/login', loginView);

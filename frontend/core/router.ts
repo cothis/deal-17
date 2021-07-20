@@ -22,7 +22,6 @@ export class RouterEvent {
   }
 
   static dispatchEvent(pathname: string | null = '', isReplace: boolean = false) {
-    console.log(pathname, isReplace);
     if (pathname === null) {
       throw new Error('pathname이 null입니다. href 속성을 확인해보세요.');
     }
