@@ -6,3 +6,4 @@ export { default as WriteView } from './write-view/write-view';
 export { default as MypageView } from './mypage-view';
 export { default as CategoryView } from './category-view/category-view';
 export { default as TownView } from './town-view/town-view';
+export { default as ChattingListView } from './chatting-list-view/chatting-list-view';
