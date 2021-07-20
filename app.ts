@@ -8,7 +8,8 @@ import {
   CategoryView,
   TownView,
   ChattingListView,
-  MenuView
+  MenuView,
+  ChattingDetailView,
 } from './frontend/page';
 import { Router } from './frontend/core/router';
 import Store from './frontend/core/store';
@@ -32,9 +33,9 @@ const categoryView = new CategoryView('#app', store);
 const townView = new TownView('#app', store);
 const chattingListView = new ChattingListView('#app', store);
 const menuView = new MenuView('#app', store);
+const chattingDetailView = new ChattingDetailView('#app', store);
 
-router.setDefaultPage(mainView);
-
+router.setDefaultPage(chattingDetailView);
 // router.setDefaultPage(mainView);
 
 router.addRoutePath('/login', loginView);
@@ -45,6 +46,7 @@ router.addRoutePath('/mypage', mypageView);
 router.addRoutePath('/category', categoryView);
 router.addRoutePath('/town', townView);
 router.addRoutePath('/chat', chattingListView);
-router.addRoutePath('/menu', menuView)
+router.addRoutePath('/menu', menuView);
+router.addRoutePath('/chat/detail', chattingDetailView);
 
 router.route('');

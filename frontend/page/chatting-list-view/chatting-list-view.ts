@@ -10,9 +10,9 @@ import chattingListComponent from '../../components/common/chatting-list';
 import './chatting-list-view.css';
 
 const template = `
- <div class="menu-view">
-   <div id="ChattingList__header"></div>
-   <div id="ChattingList__content"></div>
+ <div class="chatting-list">
+   <div id="ChattingListView__header"></div>
+   <div id="ChattingListView__content"></div>
  </div>
  `;
 
@@ -30,10 +30,10 @@ export default class ChattingList extends View {
     const productId = Number(remainUrl?.substr(1, 1));
     this.appendView(AnimateType.RIGHT, AnimateType.RIGHT);
 
-    new Header('#ChattingList__header', this.store, { title: '채팅하기' }).render();
+    new Header('#ChattingListView__header', this.store, { title: '채팅하기' }).render();
 
     this.chatRoomApi.getChatRoomByProductId(1).then((chatRooms: ChatRoom[]) => {
-      new chattingListComponent('#ChattingList__content', this.store, { chatRooms }).render();
+      new chattingListComponent('#ChattingListView__content', this.store, { chatRooms }).render();
     });
   }
 }
