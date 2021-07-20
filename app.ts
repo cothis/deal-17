@@ -11,7 +11,9 @@ import {
 import { Router } from './frontend/core/router';
 import Store from './frontend/core/store';
 import { Link } from './frontend/helper/router-link/router-link';
+import { CategoryItem } from './frontend/components/category/category-item.component';
 window.customElements.define('router-link', Link);
+window.customElements.define('category-item', CategoryItem);
 
 const store = new Store();
 const router = new Router();
