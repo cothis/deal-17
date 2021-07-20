@@ -27,7 +27,7 @@ export default class ProductList extends View {
   render() {
     this.updateView();
     this.props.chatRooms.forEach((_, i) => {
-      this.addHtml(`<router-link to="/chat/1" id="chattingListComponent__chat${i}"></router-link>`);
+      this.addHtml(`<div id="chattingListComponent__chat${i}"></div>`);
     });
     const html = this.getHtml();
     this.setTemplateData('chat', html);
