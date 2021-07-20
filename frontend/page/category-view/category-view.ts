@@ -15,6 +15,7 @@ const template: string = `
   
   <ul class="category-container flex grow">
     <category-item>디지털기기</category-item>
+    <category-item>생활가전</category-item>
     <category-item>가구/인테리어</category-item>
     <category-item>게임/취미</category-item>
     <category-item>생활/가공식품</category-item>
