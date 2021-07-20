@@ -48,7 +48,7 @@ export interface ChatRoom extends RowDataPacket {
   readonly customerId: number;
 }
 
-export interface Town {
+export interface Town extends RowDataPacket {
   readonly id: number;
   readonly name: string;
 }
