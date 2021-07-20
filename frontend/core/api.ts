@@ -9,7 +9,7 @@ export class Api {
     this.basePath = basePath;
   }
 
-  get<AjaxResponse>(path: string, OPTION?: RequestInit | undefined): Promise<AjaxResponse> {
+  request<AjaxResponse>(path: string, OPTION?: RequestInit | undefined): Promise<AjaxResponse> {
     return fetch(`${BASE_URL}${this.basePath}${path}`, OPTION).then((response) => response.json());
   }
 }
@@ -20,11 +20,11 @@ export class ProductApi extends Api {
   }
 
   getAllProducts(): Promise<Product[]> {
-    return this.get<Product[]>('');
+    return this.request<Product[]>('');
   }
 
   getProductById(id: number): Promise<Product> {
-    return this.get<Product>(`/${id}`);
+    return this.request<Product>(`/${id}`);
   }
 }
 
@@ -34,7 +34,7 @@ export class PictureApi extends Api {
   }
 
   getPicturesByProductId(productId: number): Promise<Picture[]> {
-    return this.get<Picture[]>(`/${productId}`);
+    return this.request<Picture[]>(`/${productId}`);
   }
 }
 
@@ -44,7 +44,18 @@ export class UserApi extends Api {
   }
 
   getUserById(id: number): Promise<User[]> {
-    return this.get<User[]>(`/${id}`);
+    return this.request<User[]>(`/${id}`);
+  }
+
+  join(email: string, town: string): Promise<number> {
+    const option: RequestInit = {
+      method: 'post',
+      body: JSON.stringify({ email, town }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    };
+    return this.request<number>('', option);
   }
 }
 
@@ -54,7 +65,7 @@ export class WishApi extends Api {
   }
 
   getWishesByUserId(userId: number): Promise<Wish[]> {
-    return this.get<Wish[]>(`/${userId}`);
+    return this.request<Wish[]>(`/${userId}`);
   }
 }
 
@@ -64,6 +75,6 @@ export class ChatRoomApi extends Api {
   }
 
   getChatRoomByProductId(productId: number): Promise<ChatRoom[]> {
-    return this.get<ChatRoom[]>(`/${productId}`);
+    return this.request<ChatRoom[]>(`/${productId}`);
   }
 }

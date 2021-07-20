@@ -5,6 +5,8 @@ import { AnimateType } from '../../types';
 import InputComponent from '../components/login/id-input';
 import LoginButtonComponent from '../components/login/login-button';
 
+import { UserApi } from '../core/api';
+
 const template: string = `
 <div id="joinView" class="joiv-view">
   <div id="joinView__header" class="header offwhite p-5"></div>
@@ -26,11 +28,13 @@ export interface State {
 export default class JoinView extends View {
   private store: Store;
   private state: State;
+  private api: UserApi;
 
   constructor(containerId: string, store: Store) {
     super(containerId, template);
     this.store = store;
     this.state = { id: '', town: '' };
+    this.api = new UserApi();
   }
 
   render() {
@@ -57,7 +61,7 @@ export default class JoinView extends View {
       title: '회원가입',
       id: 'join',
       onClick: () => {
-        console.log(this.state);
+        console.log(this.api.join(this.state.id, this.state.town));
       },
     }).render();
   }
