@@ -41,7 +41,7 @@ export interface Product extends RowDataPacket {
   chatRooms: number;
 }
 
-export interface ChatRoom {
+export interface ChatRoom extends RowDataPacket {
   readonly id: number;
   readonly productId: number;
   readonly sellerId: number;
