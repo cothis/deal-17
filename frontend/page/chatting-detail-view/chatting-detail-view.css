@@ -1,0 +1,12 @@
+.chatting-detail {
+    padding-bottom: 58px;
+}
+
+#ChattingDetailView__header {
+    position: sticky;
+    top: 0px;
+}
+
+.chatting-detail__message-list {
+    padding: 16px;
+}
