@@ -101,13 +101,15 @@ export class Router {
       return;
     }
 
-    const secondSlashIndex = path.substr(1).indexOf('/');
+    const lastSlashIndex = path.lastIndexOf('/');
     let url = path;
     let remainUrl = '';
-    if (secondSlashIndex >= 0) {
-      url = path.substr(0, secondSlashIndex + 1);
-      remainUrl = path.substr(secondSlashIndex + 1);
+    if (lastSlashIndex > 0) {
+      url = path.substr(0, lastSlashIndex);
+      remainUrl = path.substr(lastSlashIndex);
     }
+
+    console.log(url, remainUrl);
 
     const page = this.routeTable.get(url);
     if (page) {
