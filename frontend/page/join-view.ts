@@ -61,7 +61,7 @@ export default class JoinView extends View {
       title: '회원가입',
       id: 'join',
       onClick: () => {
-        console.log(this.api.join(this.state.id, this.state.town));
+        this.api.join(this.state.id, this.state.town).then(console.log);
       },
     }).render();
   }

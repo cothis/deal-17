@@ -19,12 +19,8 @@ router.get('/:id', (req, res) => {
 
 router.post('/', (req, res) => {
   Promise.all<number, Town>([join(req.body.email), getOrAddTown(req.body.town)])
-    .then(([userId, town]) => {
-      console.log(userId, town);
-      console.log(town.id);
-      addUserTown(userId, town.id);
-    })
-    .then((usertownId) => res.json(usertownId))
+    .then(([userId, town]) => addUserTown(userId, town.id))
+    .then((userTownId) => res.json({ userTownId }))
     .catch((e) => {
       console.error(e);
       res.status(500).json({ error: 'SERVER_ERROR' });
