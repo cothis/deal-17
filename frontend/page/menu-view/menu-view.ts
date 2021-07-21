@@ -81,4 +81,6 @@ export default class MenuView extends View {
       new ProductList('#MenuView__content', this.store, { products }).render();
     });
   }
+
+  setState(store: Store) {}
 }

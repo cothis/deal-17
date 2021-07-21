@@ -188,4 +188,6 @@ export default class Carousel extends View {
 
     this.initCarousel();
   }
+
+  setState(store: Store) {}
 }

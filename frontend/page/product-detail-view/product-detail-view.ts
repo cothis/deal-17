@@ -69,4 +69,6 @@ export default class ProductDetailView extends View {
       }).render();
     });
   }
+
+  setState(store: Store) {}
 }

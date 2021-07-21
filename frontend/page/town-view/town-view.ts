@@ -57,4 +57,6 @@ export default class TownView extends View {
       }).render();
     });
   }
+
+  setState(store: Store) {}
 }

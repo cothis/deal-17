@@ -30,4 +30,6 @@ export default class State extends View {
     this.setTemplateData('createdAt', this.props.createdAt);
     this.appendComponent();
   }
+
+  setState(store: Store) {}
 }

@@ -25,4 +25,6 @@ export default class HeaderComponent extends View {
     this.setTemplateData('title', this.props.title);
     this.updateView();
   }
+
+  setState(store: Store) {}
 }

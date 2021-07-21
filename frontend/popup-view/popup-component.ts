@@ -90,4 +90,6 @@ export default class PopupComponent extends View {
       }
     });
   }
+
+  setState(store: Store) {}
 }

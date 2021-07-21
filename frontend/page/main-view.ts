@@ -57,4 +57,6 @@ export default class MainView extends View {
       // this.loginView!.render();
     });
   }
+
+  setState(store: Store) {}
 }

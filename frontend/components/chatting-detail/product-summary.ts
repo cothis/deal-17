@@ -36,4 +36,6 @@ export default class ProductSummaryComponent extends View {
     this.setTemplateData('state', '판매중');
     this.updateView();
   }
+
+  setState(store: Store) {}
 }

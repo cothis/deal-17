@@ -43,4 +43,6 @@ export default class MenuBar extends View {
     const root = document.querySelector('#menuBarComponent');
     root?.addEventListener('click', this.onClickHandler.bind(this));
   }
+
+  setState(store: Store) {}
 }

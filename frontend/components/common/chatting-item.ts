@@ -52,4 +52,6 @@ export class ChattingItemComponent extends View {
     }
     this.updateView();
   }
+
+  setState(store: Store) {}
 }

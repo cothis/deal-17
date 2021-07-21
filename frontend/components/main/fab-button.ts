@@ -34,4 +34,6 @@ export default class FabButton extends View {
 
     root.addEventListener('click', this.onClickHandler);
   }
+
+  setState(store: Store) {}
 }

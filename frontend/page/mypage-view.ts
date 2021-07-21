@@ -37,4 +37,6 @@ export default class MypageView extends View {
       RouterEvent.dispatchEvent('@back');
     });
   }
+
+  setState(store: Store) {}
 }

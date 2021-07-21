@@ -47,4 +47,6 @@ export default class ChattingList extends View {
 
     document.querySelector('#ChattingListView__content')?.addEventListener('click', this.onChatDetailClick);
   }
+
+  setState(store: Store) {}
 }

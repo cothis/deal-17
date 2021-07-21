@@ -1,3 +1,5 @@
+import Store from '../../core/store';
+
 export class CategoryItem extends HTMLElement {
   private initHTML: string;
   private element: HTMLElement;
@@ -21,4 +23,6 @@ export class CategoryItem extends HTMLElement {
     `;
     this.replaceWith(this.element);
   }
+
+  setState(store: Store) {}
 }

@@ -71,4 +71,6 @@ export default class JoinView extends View {
       },
     }).render();
   }
+
+  setState(store: Store) {}
 }

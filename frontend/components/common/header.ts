@@ -25,8 +25,7 @@ const template = `
 </div>
 `;
 
-interface Props {
-}
+interface Props {}
 
 export default class Header extends View {
   private store: Store;
@@ -41,4 +40,6 @@ export default class Header extends View {
   render() {
     this.updateView();
   }
+
+  setState(store: Store) {}
 }

@@ -41,4 +41,6 @@ export default class CategoryView extends View {
   render() {
     this.appendView(AnimateType.LEFT, AnimateType.LEFT);
   }
+
+  setState(store: Store) {}
 }

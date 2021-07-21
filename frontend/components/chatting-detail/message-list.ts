@@ -36,4 +36,6 @@ export default class MessageListComponent extends View {
     this.setTemplateData('messageList', this.getHtml());
     this.updateView();
   }
+
+  setState(store: Store) {}
 }

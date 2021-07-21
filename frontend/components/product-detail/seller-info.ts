@@ -34,4 +34,6 @@ export default class SellerInfo extends View {
 
     this.appendComponent();
   }
+
+  setState(store: Store) {}
 }

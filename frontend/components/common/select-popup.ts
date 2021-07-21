@@ -57,4 +57,6 @@ export default class SelectPopup extends View {
     this.root = document.querySelector(`#${this.id}`)!;
     this.root.addEventListener('click', this.onClickEventHandler.bind(this));
   }
+
+  setState(store: Store) {}
 }
