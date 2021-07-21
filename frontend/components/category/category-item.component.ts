@@ -23,6 +23,4 @@ export class CategoryItem extends HTMLElement {
     `;
     this.replaceWith(this.element);
   }
-
-  setState(store: Store) {}
 }

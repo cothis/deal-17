@@ -40,6 +40,4 @@ export default class Header extends View {
   render() {
     this.updateView();
   }
-
-  setState(store: Store) {}
 }

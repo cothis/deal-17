@@ -32,6 +32,4 @@ export default class Content extends View {
 
     this.appendComponent();
   }
-
-  setState(store: Store) {}
 }

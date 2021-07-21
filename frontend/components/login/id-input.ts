@@ -41,6 +41,4 @@ export default class InputComponent extends View {
       this.props.setState(value);
     });
   }
-
-  setState(store: Store) {}
 }

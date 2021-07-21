@@ -41,6 +41,4 @@ export default class Footer extends View {
 
     this.appendComponent();
   }
-
-  setState(store: Store) {}
 }

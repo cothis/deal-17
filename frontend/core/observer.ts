@@ -17,6 +17,6 @@ export class Observer {
   }
 
   notifyObserver(store: Store) {
-    this.observers.forEach((observer) => observer.setState(store));
+    this.observers.forEach((observer) => observer.onStoreChange());
   }
 }

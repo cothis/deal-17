@@ -18,6 +18,4 @@ export default class JoinButtonComponent extends View {
   render() {
     this.appendComponent();
   }
-
-  setState(store: Store) {}
 }

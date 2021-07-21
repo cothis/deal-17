@@ -91,6 +91,4 @@ export default class WriteView extends View {
       console.log('clicked');
     });
   }
-
-  setState(store: Store) {}
 }

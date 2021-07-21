@@ -27,6 +27,4 @@ export default class HeaderOffwhite extends View {
     this.setTemplateData('title', this.props.title);
     this.appendComponent();
   }
-
-  setState(store: Store) {}
 }

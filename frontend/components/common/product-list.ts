@@ -36,6 +36,4 @@ export default class ProductList extends View {
       new ProductComponent('#mainView__product' + i, this.store, { product }).render();
     });
   }
-
-  setState(store: Store) {}
 }

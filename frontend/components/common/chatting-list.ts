@@ -36,6 +36,4 @@ export default class ProductList extends View {
       new ChattingItemComponent(`#chattingListComponent__chat${i}`, this.store, { chatRoom }).render();
     });
   }
-
-  setState(store: Store) {}
 }

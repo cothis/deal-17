@@ -58,6 +58,4 @@ export default class LoginView extends View {
     }).render();
     new JoinButtonComponent('#loginView__inputForm', this.store).render();
   }
-
-  setState(store: Store) {}
 }

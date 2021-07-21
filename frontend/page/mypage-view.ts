@@ -44,6 +44,4 @@ export default class MypageView extends View {
       onClick: this.onClick,
     }).render();
   }
-
-  setState(store: Store) {}
 }

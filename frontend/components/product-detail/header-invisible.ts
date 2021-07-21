@@ -77,6 +77,4 @@ export default class HeaderInvisible extends View {
       .querySelector('#headerInvisibleComponent__detail')
       ?.addEventListener('click', this.onClickEventHandler.bind(this));
   }
-
-  setState(store: Store) {}
 }

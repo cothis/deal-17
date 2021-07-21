@@ -59,11 +59,11 @@ export default class MainView extends View {
     });
   }
 
-  setState(store: Store) {
+  onStoreChange() {
     if (this.pageContainer) {
       const routerLink: Link | null = this.pageContainer.querySelector('#user');
       if (routerLink) {
-        routerLink.setAttribute('to', store.user ? '/mypage' : '/login');
+        routerLink.setAttribute('to', this.store.user ? '/mypage' : '/login');
       }
     }
   }

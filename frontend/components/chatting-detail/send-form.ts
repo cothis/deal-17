@@ -29,6 +29,4 @@ export default class SendFormComponent extends View {
 
     this.updateView();
   }
-
-  setState(store: Store) {}
 }

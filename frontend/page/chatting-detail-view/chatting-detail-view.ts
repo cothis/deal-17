@@ -106,6 +106,4 @@ export default class ChattingDetailView extends View {
     }).render();
     // new ExitModal('#ChattingDetailView__exit-modal', this.store, {});
   }
-
-  setState(store: Store) {}
 }

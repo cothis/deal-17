@@ -34,6 +34,4 @@ export default class LoginButtonComponent extends View {
 
     this.container.querySelector(`#${this.props.id}`)?.addEventListener('click', this.props.onClick);
   }
-
-  setState(store: Store) {}
 }

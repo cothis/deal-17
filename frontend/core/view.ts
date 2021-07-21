@@ -84,5 +84,5 @@ export default abstract class View {
     }
   }
 
-  abstract setState(store: Store): void;
+  onStoreChange(): void {}
 }

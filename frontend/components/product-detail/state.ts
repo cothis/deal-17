@@ -125,6 +125,4 @@ export default class State extends View {
 
     document.querySelector('#stateComponent')?.addEventListener('click', this.onClickEventHandler.bind(this));
   }
-
-  setState(store: Store) {}
 }

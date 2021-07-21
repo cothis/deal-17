@@ -58,6 +58,4 @@ export class ProductComponent extends View {
     this.setTemplateData('price', convertToMarketPrice(this.product.price));
     this.updateView();
   }
-
-  setState(store: Store) {}
 }
