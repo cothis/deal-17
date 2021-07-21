@@ -93,3 +93,5 @@ export enum AnimateType {
   RIGHT = 'right',
   FADE = 'fade',
 }
+
+export const QUERY_RESULT_ROWS = 0;

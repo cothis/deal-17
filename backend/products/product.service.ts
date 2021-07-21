@@ -1,18 +1,24 @@
 import { Request, Response } from 'express';
 import { promisePool } from '../db';
 import { camelCase } from 'change-case-object';
-import { Product } from '../../types';
+import { Product, QUERY_RESULT_ROWS } from '../../types';
 import { RowDataPacket } from 'mysql2';
 
-export const getAllProducts = async (): Promise<Product[]> => {
-  const [rows] = await promisePool.query<Product[]>(`select * from PRODUCT order by ID`);
-
-  return rows;
+export const getAllProducts = (): Promise<Product[]> => {
+  return promisePool.query(`select * from PRODUCT order by ID`).then((result) => (result[QUERY_RESULT_ROWS] as Product[]));
 };
 
-export const getProductById = async (req: Request): Promise<Product> => {
-  const productId: number = Number(req.params.id);
-  const [rows] = await promisePool.query<Product[]>(`select * from PRODUCT where ID = ${productId}`)
-
-  return rows[0];
+export const getProductById = (id: number): Promise<Product> => {
+  return promisePool
+    .query(`select * from PRODUCT where ID = ?`, id)
+    .then((result) => (result[QUERY_RESULT_ROWS] as Product[])[0]);
 };
+
+// export const  getMainProducts = asnyc ()
+
+
+// export const getChatRoomById = (id: number): Promise<ChatRoom> => {
+//   return promisePool
+//     .query(`select * from CHAT_ROOM where ID = ${id}`)
+//     .then((result) => (result[QUERY_RESULT_ROWS] as ChatRoom[])[0]);
+// };

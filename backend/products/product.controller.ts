@@ -17,7 +17,7 @@ router.get('/', async (_, res) => {
 
 router.get('/:id', async (req, res) => {
   try {
-    const product = await getProductById(req);
+    const product = await getProductById(Number(req.params.id));
 
     res.json(camelCase(product));
   } catch (e) {
