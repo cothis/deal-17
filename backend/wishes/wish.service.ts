@@ -13,6 +13,12 @@ export const getWishesByUserId = (userId: number): Promise<Wish[] | null> => {
 
 export const toggleWish = (userId: number, productId: number): Promise<void> => {
   return promisePool
-    .query(`insert ignore into WISH (USER_ID, PRODUCT_ID, IS_CHECKED) valuse(?, ?, 1)`, [userId, productId])
+    .query(
+      `insert ignore into WISH (USER_ID, PRODUCT_ID, IS_CHECKED) 
+      values (?, ?, 1) 
+      on duplicate key
+      update IS_CHECKED = if(IS_CHECKED = 0, 1, 0)`,
+      [userId, productId]
+    )
     .then(() => {});
 };
