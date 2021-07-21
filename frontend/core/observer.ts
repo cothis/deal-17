@@ -1,4 +1,3 @@
-import Store from './store';
 import View from './view';
 
 export class Observer {
@@ -16,7 +15,7 @@ export class Observer {
     this.observers = this.observers.filter((registed) => registed !== observer);
   }
 
-  notifyObserver(store: Store) {
+  notifyObserver() {
     this.observers.forEach((observer) => observer.onStoreChange());
   }
 }
