@@ -1,6 +1,12 @@
 import { camelCase } from 'change-case-object';
 import { Router } from 'express';
-import { getAllProducts, getMainProducts, getProductById, getProductDetail } from './product.service';
+import {
+  getAllProducts,
+  getMainProducts,
+  getProductById,
+  getProductDetail,
+  increaseViewCount,
+} from './product.service';
 
 const router = Router();
 
@@ -41,6 +47,7 @@ router.get('/:id', (req, res) => {
         console.error(e);
         res.status(500).json({ error: 'SERVER_ERROR' });
       });
+    increaseViewCount(productId);
   } else {
     getProductById(productId)
       .then((result) => res.json(result))

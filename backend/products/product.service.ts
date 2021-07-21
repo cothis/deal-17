@@ -149,3 +149,7 @@ export const getProductDetail = ({ userId, productId }: { userId: number; produc
       return products[0];
     });
 };
+
+export const increaseViewCount = (id: number) => {
+  return promisePool.query(`update PRODUCT set VIEWS = VIEWS + 1 where ID = ?`, [id]).then(() => {});
+};
