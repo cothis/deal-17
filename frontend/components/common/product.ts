@@ -11,7 +11,7 @@ const template: string = `
     <div class="product-info flex column">
       <div class="product-info-title">
         <div class="link medium flex grow">{{__subject__}}</div>
-        <i class="wmi wmi-heart large grey1"></i>
+        <i data-id="{{__wishId__}}" class="wmi wmi-heart large grey1"></i>
       </div>
       <div class="product-content flex ai-center text small grey1">
         <div>{{__townName__}}</div>
@@ -49,6 +49,8 @@ export class ProductComponent extends View {
     this.props = props;
   }
 
+  onClick() {}
+
   render() {
     this.setTemplateData(
       'image-path',
@@ -56,6 +58,7 @@ export class ProductComponent extends View {
         'https://pds.joins.com/news/component/htmlphoto_mmdata/201912/02/e157f4c7-2dc7-416c-8a88-d1a3dbfff9e8.jpg'
     );
     this.setTemplateData('subject', this.props.product.subject);
+    this.setTemplateData('wishId', String(this.props.product.id));
     this.setTemplateData('townName', this.props.product.townName || 'test동');
     this.setTemplateData('price', convertToMarketPrice(this.props.product.price));
     this.setTemplateData('chatRooms', String(this.props.product.chatRooms));
