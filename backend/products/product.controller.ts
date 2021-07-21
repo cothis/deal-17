@@ -1,6 +1,7 @@
 import { camelCase } from 'change-case-object';
 import { Router } from 'express';
 import { getAllProducts, getProductById } from './product.service';
+import { Upload } from '../uploader';
 
 const router = Router();
 
@@ -24,6 +25,21 @@ router.get('/:id', async (req, res) => {
     console.error(e);
     res.status(500).json({ error: 'SERVER_ERROR' });
   }
+});
+
+router.post('/', async (req, res) => {
+  const id = 1;
+  const upload = Upload(`products/${id}`);
+  const productsUploader = upload.array('images', 10);
+
+  productsUploader(req, res, (err) => {
+    if (err) {
+      console.error(err);
+      res.status(500).json({ error: 'SERVER_ERROR' });
+    } else {
+      res.json({ result: 'ok' });
+    }
+  });
 });
 
 export default router;
