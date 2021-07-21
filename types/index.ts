@@ -95,16 +95,16 @@ export enum AnimateType {
 }
 
 export const CATEGORIES = [
-  { name: '디지털기기', image: '' },
-  { name: '생활가전', image: '' },
-  { name: '가구/인테리어', image: '' },
-  { name: '게임/취미', image: '' },
-  { name: '생활/가공식품', image: '' },
-  { name: '스포츠/레저', image: '' },
-  { name: '여성패션/잡화', image: '' },
-  { name: '남성패션/잡화', image: '' },
-  { name: '유아동', image: '' },
-  { name: '뷰티/미용', image: '' },
-  { name: '반려동물', image: '' },
-  { name: '도서/티켓/음반', image: '' },
+  { name: '디지털기기', image: 'https://deal-17.s3.ap-northeast-2.amazonaws.com/categories/digital.png' },
+  { name: '생활가전', image: 'https://deal-17.s3.ap-northeast-2.amazonaws.com/categories/life.png' },
+  { name: '가구/인테리어', image: 'https://deal-17.s3.ap-northeast-2.amazonaws.com/categories/furniture.png' },
+  { name: '게임/취미', image: 'https://deal-17.s3.ap-northeast-2.amazonaws.com/categories/game.png' },
+  { name: '생활/가공식품', image: 'https://deal-17.s3.ap-northeast-2.amazonaws.com/categories/food.png' },
+  { name: '스포츠/레저', image: 'https://deal-17.s3.ap-northeast-2.amazonaws.com/categories/sport.png' },
+  { name: '여성패션/잡화', image: 'https://deal-17.s3.ap-northeast-2.amazonaws.com/categories/skirt.png' },
+  { name: '남성패션/잡화', image: 'https://deal-17.s3.ap-northeast-2.amazonaws.com/categories/clothe.png' },
+  { name: '유아동', image: 'https://deal-17.s3.ap-northeast-2.amazonaws.com/categories/kids.png' },
+  { name: '뷰티/미용', image: 'https://deal-17.s3.ap-northeast-2.amazonaws.com/categories/veauti.png' },
+  { name: '반려동물', image: 'https://deal-17.s3.ap-northeast-2.amazonaws.com/categories/pet.png' },
+  { name: '도서/티켓/음반', image: 'https://deal-17.s3.ap-northeast-2.amazonaws.com/categories/book.png' },
 ];
