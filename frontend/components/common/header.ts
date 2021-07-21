@@ -15,7 +15,7 @@ const template = `
       </router-link>
     </div>
     <div class="header-right flex">
-      <router-link to="/login">
+      <router-link to="/login" id="user">
         <i class="wmi wmi-user large"></i>
       </router-link>
       <router-link to="/menu">
