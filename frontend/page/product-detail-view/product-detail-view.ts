@@ -57,18 +57,23 @@ export default class ProductDetailView extends View {
       new State('#productDetailView__state', this.store, { state: product.state }).render();
       new Title('#productDetailView__title', this.store, {
         subject: product.subject,
-        category: '기타 중고물품',
+        category: product.category.name,
         createdAt: '4시간 전',
       }).render();
-      new Content('#productDetailView__content', this.store, { content: product.content ?? '' }).render();
+      new Content('#productDetailView__content', this.store, {
+        content: product.content ?? '',
+        chatRooms: product.chatRooms,
+        wishes: product.wishes,
+        views: product.views,
+      }).render();
       new SellerInfo('#productDetailView__seller-info', this.store, {
-        sellerEmail: '테스트유저',
-        sellerTown: '역삼동',
+        sellerEmail: product.seller.email,
+        sellerTown: product.townName,
       }).render();
       new Footer('#productDetailView__footer', this.store, {
-        isWish: false,
+        isWish: product.userWish,
         price: convertToMarketPrice(product.price) ?? '가격미정',
-        chatRoomCount: 2,
+        chatRoomCount: product.chatRooms,
       }).render();
     });
   }
