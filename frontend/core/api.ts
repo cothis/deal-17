@@ -81,6 +81,18 @@ export class WishApi extends Api {
   getWishesByUserId(userId: number): Promise<Wish[]> {
     return this.request<Wish[]>(`/${userId}`);
   }
+
+  toggleWish(userId: number, productId: number): Promise<void> {
+    const option: RequestInit = {
+      method: 'put',
+      body: JSON.stringify({ userId, productId }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    };
+    console.log(userId, productId)
+    return this.request<void>('', option);
+  }
 }
 
 export class ChatRoomApi extends Api {

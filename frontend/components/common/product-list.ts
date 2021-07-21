@@ -1,9 +1,10 @@
-import { Product } from '../../../types';
+import { Product, Wish } from '../../../types';
 import View from '../../core/view';
 import Store from '../../core/store';
+import { RouterEvent } from '../../core/router';
+import { WishApi } from '../../core/api';
 
 import { ProductComponent } from '../../components/common/product';
-import { RouterEvent } from '../../core/router';
 
 const template = `
 <div id="mainView__product">
@@ -18,11 +19,13 @@ interface Props {
 export default class ProductList extends View {
   private store: Store;
   private props: Props;
+  private wishApi: WishApi;
 
   constructor(selector: string, store: Store, props: Props) {
     super(selector, template);
     this.store = store;
     this.props = props;
+    this.wishApi = new WishApi();
   }
 
   render() {
@@ -37,10 +40,18 @@ export default class ProductList extends View {
       new ProductComponent(`#mainView__product${i}`, this.store, { product }).render();
       const productComponent = document.querySelector(`#mainView__product${i}`);
       productComponent?.addEventListener('click', (e) => {
-        const wishButtonId = (e.target as HTMLElement).dataset.id;
-        
+        const wishElement = e.target as HTMLElement;
+        const wishButtonId = Number(wishElement.dataset.id);
+
         if (wishButtonId) {
-          console.log('wish');
+          // TODO: user id 연결하기
+          if (wishElement.classList.contains('primary1')) {
+            wishElement.classList.remove('primary1');
+          } else {
+            wishElement.classList.add('primary1');
+          }
+
+          this.wishApi.toggleWish(1, wishButtonId);
         } else {
           RouterEvent.dispatchEvent(`/product/${product.id}`);
         }

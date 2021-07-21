@@ -19,7 +19,7 @@ router.put('/', (req, res) => {
   const productId = Number(req.body.productId);
 
   toggleWish(userId, productId)
-    .then(() => res.end())
+    .then(() => res.json({}))
     .catch((e) => {
       console.error(e);
       res.status(500).json({ error: 'SERVER_ERROR' });

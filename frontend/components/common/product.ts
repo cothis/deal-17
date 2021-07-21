@@ -11,7 +11,7 @@ const template: string = `
     <div class="product-info flex column">
       <div class="product-info-title">
         <div class="link medium flex grow">{{__subject__}}</div>
-        <i data-id="{{__wishId__}}" class="wmi wmi-heart large grey1"></i>
+        <i data-id="{{__wishId__}}" class="{{__displayNone__}} wmi wmi-heart large grey1 {{__primary1__}}"></i>
       </div>
       <div class="product-content flex ai-center text small grey1">
         <div>{{__townName__}}</div>
@@ -43,10 +43,12 @@ interface Props {
 
 export class ProductComponent extends View {
   private props: Props;
+  private store: Store;
 
   constructor(selector: string, store: Store, props: Props) {
     super(selector, template);
     this.props = props;
+    this.store = store;
   }
 
   onClick() {}
@@ -63,6 +65,16 @@ export class ProductComponent extends View {
     this.setTemplateData('price', convertToMarketPrice(this.props.product.price));
     this.setTemplateData('chatRooms', String(this.props.product.chatRooms));
     this.setTemplateData('wishes', String(this.props.product.wishes));
+
+    if (this.props.product.userWish) {
+      this.setTemplateData('primary1', 'primary1');
+    }
+
+    // TODO: login sessiong 붙으면 주석 해제하기
+    if (!this.store.user) {
+      // this.setTemplateData('displayNone', 'display-none');
+    }
+
     this.updateView();
   }
 }

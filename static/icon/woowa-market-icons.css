@@ -35,6 +35,7 @@ url("./fonts/woowa-market-icons.woff?e32faba8e24800ca60e2618c5a372da7") format("
 
 /* color */
 .wmi.grey1 { color: var(--grey1); }
+.wmi.primary1 { color: var(--primary1) }
 
 .wmi-add::before { content: "\f101"; }
 .wmi-category::before { content: "\f102"; }
