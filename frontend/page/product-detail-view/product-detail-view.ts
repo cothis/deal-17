@@ -58,7 +58,7 @@ export default class ProductDetailView extends View {
       new Title('#productDetailView__title', this.store, {
         subject: product.subject,
         category: product.category.name,
-        createdAt: '4시간 전',
+        createdAt: String(new Date(product.createdAt)),
       }).render();
       new Content('#productDetailView__content', this.store, {
         content: product.content ?? '',

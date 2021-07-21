@@ -16,7 +16,7 @@ const template: string = `
       <div class="product-content flex ai-center text small grey1">
         <div>{{__townName__}}</div>
         <div>&nbsp;&middot;&nbsp;</div>
-        <div>2시간 전</div>
+        <div>{{__createdAt__}}</div>
       </div>
       <div class="product-price link small">
         <div>{{__price__}}</div>
@@ -62,6 +62,7 @@ export class ProductComponent extends View {
     this.setTemplateData('subject', this.props.product.subject);
     this.setTemplateData('wishId', String(this.props.product.id));
     this.setTemplateData('townName', this.props.product.townName || 'test동');
+    this.setTemplateData('createdAt', String(new Date(this.props.product.createdAt)));
     this.setTemplateData('price', convertToMarketPrice(this.props.product.price));
     this.setTemplateData('chatRooms', String(this.props.product.chatRooms));
     this.setTemplateData('wishes', String(this.props.product.wishes));
