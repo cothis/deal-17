@@ -26,6 +26,15 @@ export class ProductApi extends Api {
   getProductById(id: number): Promise<Product> {
     return this.request<Product>(`/${id}`);
   }
+
+  createProduct(formData: FormData): Promise<any> {
+    const option: RequestInit = {
+      method: 'post',
+      headers: {},
+      body: formData,
+    };
+    return this.request<any>('', option);
+  }
 }
 
 export class PictureApi extends Api {

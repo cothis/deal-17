@@ -2,9 +2,11 @@ import View from '../../core/view';
 import Store from '../../core/store';
 import { AnimateType, CATEGORIES } from '../../../types';
 import './write-view.css';
+import { ProductApi } from '../../core/api';
 
 const template: string = `
-<div class="d-flex grow col">
+<input id="fileInput" type="file" class="d-none" multiple accept=".gif, .jpg, .png">
+<form class="d-flex grow col">
   <div id="writeView__header" class="header white p-5">
     <router-link to="@back" class="icon-wrapper">
       <i class="wmi wmi-chevron-left large"></i>
@@ -15,7 +17,6 @@ const template: string = `
   </div>
   <div id="writeForm" class="d-flex col grow p-5 border-y overflow-auto">
     <div class="d-flex gap-4 border-bottom">
-      <input id="fileInput" type="file" class="d-none" multiple accept=".gif, .jpg, .png">
       <div id="imgButton" class="no-shrink my-4 img-box medium img-button">
         <i class="wmi wmi-image large"></i>
         <span>{{__imageCount__}}/10</span>
@@ -26,7 +27,7 @@ const template: string = `
     </div>
     <div class="py-4 border-bottom">
       <div>
-        <input type="text" class="write-input text large" placeholder="글 제목">
+        <input name="subject" type="text" class="write-input text large" placeholder="글 제목">
       </div>
       <div>
         <div class="text medium grey1">(필수)카테고리를 선택해주세요.</div>
@@ -36,31 +37,34 @@ const template: string = `
       </div>
     </div>
     <div class="py-4 border-bottom">
-    <input type="text" class="write-input" placeholder="₩ 가격(선택사항)">
+    <input type="text" name="price" class="write-input" placeholder="₩ 가격(선택사항)">
     </div>
     <div class="py-4">
-      <textarea class="write-input textarea"></textarea>
+      <textarea name="content" class="write-input textarea"></textarea>
     </div>
   </div>
   <div class="location-bar p-5">
     <i class="wmi wmi-map-pin large"></i>
     역삼동
   </div>
-</div>
+</form>
 `;
 
 interface State {
   images: File[];
+  category: string;
 }
 
 export default class WriteView extends View {
   private store: Store;
   private state: State;
+  private api: ProductApi;
 
   constructor(containerId: string, store: Store) {
     super(containerId, template);
     this.store = store;
-    this.state = { images: [] };
+    this.state = { images: [], category: '' };
+    this.api = new ProductApi();
   }
 
   addEventListener() {
@@ -68,9 +72,17 @@ export default class WriteView extends View {
 
     this.pageContainer.querySelector('.textarea')?.addEventListener('input', this.onTextareaInput);
     this.pageContainer.querySelector('#fileInput')?.addEventListener('change', this.onFileChange.bind(this));
-    this.pageContainer.querySelector('#imgButton')?.addEventListener('click', this.onImgButtonClick);
+    this.pageContainer.querySelector('#imgButton')?.addEventListener('click', this.onImgButtonClick.bind(this));
     this.pageContainer.querySelector('#imgList')?.addEventListener('click', this.onDeleteButtonClick.bind(this));
     this.pageContainer.querySelector('#requestWrite')?.addEventListener('click', this.onWriteButtonClick.bind(this));
+    this.pageContainer.querySelector('.category-list')?.addEventListener('click', this.onCategoryListClick.bind(this));
+  }
+
+  onCategoryListClick(e: Event) {
+    const target = (<HTMLElement>e.target).closest('.category-list-item');
+    if (!target) return;
+
+    this.state.category = (<HTMLElement>target).dataset.category ?? '';
   }
 
   onImgButtonClick() {
@@ -78,7 +90,18 @@ export default class WriteView extends View {
   }
 
   onWriteButtonClick(e: Event) {
-    console.log(e);
+    const formData = new FormData();
+    this.state.images.forEach((image) => {
+      formData.append('images', image, image.name);
+    });
+    formData.append('subject', 'hi');
+    formData.append('price', '3000');
+    formData.append('category', this.state.category);
+    formData.append('content', 'content');
+
+    console.log(formData);
+
+    this.api.createProduct(formData).then(console.log);
   }
 
   onFileChange(e: Event) {
@@ -139,7 +162,7 @@ export default class WriteView extends View {
   makeCategoryTempalte(): string {
     return CATEGORIES.map(
       (category) => `<li>
-                      <button class="category-list-item">${category.name}</button>
+                      <button type="button" class="category-list-item" data-category="${category.name}">${category.name}</ㅠ>
                     </li>`
     ).join('');
   }
@@ -154,7 +177,7 @@ export default class WriteView extends View {
             <li class="img-button delete">
               <div class="img-box medium">
                 <img src="${src}">
-                <button class="bg-black rounded text offwhite small flex ai-center jc-center">
+                <button type="button" class="bg-black rounded text offwhite small flex ai-center jc-center">
                   <i class="wmi wmi-close medium"></i>
                 </button>
               </div>
