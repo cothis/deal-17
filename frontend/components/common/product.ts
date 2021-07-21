@@ -14,7 +14,7 @@ const template: string = `
         <i class="wmi wmi-heart large grey1"></i>
       </div>
       <div class="product-content flex ai-center text small grey1">
-        <div>역삼동</div>
+        <div>{{__townName__}}</div>
         <div>&nbsp;&middot;&nbsp;</div>
         <div>2시간 전</div>
       </div>
@@ -25,11 +25,11 @@ const template: string = `
         <div class="product-icon-box grow flex">
           <div class="flex ai-center">
             <i class="wmi wmi-message-square small"></i>
-            <div>1</div>
+            <div>{{__chatRooms__}}</div>
           </div>
           <div class="flex ai-center">
             <i class="wmi wmi-heart small"></i>
-            <div>1</div>
+            <div>{{__wishes__}}</div>
           </div>
         </div>
       </div>
@@ -42,20 +42,24 @@ interface Props {
 }
 
 export class ProductComponent extends View {
-  private product: Product;
+  private props: Props;
+
   constructor(selector: string, store: Store, props: Props) {
     super(selector, template);
-    this.product = props.product;
+    this.props = props;
   }
 
   render() {
-    // TODO: image path 수정해야함
     this.setTemplateData(
       'image-path',
-      'https://pds.joins.com/news/component/htmlphoto_mmdata/201912/02/e157f4c7-2dc7-416c-8a88-d1a3dbfff9e8.jpg'
+      this.props.product.pictures[0]?.path ||
+        'https://pds.joins.com/news/component/htmlphoto_mmdata/201912/02/e157f4c7-2dc7-416c-8a88-d1a3dbfff9e8.jpg'
     );
-    this.setTemplateData('subject', this.product.subject);
-    this.setTemplateData('price', convertToMarketPrice(this.product.price));
+    this.setTemplateData('subject', this.props.product.subject);
+    this.setTemplateData('townName', this.props.product.townName || 'test동');
+    this.setTemplateData('price', convertToMarketPrice(this.props.product.price));
+    this.setTemplateData('chatRooms', String(this.props.product.chatRooms));
+    this.setTemplateData('wishes', String(this.props.product.wishes));
     this.updateView();
   }
 }

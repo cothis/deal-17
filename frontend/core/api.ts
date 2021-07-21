@@ -1,4 +1,5 @@
 import { Product, Picture, ChatRoom, Wish, User } from '../../types';
+import qs from 'querystring';
 
 const BASE_URL: string = process.env.API_URL ?? 'http://localhost:8000';
 
@@ -19,8 +20,17 @@ export class ProductApi extends Api {
     super('/api/v0/products');
   }
 
-  getAllProducts(): Promise<Product[]> {
-    return this.request<Product[]>('');
+  getAllProducts(param: {
+    type: string;
+    userId: number;
+    wishId?: number;
+    townId?: number;
+    chatRoomId?: number;
+    categoryId?: number;
+    page?: number;
+    pageSize?: number;
+  }): Promise<Product[]> {
+    return this.request<Product[]>(`?${qs.stringify(param)}`);
   }
 
   getProductById(id: number): Promise<Product> {
