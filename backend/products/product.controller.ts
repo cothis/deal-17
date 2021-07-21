@@ -6,6 +6,7 @@ import {
   getProductById,
   getProductDetail,
   increaseViewCount,
+  updateProductState,
 } from './product.service';
 
 const router = Router();
@@ -56,6 +57,18 @@ router.get('/:id', (req, res) => {
         res.status(500).json({ error: 'SERVER_ERROR' });
       });
   }
+});
+
+router.put('/:id/state', (req, res) => {
+  const id = Number(req.params.id);
+  const state = Number(req.body.state);
+  
+  updateProductState(id, state)
+    .then(() => res.json({}))
+    .catch((e) => {
+      console.error(e);
+      res.status(500).json({ error: 'SERVER_ERROR' });
+    });
 });
 
 export default router;
