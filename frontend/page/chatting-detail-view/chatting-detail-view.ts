@@ -40,7 +40,7 @@ export default class ChattingDetailView extends View {
 
   render(remainUrl: string) {
     const chatRoomId = Number(remainUrl.substr(1, 1));
-    
+
     this.appendView(AnimateType.RIGHT, AnimateType.RIGHT);
 
     this.productApi.getProductById(1).then((product) => {

@@ -11,18 +11,21 @@ import {
   Wish,
   Message,
 } from '../../types';
+import { Observer } from './observer';
 
 export default class Store implements UserStore, ProductStore {
   private _user: User | null;
   private _auth: string;
   private _currentPage: number;
   private products: Product[];
+  observer: Observer;
 
   constructor() {
     this._user = null;
     this._auth = '';
     this._currentPage = 1;
     this.products = [];
+    this.observer = new Observer();
   }
 
   get currentPage(): number {

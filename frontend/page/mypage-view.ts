@@ -27,14 +27,21 @@ export default class MypageView extends View {
     this.store = store;
   }
 
+  onClick() {
+    this.store.user = null;
+    this.store.observer.notifyObserver(this.store);
+    RouterEvent.dispatchEvent('@back');
+  }
+
   render() {
-    this.setTemplateData('username', 'test user');
+    console.log(this.store.user);
+    this.setTemplateData('username', this.store.user?.email!);
     this.appendView(AnimateType.RIGHT, AnimateType.RIGHT);
     new HeaderComponent('#mypageView__header', this.store, { title: '내 계정' }).render();
-    new LoginButtonComponent('#myPage', this.store, { title: '로그아웃', id: 'logout', onClick: () => {} }).render();
-
-    this.container.querySelector('#logout')?.addEventListener('click', (e) => {
-      RouterEvent.dispatchEvent('@back');
-    });
+    new LoginButtonComponent('#myPage', this.store, {
+      title: '로그아웃',
+      id: 'logout',
+      onClick: this.onClick,
+    }).render();
   }
 }

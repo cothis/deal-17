@@ -50,6 +50,7 @@ export default class LoginView extends View {
           .getUserByEmail(this.state.email)
           .then((user) => {
             this.store.user = user;
+            this.store.observer.notifyObserver(this.store);
             RouterEvent.dispatchEvent('@back');
           })
           .catch(console.error);

@@ -7,6 +7,7 @@ import Header from '../components/common/header';
 import ProductList from '../components/common/product-list';
 import FabButton from '../components/main/fab-button';
 import LoginView from './login-view';
+import { Link } from '../helper/router-link/router-link';
 
 const template = `
 <div class="MainView">
@@ -56,5 +57,14 @@ export default class MainView extends View {
       // this.loginView = new LoginView('#mainView__sidePanel', this.store);
       // this.loginView!.render();
     });
+  }
+
+  onStoreChange() {
+    if (this.pageContainer) {
+      const routerLink: Link | null = this.pageContainer.querySelector('#user');
+      if (routerLink) {
+        routerLink.setAttribute('to', this.store.user ? '/mypage' : '/login');
+      }
+    }
   }
 }
