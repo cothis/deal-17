@@ -16,21 +16,12 @@ const template: string = `
   </div>
   <div class="d-flex col h-full p-5 border-y">
     <div class="d-flex py-4 gap-4 border-bottom">
-      <div class="img-box medium img-button">
+      <div id="imgButton" class="img-box medium img-button">
         <i class="wmi wmi-image large"></i>
-        <span>0/10</span>
+        <span>{{__imageCount__}}/10</span>
       </div>
-      <ul class="d-flex gap-4">
-        <li class="img-button delete">
-          <div class="img-box medium">
-            <img src="https://fujifilm-x.com/wp-content/uploads/2019/08/x-t30_sample-images03.jpg">
-          </div>
-        </li>
-        <li class="img-button delete">
-          <div class="img-box medium">
-            <img src="https://fujifilm-x.com/wp-content/uploads/2019/08/x-t30_sample-images03.jpg">
-          </div>
-        </li>
+      <ul id="imgList" class="d-flex gap-4">
+        {{__images__}}
       </ul>
     </div>
     <div class="py-4 border-bottom">
@@ -69,26 +60,74 @@ const template: string = `
 </div>
 `;
 
+interface State {
+  images: any[];
+}
+
 export default class WriteView extends View {
   private store: Store;
+  private state: State;
 
   constructor(containerId: string, store: Store) {
     super(containerId, template);
     this.store = store;
+    this.state = { images: [] };
   }
 
-  render() {
-    this.appendView(AnimateType.DOWN, AnimateType.DOWN);
+  addEventListener() {
+    if (!this.pageContainer) return;
 
-    this.pageContainer?.querySelector('.textarea')?.addEventListener('input', (e) => {
+    this.pageContainer.querySelector('.textarea')?.addEventListener('input', (e) => {
       const textarea = <HTMLElement>e.target;
 
       textarea.style.height = '1px';
       textarea.style.height = textarea.scrollHeight + 'px';
     });
 
-    this.pageContainer?.querySelector('.img-button.delete::after')?.addEventListener('click', (e) => {
+    this.pageContainer.querySelector('.img-button.delete::after')?.addEventListener('click', (e) => {
       console.log('clicked');
     });
+
+    this.pageContainer.querySelector('#imgButton')?.addEventListener('click', (e) => {
+      this.state.images.push({ path: 'https://fujifilm-x.com/wp-content/uploads/2019/08/x-t30_sample-images03.jpg' });
+
+      (<HTMLElement>(
+        this.pageContainer?.querySelector('#imgButton > span')
+      )).innerHTML = `${this.state.images.length}/10`;
+
+      (<HTMLElement>this.pageContainer?.querySelector('#imgList')).innerHTML = this.makeImagesTemplate();
+    });
+  }
+
+  makeImagesTemplate(): string {
+    this.state.images.forEach((image) => {
+      this.addHtml(`
+      <li class="img-button delete">
+        <div class="img-box medium">
+          <img src="${image.path}">
+        </div>
+      </li>
+      `);
+    });
+
+    return this.getHtml();
+  }
+
+  updateTemplate() {
+    this.setTemplateData('imageCount', String(this.state.images.length));
+
+    this.setTemplateData('images', this.makeImagesTemplate());
+  }
+
+  repaint() {
+    this.updateTemplate();
+    this.updateView();
+    this.addEventListener();
+  }
+
+  render() {
+    this.updateTemplate();
+    this.appendView(AnimateType.DOWN, AnimateType.DOWN);
+    this.addEventListener();
   }
 }
