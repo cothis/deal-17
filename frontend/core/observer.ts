@@ -1,7 +1,7 @@
 import Store from './store';
 import View from './view';
 
-class Observer {
+export class Observer {
   observers: View[];
 
   constructor() {
