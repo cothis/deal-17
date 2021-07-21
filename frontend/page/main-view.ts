@@ -58,5 +58,7 @@ export default class MainView extends View {
     });
   }
 
-  setState(store: Store) {}
+  setState(store: Store) {
+    console.log(store);
+  }
 }
