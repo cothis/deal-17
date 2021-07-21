@@ -68,7 +68,7 @@ export const getMainProducts = ({
         from TOWN t
         left join USER_TOWN ut
         on ut.TOWN_ID = t.ID
-        and ut.USER_ID in(${sellerIds.join(', ')})`),
+        where ut.USER_ID in(${sellerIds.join(', ')})`),
 
         // chatRoom , product id로 count | PRODUCT_ID
         promisePool.query(`
