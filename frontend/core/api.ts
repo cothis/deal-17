@@ -33,8 +33,8 @@ export class ProductApi extends Api {
     return this.request<Product[]>(`?${qs.stringify(param)}`);
   }
 
-  getProductById(id: number): Promise<Product> {
-    return this.request<Product>(`/${id}`);
+  getProductById(productId: number, param: { type: string; userId: number }): Promise<Product> {
+    return this.request<Product>(`/${productId}?${qs.stringify(param)}`);
   }
 }
 
@@ -90,7 +90,6 @@ export class WishApi extends Api {
         'Content-Type': 'application/json',
       },
     };
-    console.log(userId, productId)
     return this.request<void>('', option);
   }
 }

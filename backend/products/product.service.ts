@@ -9,6 +9,10 @@ interface ProductMap {
   [key: string]: Product;
 }
 
+interface ProductArrayMap {
+  [key: string]: Product[];
+}
+
 const injectProductDetail = (products: Product[], userId: number) => {
   const productIds = products.map((product) => product.id);
   let sellerIds = products.map((product) => product.sellerId);
@@ -61,10 +65,14 @@ const injectProductDetail = (products: Product[], userId: number) => {
       (obj, product) => Object.assign(obj, { [product.id]: product }),
       {}
     ) as ProductMap;
-    const sellerIdMap = products.reduce(
-      (obj, product) => Object.assign(obj, { [product.sellerId]: product }),
-      {}
-    ) as ProductMap;
+
+    const sellerIdMap = products.reduce((obj: ProductArrayMap, product) => {
+      if (!obj[product.sellerId]) {
+        obj[product.sellerId] = [];
+      }
+      obj[product.sellerId].push(product);
+      return obj;
+    }, {}) as ProductArrayMap;
 
     pictures.forEach((picture) => {
       const product = productIdMap[picture.productId];
@@ -77,8 +85,10 @@ const injectProductDetail = (products: Product[], userId: number) => {
     });
 
     towns.forEach((town) => {
-      const product = sellerIdMap[town.userId];
-      product.townName = town.name;
+      const products = sellerIdMap[town.userId];
+      products.forEach((product) => {
+        product.townName = town.townName;
+      });
     });
 
     chatRoomCounts.forEach((chatRoomCount) => {
@@ -145,7 +155,6 @@ export const getProductDetail = ({ userId, productId }: { userId: number; produc
       return injectProductDetail(products, userId);
     })
     .then((products: Product[]) => {
-      console.log(products[0]);
       return products[0];
     });
 };

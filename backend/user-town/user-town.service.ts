@@ -15,7 +15,6 @@ export const getTownsByUserId = (userId: number): Promise<Town[]> => {
 };
 
 export const addUserTown = (userId: number, townId: number): Promise<number> => {
-  console.log(userId, townId);
   return promisePool
     .query<OkPacket>('insert into user_town(user_id, town_id) values (?, ?)', [userId, townId])
     .then((res) => res[0])
