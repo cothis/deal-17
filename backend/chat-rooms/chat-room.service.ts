@@ -1,9 +1,7 @@
 import { Request, Response } from 'express';
 import { promisePool } from '../db';
 import { camelCase } from 'change-case-object';
-import { ChatRoom } from '../../types';
-
-const QUERY_RESULT_ROWS = 0;
+import { ChatRoom, QUERY_RESULT_ROWS } from '../../types';
 
 export const getChatRoomsByProductId = (productId: number): Promise<ChatRoom[] | null> => {
   return promisePool
