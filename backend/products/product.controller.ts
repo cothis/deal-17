@@ -1,17 +1,15 @@
 import { camelCase } from 'change-case-object';
 import { Router } from 'express';
-import { getAllProducts, getMainProducts, getProductById } from './product.service';
+import { getAllProducts, getMainProducts, getProductById, getProductDetail } from './product.service';
 
 const router = Router();
 
 router.get('/', (req, res) => {
   const type = req.query.type;
-  if (type === 'main') {
+
+  if (type === 'view') {
     getMainProducts({
       userId: Number(req.query.userId),
-      wishId: Number(req.query.wishId),
-      townId: Number(req.query.townId),
-      chatRoomId: Number(req.query.chatRoomId),
       categoryId: Number(req.query.categoryId),
       page: Number(req.query.page),
       pageSize: Number(req.query.pageSize),
@@ -31,14 +29,25 @@ router.get('/', (req, res) => {
   }
 });
 
-router.get('/:id', async (req, res) => {
-  try {
-    const product = await getProductById(Number(req.params.id));
+router.get('/:id', (req, res) => {
+  const type = req.query.type;
+  const userId = Number(req.query.userId);
+  const productId = Number(req.params.id);
 
-    res.json(camelCase(product));
-  } catch (e) {
-    console.error(e);
-    res.status(500).json({ error: 'SERVER_ERROR' });
+  if (type === 'view') {
+    getProductDetail({ userId, productId: productId })
+      .then((product) => res.json(product))
+      .catch((e) => {
+        console.error(e);
+        res.status(500).json({ error: 'SERVER_ERROR' });
+      });
+  } else {
+    getProductById(productId)
+      .then((result) => res.json(result))
+      .catch((e) => {
+        console.error(e);
+        res.status(500).json({ error: 'SERVER_ERROR' });
+      });
   }
 });
 
