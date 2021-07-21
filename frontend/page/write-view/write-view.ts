@@ -15,12 +15,13 @@ const template: string = `
     </button>
   </div>
   <div class="d-flex col h-full p-5 border-y">
-    <div class="d-flex py-4 gap-4 border-bottom">
-      <div id="imgButton" class="img-box medium img-button">
+    <div class="d-flex gap-4 border-bottom">
+      <input id="fileInput" type="file" class="d-none" multiple accept=".gif, .jpg, .png">
+      <div id="imgButton" class="no-shrink my-4 img-box medium img-button">
         <i class="wmi wmi-image large"></i>
         <span>{{__imageCount__}}/10</span>
       </div>
-      <ul id="imgList" class="d-flex gap-4">
+      <ul id="imgList" class="d-flex gap-4 grow overflow-x-auto">
         {{__images__}}
       </ul>
     </div>
@@ -61,7 +62,7 @@ const template: string = `
 `;
 
 interface State {
-  images: any[];
+  images: File[];
 }
 
 export default class WriteView extends View {
@@ -88,46 +89,81 @@ export default class WriteView extends View {
       console.log('clicked');
     });
 
+    this.pageContainer.querySelector('#fileInput')?.addEventListener('change', this.onFileChange.bind(this));
+
     this.pageContainer.querySelector('#imgButton')?.addEventListener('click', (e) => {
-      this.state.images.push({ path: 'https://fujifilm-x.com/wp-content/uploads/2019/08/x-t30_sample-images03.jpg' });
-
-      (<HTMLElement>(
-        this.pageContainer?.querySelector('#imgButton > span')
-      )).innerHTML = `${this.state.images.length}/10`;
-
-      (<HTMLElement>this.pageContainer?.querySelector('#imgList')).innerHTML = this.makeImagesTemplate();
+      (<HTMLElement>this.pageContainer?.querySelector('#fileInput')).click();
     });
   }
 
-  makeImagesTemplate(): string {
-    this.state.images.forEach((image) => {
-      this.addHtml(`
-      <li class="img-button delete">
-        <div class="img-box medium">
-          <img src="${image.path}">
-        </div>
-      </li>
-      `);
+  onFileChange(e: Event) {
+    const files = (<HTMLInputElement>e.target).files;
+    if (!files) return;
+
+    for (let i = 0; i < files?.length; i++) {
+      this.state.images.push(files[i]);
+    }
+
+    this.updatePage();
+  }
+
+  updatePage() {
+    (<HTMLElement>this.pageContainer?.querySelector('#imgButton > span')).innerHTML = `${this.state.images.length}/10`;
+    this.makeImagesTemplate().then((result) => {
+      (<HTMLElement>this.pageContainer?.querySelector('#imgList')).innerHTML = result;
     });
-
-    return this.getHtml();
   }
 
-  updateTemplate() {
-    this.setTemplateData('imageCount', String(this.state.images.length));
-
-    this.setTemplateData('images', this.makeImagesTemplate());
+  getTemporalPath(file: File): Promise<string> {
+    return new Promise<string>((resolve, reject) => {
+      const fileReader = new FileReader();
+      fileReader.addEventListener('load', (e) => {
+        resolve(String((<FileReader>e.target).result));
+      });
+      fileReader.readAsDataURL(file);
+    });
   }
 
-  repaint() {
-    this.updateTemplate();
-    this.updateView();
-    this.addEventListener();
+  makeImagesTemplate(): Promise<string> {
+    const promiseArray = [];
+    for (const image of this.state.images) {
+      promiseArray.push(
+        new Promise<void>((resolve) =>
+          this.getTemporalPath(image).then((src) => {
+            this.addHtml(`
+            <li class="img-button delete">
+              <div class="img-box medium">
+                <img src="${src}">
+                <button class="bg-black rounded text offwhite small flex ai-center jc-center">
+                  <i class="wmi wmi-close medium"></i>
+                </button>
+              </div>
+            </li>
+            `);
+            resolve();
+          })
+        )
+      );
+    }
+    return Promise.all(promiseArray).then(() => this.getHtml());
+  }
+
+  updateTemplate(): Promise<void> {
+    return new Promise<void>((resolve) => {
+      this.setTemplateData('imageCount', String(this.state.images.length));
+      this.makeImagesTemplate().then((result) => {
+        this.setTemplateData('images', result);
+        resolve();
+      });
+    });
   }
 
   render() {
-    this.updateTemplate();
-    this.appendView(AnimateType.DOWN, AnimateType.DOWN);
-    this.addEventListener();
+    this.updateTemplate()
+      .then(() => {
+        this.appendView(AnimateType.DOWN, AnimateType.DOWN);
+        this.addEventListener();
+      })
+      .catch(console.error);
   }
 }
