@@ -2,19 +2,18 @@ import View from '../../core/view';
 import Store from '../../core/store';
 import { AnimateType } from '../../../types';
 import './write-view.css';
-import { text } from 'express';
 
 const template: string = `
-<div class="d-flex col">
+<div class="d-flex grow col">
   <div id="writeView__header" class="header white p-5">
     <router-link to="@back" class="icon-wrapper">
       <i class="wmi wmi-chevron-left large"></i>
     </router-link>  
     <span class="text medium">글쓰기</span>
-    <button type="button" class="icon-wrapper"><i class="wmi wmi-check large"></i>   
+    <button id="requestWrite" type="button" class="icon-wrapper"><i class="wmi wmi-check large"></i>   
     </button>
   </div>
-  <div class="d-flex col h-full p-5 border-y">
+  <div id="writeForm" class="d-flex col grow p-5 border-y overflow-auto">
     <div class="d-flex gap-4 border-bottom">
       <input id="fileInput" type="file" class="d-none" multiple accept=".gif, .jpg, .png">
       <div id="imgButton" class="no-shrink my-4 img-box medium img-button">
@@ -78,22 +77,19 @@ export default class WriteView extends View {
   addEventListener() {
     if (!this.pageContainer) return;
 
-    this.pageContainer.querySelector('.textarea')?.addEventListener('input', (e) => {
-      const textarea = <HTMLElement>e.target;
-
-      textarea.style.height = '1px';
-      textarea.style.height = textarea.scrollHeight + 'px';
-    });
-
-    this.pageContainer.querySelector('.img-button.delete::after')?.addEventListener('click', (e) => {
-      console.log('clicked');
-    });
-
+    this.pageContainer.querySelector('.textarea')?.addEventListener('input', this.onInputTextarea);
     this.pageContainer.querySelector('#fileInput')?.addEventListener('change', this.onFileChange.bind(this));
+    this.pageContainer.querySelector('#imgButton')?.addEventListener('click', this.onImgButtonClick);
+    this.pageContainer.querySelector('#imgList')?.addEventListener('click', this.onDeleteButtonClick.bind(this));
+    this.pageContainer.querySelector('#requestWrite')?.addEventListener('click', this.onWriteButtonClick.bind(this));
+  }
 
-    this.pageContainer.querySelector('#imgButton')?.addEventListener('click', (e) => {
-      (<HTMLElement>this.pageContainer?.querySelector('#fileInput')).click();
-    });
+  onImgButtonClick(e: Event) {
+    (<HTMLElement>this.pageContainer?.querySelector('#fileInput')).click();
+  }
+
+  onWriteButtonClick(e: Event) {
+    console.log(e);
   }
 
   onFileChange(e: Event) {
@@ -101,10 +97,19 @@ export default class WriteView extends View {
     if (!files) return;
 
     for (let i = 0; i < files?.length; i++) {
+      if (this.state.images.length >= 10) break;
+
       this.state.images.push(files[i]);
     }
 
     this.updatePage();
+  }
+
+  onInputTextarea(e: Event) {
+    const textarea = <HTMLElement>e.target;
+
+    textarea.style.height = '1px';
+    textarea.style.height = textarea.scrollHeight + 'px';
   }
 
   updatePage() {
@@ -122,6 +127,23 @@ export default class WriteView extends View {
       });
       fileReader.readAsDataURL(file);
     });
+  }
+
+  onDeleteButtonClick(e: Event) {
+    const button = (<HTMLElement>e.target).closest('button');
+    if (!button) return;
+
+    const li = button.closest('li');
+    if (!li) return;
+
+    const ul = li.closest('ul');
+    if (!ul) return;
+
+    const index = Array.from(ul.children).findIndex((child) => child === li);
+    if (index >= 0) {
+      this.state.images.splice(index, 1);
+      this.updatePage();
+    }
   }
 
   makeImagesTemplate(): Promise<string> {
