@@ -1,6 +1,6 @@
 import View from '../../core/view';
 import Store from '../../core/store';
-import { AnimateType } from '../../../types';
+import { AnimateType, CATEGORIES } from '../../../types';
 import './write-view.css';
 
 const template: string = `
@@ -31,18 +31,7 @@ const template: string = `
       <div>
         <div class="text medium grey1">(필수)카테고리를 선택해주세요.</div>
         <ul class="category-list">
-          <li>
-            <button class="category-list-item">여성패션/잡화</button>
-          </li>
-          <li>
-            <button class="category-list-item">여성패션/잡화</button>
-          </li>
-          <li>
-            <button class="category-list-item">여성패션/잡화</button>
-          </li>
-          <li>
-            <button class="category-list-item">여성패션/잡화</button>
-          </li>
+          {{__category-item__}}
         </ul>
       </div>
     </div>
@@ -77,14 +66,14 @@ export default class WriteView extends View {
   addEventListener() {
     if (!this.pageContainer) return;
 
-    this.pageContainer.querySelector('.textarea')?.addEventListener('input', this.onInputTextarea);
+    this.pageContainer.querySelector('.textarea')?.addEventListener('input', this.onTextareaInput);
     this.pageContainer.querySelector('#fileInput')?.addEventListener('change', this.onFileChange.bind(this));
     this.pageContainer.querySelector('#imgButton')?.addEventListener('click', this.onImgButtonClick);
     this.pageContainer.querySelector('#imgList')?.addEventListener('click', this.onDeleteButtonClick.bind(this));
     this.pageContainer.querySelector('#requestWrite')?.addEventListener('click', this.onWriteButtonClick.bind(this));
   }
 
-  onImgButtonClick(e: Event) {
+  onImgButtonClick() {
     (<HTMLElement>this.pageContainer?.querySelector('#fileInput')).click();
   }
 
@@ -105,7 +94,8 @@ export default class WriteView extends View {
     this.updatePage();
   }
 
-  onInputTextarea(e: Event) {
+  onTextareaInput(e: Event) {
+    // 자동 스크롤때문에 어쩔수없이 style 속성 사용
     const textarea = <HTMLElement>e.target;
 
     textarea.style.height = '1px';
@@ -146,6 +136,14 @@ export default class WriteView extends View {
     }
   }
 
+  makeCategoryTempalte(): string {
+    return CATEGORIES.map(
+      (category) => `<li>
+                      <button class="category-list-item">${category.name}</button>
+                    </li>`
+    ).join('');
+  }
+
   makeImagesTemplate(): Promise<string> {
     const promiseArray = [];
     for (const image of this.state.images) {
@@ -173,6 +171,7 @@ export default class WriteView extends View {
   updateTemplate(): Promise<void> {
     return new Promise<void>((resolve) => {
       this.setTemplateData('imageCount', String(this.state.images.length));
+      this.setTemplateData('category-item', this.makeCategoryTempalte());
       this.makeImagesTemplate().then((result) => {
         this.setTemplateData('images', result);
         resolve();

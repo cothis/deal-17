@@ -93,3 +93,18 @@ export enum AnimateType {
   RIGHT = 'right',
   FADE = 'fade',
 }
+
+export const CATEGORIES = [
+  { name: '디지털기기', image: '' },
+  { name: '생활가전', image: '' },
+  { name: '가구/인테리어', image: '' },
+  { name: '게임/취미', image: '' },
+  { name: '생활/가공식품', image: '' },
+  { name: '스포츠/레저', image: '' },
+  { name: '여성패션/잡화', image: '' },
+  { name: '남성패션/잡화', image: '' },
+  { name: '유아동', image: '' },
+  { name: '뷰티/미용', image: '' },
+  { name: '반려동물', image: '' },
+  { name: '도서/티켓/음반', image: '' },
+];
