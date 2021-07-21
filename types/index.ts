@@ -32,13 +32,14 @@ export interface Product extends RowDataPacket {
   readonly sellerId: number;
   state: number;
   views: number;
-  readonly createdAt: Date;
+  readonly createdAt: string;
 
   // db 외 정보
   pictures: Picture[];
   userWish: boolean;
-  wishes: number;
+  townName: string;
   chatRooms: number;
+  wishes: number;
 }
 
 export interface ChatRoom extends RowDataPacket {

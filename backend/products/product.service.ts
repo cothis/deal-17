@@ -5,6 +5,10 @@ import { Product, QUERY_RESULT_ROWS } from '../../types';
 import { RowDataPacket } from 'mysql2';
 import { ResolvePlugin } from 'webpack';
 
+interface ProductMap {
+  [key: string]: Product;
+}
+
 export const getAllProducts = (): Promise<Product[]> => {
   return promisePool
     .query(`select * from PRODUCT order by ID`)
@@ -39,26 +43,98 @@ export const getMainProducts = ({
   const pageSizeParam = pageSize || 10;
 
   return promisePool
-    .query(`select * from PRODUCT where CATEGORY_ID = IFNULL(?, CATEGORY_ID) order by ID desc LIMIT ? OFFSET ?`, [
+    .query(`select * from PRODUCT where CATEGORY_ID = ifnull(?, CATEGORY_ID) order by ID desc limit ? offset ?`, [
       categoryIdParam,
       pageSizeParam,
       (pageParam - 1) * pageSizeParam,
     ])
     .then((result) => {
+      console.log(result[QUERY_RESULT_ROWS])
       const products = camelCase(result[QUERY_RESULT_ROWS]) as Product[];
       const productIds = products.map((product) => product.id);
-      const sellerIds = products.map((product) => product.sellerId);
+      let sellerIds = products.map((product) => product.sellerId);
+      sellerIds = sellerIds.filter((sellerId, pos) => sellerIds.indexOf(sellerId) === pos);
 
-      console.log(productIds, sellerIds);
-      return products;
+      return Promise.all([
+        // picture 이미지 | PRODUCT_ID
+        promisePool.query(`select * from PICTURE where PRODUCT_ID in(${productIds.join(', ')})`),
 
-      // picture 이미지 | PRODUCT_ID
+        // 로그인한 유저가 wish 눌럿는지 | USER_ID
+        promisePool.query(`select * from WISH where USER_ID = ? and PRODUCT_ID in(${productIds.join(', ')})`, [userId]),
 
-      // 로그인한 유저가 wish 눌럿는지 | USER_ID
-      // seller -> user-town, town 판매자 동네 이름 | USER_ID와 TOWN_ID, ID
-      // chatRoom , product id로 count | PRODUCT_ID
-      // wish, product id로 count | PRODUCT_ID
-      promisePool.query;
+        // seller -> user-town, town 판매자 동네 이름 | USER_ID와 TOWN_ID, ID
+        promisePool.query(`
+        select t.NAME as TOWN_NAME, ut.USER_ID
+        from TOWN t
+        left join USER_TOWN ut
+        on ut.TOWN_ID = t.ID
+        and ut.USER_ID in(${sellerIds.join(', ')})`),
+
+        // chatRoom , product id로 count | PRODUCT_ID
+        promisePool.query(`
+        select PRODUCT_ID, count(*) CHAT_ROOM_COUNT
+        from CHAT_ROOM 
+        where PRODUCT_ID in(${productIds.join(', ')})
+        group by PRODUCT_ID`),
+
+        // wish, product id로 count | PRODUCT_ID
+        promisePool.query(`
+        select PRODUCT_ID, count(*) WISH_COUNT
+        from WISH 
+        where PRODUCT_ID in(${productIds.join(', ')})
+        group by PRODUCT_ID`),
+      ]).then(([resultPicture, resultWish, resultTownName, resultChatRoomCount, resultWishCount]) => {
+        const pictures = camelCase(resultPicture[QUERY_RESULT_ROWS]) as any[];
+        const wishes = camelCase(resultWish[QUERY_RESULT_ROWS]) as any[];
+        const towns = camelCase(resultTownName[QUERY_RESULT_ROWS]) as any[];
+        const chatRoomCounts = camelCase(resultChatRoomCount[QUERY_RESULT_ROWS]) as any[];
+        const wishCounts = camelCase(resultWishCount[QUERY_RESULT_ROWS]) as any[];
+        console.log(pictures, wishes, towns, chatRoomCounts, wishCounts);
+
+        products.forEach((product) => {
+          product.pictures = [];
+          product.userWish = false;
+          product.townName = '';
+          product.chatRooms = 0;
+          product.wishes = 0;
+        });
+
+        const productIdMap = products.reduce(
+          (obj, product) => Object.assign(obj, { [product.id]: product }),
+          {}
+        ) as ProductMap;
+        const sellerIdMap = products.reduce(
+          (obj, product) => Object.assign(obj, { [product.sellerId]: product }),
+          {}
+        ) as ProductMap;
+
+        pictures.forEach((picture) => {
+          const product = productIdMap[picture.productId];
+          product.pictures.push(picture);
+        });
+
+        wishes.forEach((wish) => {
+          const product = productIdMap[wish.productId];
+          product.userWish = wish.isChecked === 1;
+        });
+
+        towns.forEach((town) => {
+          const product = sellerIdMap[town.userId];
+          product.townName = town.name;
+        });
+
+        chatRoomCounts.forEach((chatRoomCount) => {
+          const product = productIdMap[chatRoomCount.productId];
+          product.chatRooms = chatRoomCount.chatRoomCount;
+        });
+
+        wishCounts.forEach((wishCount) => {
+          const product = productIdMap[wishCount.productId];
+          product.wishes = wishCount.wishCount;
+        });
+
+        return products;
+      });
     })
     .then((products: Product[]) => {
       console.log(products);
