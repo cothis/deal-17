@@ -42,6 +42,7 @@ export default class Store implements UserStore, ProductStore {
 
   set towns(towns) {
     this._towns = towns;
+    this.observer.notifyObserver();
   }
 
   get auth(): string {

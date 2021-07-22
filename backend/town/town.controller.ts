@@ -1,7 +1,22 @@
 import { Router } from 'express';
 import { getTownsByUserId } from '../user-town/user-town.service';
+import { getOrAddTown } from './town.service';
 
 const router = Router();
+
+router.get('/search', (req, res) => {
+  try {
+    const name = req.query.name;
+    if (!name) throw new Error('동네 이름을 입력해야 합니다.');
+
+    getOrAddTown(String(name)).then((town) => {
+      res.json(town);
+    });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: err.message });
+  }
+});
 
 router.get('/', (req, res) => {
   try {
