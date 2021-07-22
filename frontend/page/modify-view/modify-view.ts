@@ -97,7 +97,7 @@ export default class ModifyView extends View {
     formData.append('content', this.pageContainer?.querySelector('textarea')?.value ?? '');
     formData.append('sellerId', String(this.store.user?.id ?? 1));
 
-    this.api.createProduct(formData).then((res) => {
+    this.api.updateProduct(this.productId, formData).then((res) => {
       if (res.result === 'ok') {
         RouterEvent.dispatchEvent('@back');
       }

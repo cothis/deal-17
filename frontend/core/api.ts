@@ -58,6 +58,15 @@ export class ProductApi extends Api {
     return this.request<any>('', option);
   }
 
+  updateProduct(productId: number, formData: FormData): Promise<any> {
+    const option: RequestInit = {
+      method: 'patch',
+      headers: {},
+      body: formData,
+    };
+    return this.request<any>(`/${productId}`, option);
+  }
+
   updateProductState(id: number, state: number): Promise<void> {
     const option: RequestInit = {
       method: 'put',

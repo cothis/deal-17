@@ -108,7 +108,7 @@ const injectProductDetail = (products: Product[], userId: number) => {
 
       wishes.forEach((wish) => {
         const product = productIdMap[wish.productId];
-        console.log(wish)
+        console.log(wish);
         product.userWish = wish.isChecked === 1;
       });
 
@@ -260,5 +260,23 @@ export const createProduct = (body: {
     .catch((err) => {
       console.error(err);
       throw new Error('상품 등록 실패');
+    });
+};
+
+export const updateProductById = (
+  body: { subject: any; price: number; categoryId: number; content: any; sellerId: number },
+  productId: string
+): Promise<boolean> => {
+  const { subject, price, categoryId, content, sellerId } = body;
+  return promisePool
+    .query<OkPacket>(
+      'update PRODUCT set subject = ?, category_id = ?, price = ?, content = ?, seller_id = ? where id = ?',
+      [subject, categoryId, price, content, sellerId, productId]
+    )
+    .then((res) => res[0])
+    .then((result) => true)
+    .catch((err) => {
+      console.error(err);
+      throw new Error('상품 수정 실패');
     });
 };
