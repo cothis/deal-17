@@ -11,7 +11,10 @@ router.get('/:id', (req, res) => {
     getUserByEmail(String(req.query.email))
       .then((user) => {
         req.session.user = user;
-        res.json(user);
+        req.session.save(() => {
+          console.log(req.session);
+          res.json(user);
+        });
       })
       .catch((err: Error) => {
         console.error(err);

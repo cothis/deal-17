@@ -16,7 +16,7 @@ import Store from './frontend/core/store';
 import { Link } from './frontend/helper/router-link/router-link';
 import { CategoryItem } from './frontend/components/category/category-item.component';
 import { TownViewElement } from './frontend/page/town-view/town-view.custom';
-import { Observer } from './frontend/core/observer';
+import { SessionApi } from './frontend/core/api';
 
 window.customElements.define('router-link', Link);
 window.customElements.define('category-item', CategoryItem);
@@ -24,6 +24,10 @@ window.customElements.define('town-button', TownViewElement);
 
 const store = new Store();
 const router = new Router();
+
+const sessionApi = new SessionApi();
+const session = sessionApi.getSession();
+store.user = session.user;
 
 const mainView = new MainView('#app', store);
 const loginView = new LoginView('#app', store);

@@ -24,19 +24,28 @@ app.set('port', process.env.PORT || 8000);
 app.use(
   session({
     secret: 'keyboard cat',
-    resave: false,
+    resave: true,
     saveUninitialized: true,
     cookie: {
-      secure: true,
+      secure: false,
+      maxAge: 60 * 60 * 1000,
     },
   })
 );
 app.use(express.json());
-app.use(cors());
+app.use(
+  cors({
+    origin: 'http://localhost:3000',
+    credentials: true,
+  })
+);
 app.use('/static', express.static(path.join(__dirname, '../static')));
 app.use('/dist', express.static(path.join(__dirname, '../dist')));
 app.get('/', (req, res) => res.sendFile(path.join(__dirname, '../dist/index.html')));
-app.get('/session', (req, res) => res.json(req.session));
+app.get('/session', (req, res) => {
+  console.log(req.session);
+  res.json(req.session.user);
+});
 app.use('/api/v0/products', ProductController);
 app.use('/api/v0/pictures', PictureController);
 app.use('/api/v0/users', UserController);

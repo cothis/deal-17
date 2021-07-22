@@ -12,7 +12,9 @@ export class Api {
   }
 
   request<AjaxResponse>(path: string, OPTION?: RequestInit | undefined): Promise<AjaxResponse> {
-    return fetch(`${BASE_URL}${this.basePath}${path}`, OPTION).then((response) => response.json());
+    return fetch(`${BASE_URL}${this.basePath}${path}`, { ...OPTION, credentials: 'include' }).then((response) =>
+      response.json()
+    );
   }
 }
 
