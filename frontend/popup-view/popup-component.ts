@@ -4,7 +4,7 @@ import './popup-component.css';
 
 const template: string = `
 <div class="zindex-100 backdrop"></div>
-<div class="modal popup {{__inputState__}}">
+<div class="zindex-200 modal popup {{__inputState__}}">
   {{__title__}}
   {{__input__}}
   <div class="button-bar">
