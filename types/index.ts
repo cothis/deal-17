@@ -40,6 +40,8 @@ export interface Product extends RowDataPacket {
   townName: string;
   chatRooms: number;
   wishes: number;
+  seller: User;
+  category: Category;
 }
 
 export interface ChatRoom extends RowDataPacket {
