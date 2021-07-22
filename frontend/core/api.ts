@@ -173,10 +173,10 @@ export class TownApi extends Api {
     return this.request<{ result: boolean; town: Town }>('/', option);
   }
 
-  deleteTown(townId: number): Promise<{ result: boolean }> {
+  deleteUserTown(userId: number, townId: number): Promise<{ result: boolean }> {
     const option: RequestInit = {
       method: 'delete',
-      body: JSON.stringify({ townId }),
+      body: JSON.stringify({ townId, userId }),
       headers: {
         'Content-Type': 'application/json',
       },

@@ -43,6 +43,7 @@ export default class TownView extends View {
 
   onRemoveClick(e: Event) {
     if (this.store.towns.length > 1) {
+      this.api.deleteUserTown(this.store.user!.id, this.store.towns[this.clickedIndex].id);
       this.store.deleteTown(this.clickedIndex);
     }
   }
