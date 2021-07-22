@@ -4,9 +4,9 @@ import cors from 'cors';
 import 'dotenv-defaults/config';
 import ProductController from './products/product.controller';
 import PictureController from './pictures/picture.controller';
-import UserController from './users/user.controller'
-import WishController from './wishes/wish.controller'
-import ChatRoomController from './chat-rooms/chat-room.controller'
+import UserController from './users/user.controller';
+import WishController from './wishes/wish.controller';
+import ChatRoomController from './chat-rooms/chat-room.controller';
 import * as path from 'path';
 
 const app = express();

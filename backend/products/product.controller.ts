@@ -1,6 +1,7 @@
 import { camelCase } from 'change-case-object';
 import { Router } from 'express';
 import {
+  createProduct,
   getAllProducts,
   getMainProducts,
   getProductById,
@@ -8,7 +9,11 @@ import {
   increaseViewCount,
   updateProductState,
 } from './product.service';
+import { createPictures } from '../pictures/picture.service';
+import { Upload } from '../uploader';
 
+
+const upload = Upload('products');
 const router = Router();
 
 router.get('/', (req, res) => {
@@ -59,6 +64,29 @@ router.get('/:id', (req, res) => {
   }
 });
 
+router.post('/', upload.array('images', 10), async (req, res) => {
+  try {
+    console.log(req.body);
+    const { subject, price, categoryId, content, sellerId } = req.body;
+    console.log(subject, price, categoryId, content, sellerId);
+
+    const productId = await createProduct({
+      subject,
+      price: parseInt(price),
+      categoryId: parseInt(categoryId),
+      content,
+      sellerId: parseInt(sellerId),
+    });
+
+    console.log(req.files);
+    const pictureId = createPictures(req, productId);
+
+    res.json({ result: 'ok', productId, pictureId });
+  } catch (e) {
+    console.error(e);
+    res.status(500).json({ error: 'SERVER_ERROR' });
+  }
+  
 router.put('/:id/state', (req, res) => {
   const id = Number(req.params.id);
   const state = Number(req.body.state);

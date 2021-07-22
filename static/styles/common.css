@@ -168,6 +168,14 @@
   overflow: hidden;
 }
 
+.overflow-auto {
+  overflow: auto;
+}
+
+.overflow-x-auto {
+  overflow-x: auto;
+}
+
 /* display */
 .display-none {
   display: none !important;
@@ -209,6 +217,10 @@
 
 .text.white {
   color: var(--white);
+}
+
+.text.offwhite {
+  color: var(--off-white);
 }
 
 .text.primary1 {
@@ -525,28 +537,16 @@
   gap: 6px;
   color: var(--grey1);
   font-size: var(--xsmall);
+  overflow: visible;
 }
 
-.img-button.delete::after {
+.img-button.delete button {
   position: absolute;
-  right: -12px;
-  top: -12px;
-  display: inline-block;
+  width: 24px;
+  height: 24px;
+  right: -8px;
+  top: 4px;
   padding: 4px;
-  border-radius: 50%;
-  color: var(--grey3);
-  background-color: var(--black);
-  content: "\f107";
-  font-family: woowa-market-icons;
-  font-style: normal;
-  font-weight: normal !important;
-  font-variant: normal;
-  text-transform: none;
-  font-size: 20px;
-  line-height: 1;
-  vertical-align: -.125em;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
   cursor: pointer;
 }
 
@@ -951,6 +951,10 @@
   background-color: transparent;
 }
 
+.bg-black {
+  background-color: var(--black);
+}
+
 .align-self-center {
   align-self: center;
 }
@@ -970,4 +974,12 @@
 
 .cursor-pointer {
   cursor: pointer;
+}
+
+.rounded {
+  border-radius: 50%;
+}
+
+.visibility-hidden {
+  visibility: hidden;
 }

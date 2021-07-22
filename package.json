@@ -46,7 +46,10 @@
     "webpack-merge": "^5.8.0"
   },
   "dependencies": {
+    "@aws-sdk/types": "^3.22.0",
     "@types/express": "^4.17.13",
+    "@types/multer": "^1.4.7",
+    "@types/multer-s3": "^2.7.10",
     "bcrypt": "^5.0.1",
     "change-case-object": "^2.0.0",
     "core-js": "^3.15.2",
@@ -54,6 +57,8 @@
     "dotenv": "^10.0.0",
     "dotenv-defaults": "^2.0.2",
     "express": "^4.17.1",
+    "multer": "^1.4.2",
+    "multer-s3": "^2.9.0",
     "mysql2": "^2.2.5"
   }
 }
