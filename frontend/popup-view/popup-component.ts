@@ -56,7 +56,7 @@ export default class PopupComponent extends View {
       input = `
       <div class="input--wrapper">
         <label>${this.props.input.label}</label>
-        <input class="input large" type="text" placeholder="${this.props.input.placeholder}">
+        <input id="popupText" class="input large" type="text" placeholder="${this.props.input.placeholder}">
       </div>`;
     }
 

@@ -15,8 +15,6 @@ export interface ProductStore {
 export interface User {
   readonly id: number;
   readonly email: string;
-
-  towns: Town[];
 }
 
 export interface Category {

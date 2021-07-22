@@ -1,4 +1,4 @@
-import { UserStore, ProductStore, User, Product } from '../../types';
+import { UserStore, ProductStore, User, Product, Town } from '../../types';
 import { Observer } from './observer';
 
 export default class Store implements UserStore, ProductStore {
@@ -6,6 +6,7 @@ export default class Store implements UserStore, ProductStore {
   private _auth: string;
   private _currentPage: number;
   private _products: Product[];
+  private _towns: Town[];
   observer: Observer;
 
   constructor() {
@@ -13,6 +14,7 @@ export default class Store implements UserStore, ProductStore {
     this._auth = '';
     this._currentPage = 1;
     this._products = [];
+    this._towns = [];
     this.observer = new Observer();
   }
 
@@ -32,6 +34,14 @@ export default class Store implements UserStore, ProductStore {
   set user(user: User | null) {
     this._user = user;
     this.observer.notifyObserver();
+  }
+
+  get towns(): Town[] {
+    return this._towns;
+  }
+
+  set towns(towns) {
+    this._towns = towns;
   }
 
   get auth(): string {
