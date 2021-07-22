@@ -58,9 +58,29 @@
   height: 100%;
 }
 
+.product-component-select-popup{
+  position: absolute;
+    right: 0;
+    top: 32px;
+}
+
 .product-info-title {
+  position: relative;
   display: flex;
   align-items: center;
+}
+
+.product-info-title .wmi-heart,
+.product-info-title .wmi-more-vertical {
+  display: none;
+}
+
+.product-info-title.show-heart-button .wmi-heart {
+  display: block !important;
+}
+
+.product-info-title.show-more-button .wmi-more-vertical {
+  display: block !important;
 }
 
 .product-price {
