@@ -58,7 +58,6 @@ export default class HeaderInvisible extends View {
       case Action.EDIT:
         // 수정
         RouterEvent.dispatchEvent(`/modify/${this.props.productId}`);
-        console.log('수정하기 클릭');
         break;
       case Action.DELETE:
         // 삭제

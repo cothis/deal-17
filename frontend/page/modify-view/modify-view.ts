@@ -1,11 +1,12 @@
 import View from '../../core/view';
 import Store from '../../core/store';
-import { AnimateType, CATEGORIES } from '../../../types';
+import { AnimateType, CATEGORIES, Product } from '../../../types';
 import '../write-view/write-view.css';
-import { ProductApi } from '../../core/api';
+import { PictureApi, ProductApi } from '../../core/api';
 import { RouterEvent } from '../../core/router';
 import { ImageItemComponent } from '../../components/write/image-item';
 import { CategoryItemComponent } from '../../components/write/category-item';
+import { GetFileObjectFromURL } from '../../helper/getFileObjectFromURL';
 
 const template: string = `
 <input id="fileInput" type="file" class="d-none" multiple accept=".gif, .jpg, .png">
@@ -60,12 +61,16 @@ export default class ModifyView extends View {
   private store: Store;
   private state: State;
   private api: ProductApi;
+  private productId!: number;
+  private pictureApi: PictureApi;
+  private product!: Product;
 
   constructor(containerId: string, store: Store) {
     super(containerId, template);
     this.store = store;
     this.state = { images: [], categoryId: 0 };
     this.api = new ProductApi();
+    this.pictureApi = new PictureApi();
   }
 
   addEventListener() {
@@ -142,7 +147,19 @@ export default class ModifyView extends View {
     });
   }
 
-  render() {
+  render(remainUrl: string) {
+    this.productId = parseInt(remainUrl.substr(1));
+    this.api.getProductById(this.productId, { type: '', userId: 0 }).then((product) => {
+      this.product = product;
+    });
+    // this.pictureApi.getPicturesByProductId(this.productId).then((images) => {
+    //   images.map((image) => {
+    //     GetFileObjectFromURL(image.path, (file) => {
+    //       this.state.images.push(file);
+    //     });
+    //   });
+    // });
+
     this.setTemplateData('imageCount', String(this.state.images.length));
 
     this.appendView(AnimateType.DOWN, AnimateType.DOWN);
