@@ -1,5 +1,3 @@
-import Store from '../../core/store';
-
 export class CategoryItem extends HTMLElement {
   private initHTML: string;
   private element: HTMLElement;
@@ -13,7 +11,9 @@ export class CategoryItem extends HTMLElement {
 
     this.render();
     this.element.addEventListener('click', (e) => {
-      console.log(e.currentTarget);
+      const categoryId = (<HTMLLIElement>e.currentTarget).dataset.categoryId;
+
+      this.element.parentElement!.dispatchEvent(new CustomEvent('category-change', { detail: { categoryId } }));
     });
 
     this.path = '';

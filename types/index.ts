@@ -98,18 +98,22 @@ export enum AnimateType {
   FADE = 'fade',
 }
 
-export const CATEGORIES = [
-  { id: 1, name: '디지털기기', image: 'https://deal-17.s3.ap-northeast-2.amazonaws.com/categories/digital.png' },
-  { id: 2, name: '생활가전', image: 'https://deal-17.s3.ap-northeast-2.amazonaws.com/categories/life.png' },
-  { id: 3, name: '가구/인테리어', image: 'https://deal-17.s3.ap-northeast-2.amazonaws.com/categories/furniture.png' },
-  { id: 4, name: '게임/취미', image: 'https://deal-17.s3.ap-northeast-2.amazonaws.com/categories/game.png' },
-  { id: 5, name: '생활/가공식품', image: 'https://deal-17.s3.ap-northeast-2.amazonaws.com/categories/food.png' },
-  { id: 6, name: '스포츠/레저', image: 'https://deal-17.s3.ap-northeast-2.amazonaws.com/categories/sport.png' },
-  { id: 7, name: '여성패션/잡화', image: 'https://deal-17.s3.ap-northeast-2.amazonaws.com/categories/skirt.png' },
-  { id: 8, name: '남성패션/잡화', image: 'https://deal-17.s3.ap-northeast-2.amazonaws.com/categories/clothe.png' },
-  { id: 9, name: '유아동', image: 'https://deal-17.s3.ap-northeast-2.amazonaws.com/categories/kids.png' },
-  { id: 10, name: '뷰티/미용', image: 'https://deal-17.s3.ap-northeast-2.amazonaws.com/categories/veauti.png' },
-  { id: 11, name: '반려동물', image: 'https://deal-17.s3.ap-northeast-2.amazonaws.com/categories/pet.png' },
-  { id: 12, name: '도서/티켓/음반', image: 'https://deal-17.s3.ap-northeast-2.amazonaws.com/categories/book.png' },
+export const CATEGORIES: Category[] = [
+  { id: 1, name: '디지털기기', imagePath: 'https://deal-17.s3.ap-northeast-2.amazonaws.com/categories/digital.png' },
+  { id: 2, name: '생활가전', imagePath: 'https://deal-17.s3.ap-northeast-2.amazonaws.com/categories/life.png' },
+  {
+    id: 3,
+    name: '가구/인테리어',
+    imagePath: 'https://deal-17.s3.ap-northeast-2.amazonaws.com/categories/furniture.png',
+  },
+  { id: 4, name: '게임/취미', imagePath: 'https://deal-17.s3.ap-northeast-2.amazonaws.com/categories/game.png' },
+  { id: 5, name: '생활/가공식품', imagePath: 'https://deal-17.s3.ap-northeast-2.amazonaws.com/categories/food.png' },
+  { id: 6, name: '스포츠/레저', imagePath: 'https://deal-17.s3.ap-northeast-2.amazonaws.com/categories/sport.png' },
+  { id: 7, name: '여성패션/잡화', imagePath: 'https://deal-17.s3.ap-northeast-2.amazonaws.com/categories/skirt.png' },
+  { id: 8, name: '남성패션/잡화', imagePath: 'https://deal-17.s3.ap-northeast-2.amazonaws.com/categories/clothe.png' },
+  { id: 9, name: '유아동', imagePath: 'https://deal-17.s3.ap-northeast-2.amazonaws.com/categories/kids.png' },
+  { id: 10, name: '뷰티/미용', imagePath: 'https://deal-17.s3.ap-northeast-2.amazonaws.com/categories/veauti.png' },
+  { id: 11, name: '반려동물', imagePath: 'https://deal-17.s3.ap-northeast-2.amazonaws.com/categories/pet.png' },
+  { id: 12, name: '도서/티켓/음반', imagePath: 'https://deal-17.s3.ap-northeast-2.amazonaws.com/categories/book.png' },
 ];
 export const QUERY_RESULT_ROWS = 0;
