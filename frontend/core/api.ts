@@ -1,4 +1,4 @@
-import { Product, Picture, ChatRoom, Wish, User } from '../../types';
+import { Product, Picture, ChatRoom, Wish, User, Town } from '../../types';
 import qs from 'querystring';
 import { Session } from 'express-session';
 
@@ -141,5 +141,15 @@ export class ChatRoomApi extends Api {
 
   getChatRoomByProductId(productId: number): Promise<ChatRoom[]> {
     return this.request<ChatRoom[]>(`/${productId}`);
+  }
+}
+
+export class TownApi extends Api {
+  constructor() {
+    super('/api/v0/town');
+  }
+
+  getTownsByUserId(id: number): Promise<Town[]> {
+    return this.request<Town[]>(`?userId=${id}`);
   }
 }

@@ -3,6 +3,7 @@ import Store from '../../core/store';
 import { AnimateType } from '../../../types';
 import './town-view.css';
 import PopupComponent from '../../popup-view/popup-component';
+import { TownApi } from '../../core/api';
 
 const template: string = `
 <div class="flex column grow">
@@ -20,9 +21,7 @@ const template: string = `
       <span>최대 2개까지 설정 가능해요.</span>
     </div>
     <div id="button-wrapper" class="flex justify-between gap-4 x-mt-24">
-      <town-button state="active" name="역삼동"></town-button>
-      <town-button state="add"></town-button>
-      <town-button state="inactive" name="두두동"></town-button>
+      {{__town-button__}}
     </div>
   </div>
 </div>
@@ -31,30 +30,49 @@ const template: string = `
 
 export default class TownView extends View {
   private store: Store;
+  private api: TownApi;
 
   constructor(containerId: string, store: Store) {
     super(containerId, template);
 
     this.store = store;
+    this.api = new TownApi();
   }
 
   render() {
-    this.appendView(AnimateType.LEFT, AnimateType.LEFT);
+    if (this.store.user) {
+      this.api.getTownsByUserId(this.store.user.id).then((result) => {
+        for (let i = 0; i < 2; i++) {
+          const town = result[i];
+          if (town) {
+            this.addHtml(
+              `<town-button state="${town.isActive ? 'active' : 'inactive'}" name="${town.name}"></town-button>`
+            );
+          } else {
+            this.addHtml(`<town-button state="add"></town-button>`);
+          }
+        }
 
-    this.pageContainer?.querySelector('#button-wrapper')?.addEventListener('click', (e) => {
-      const button = (<HTMLElement>e.target).closest('button');
-      if (!button) {
-        return;
-      }
+        this.setTemplateData('town-button', this.getHtml());
 
-      new PopupComponent('#town-popup', this.store, {
-        input: {
-          label: '현재 위치를 입력하세요.',
-          placeholder: '시 구 제외, 동만 입력',
-        },
-        okText: '확인',
-        okClickHandler: (e) => console.log(e.target),
-      }).render();
-    });
+        this.appendView(AnimateType.LEFT, AnimateType.LEFT);
+
+        this.pageContainer?.querySelector('#button-wrapper')?.addEventListener('click', (e) => {
+          const button = (<HTMLElement>e.target).closest('button');
+          if (!button) {
+            return;
+          }
+
+          new PopupComponent('#town-popup', this.store, {
+            input: {
+              label: '현재 위치를 입력하세요.',
+              placeholder: '시 구 제외, 동만 입력',
+            },
+            okText: '확인',
+            okClickHandler: (e) => console.log(e.target),
+          }).render();
+        });
+      });
+    }
   }
 }
