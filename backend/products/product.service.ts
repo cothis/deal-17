@@ -235,3 +235,27 @@ export const increaseViewCount = (id: number) => {
 export const updateProductState = (id: number, state: number) => {
   return promisePool.query(`update PRODUCT set STATE = ? where ID = ?`, [state, id]).then(() => {});
 };
+
+export const createProduct = (body: {
+  subject: string;
+  price: number;
+  categoryId: number;
+  content: string;
+  sellerId: number;
+}): Promise<number> => {
+  const { subject, price, categoryId, content, sellerId } = body;
+  return promisePool
+    .query<OkPacket>('insert into PRODUCT(subject, category_id, price, content, seller_id) values(?, ?, ?, ?, ?)', [
+      subject,
+      categoryId,
+      price,
+      content,
+      sellerId,
+    ])
+    .then((res) => res[0])
+    .then((result) => result.insertId)
+    .catch((err) => {
+      console.error(err);
+      throw new Error('상품 등록 실패');
+    });
+};

@@ -2,6 +2,10 @@ hr {
   width: 100%;
 }
 
+#writeForm {
+  max-height: calc(calc(100vh - var(--header-height)) - var(--location-bar-height));
+}
+
 .border-y {
   border-top: 1px solid var(--grey1);
   border-bottom: 1px solid var(--grey1);

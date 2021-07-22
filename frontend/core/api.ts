@@ -52,6 +52,15 @@ export class ProductApi extends Api {
   getProductById(productId: number, param: { type: string; userId: number }): Promise<Product> {
     return this.request<Product>(`/${productId}?${qs.stringify(param)}`);
   }
+
+  createProduct(formData: FormData): Promise<any> {
+    const option: RequestInit = {
+      method: 'post',
+      headers: {},
+      body: formData,
+    };
+    return this.request<any>('', option);
+  }
 }
 
 export class PictureApi extends Api {
