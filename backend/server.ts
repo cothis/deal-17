@@ -21,12 +21,6 @@ declare module 'express-session' {
 const app = express();
 const server: http.Server = http.createServer(app);
 
-declare module 'express-session' {
-  export interface SessionData {
-    user: User;
-  }
-}
-
 app.set('port', process.env.PORT || 8000);
 app.use(
   session({
