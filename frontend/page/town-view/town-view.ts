@@ -3,6 +3,7 @@ import Store from '../../core/store';
 import { AnimateType } from '../../../types';
 import './town-view.css';
 import PopupComponent from '../../popup-view/popup-component';
+import { TownApi } from '../../core/api';
 
 const template: string = `
 <div class="flex column grow">
@@ -31,11 +32,13 @@ const template: string = `
 
 export default class TownView extends View {
   private store: Store;
+  private api: TownApi;
 
   constructor(containerId: string, store: Store) {
     super(containerId, template);
 
     this.store = store;
+    this.api = new TownApi();
   }
 
   render() {
