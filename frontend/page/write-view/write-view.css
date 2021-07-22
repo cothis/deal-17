@@ -43,3 +43,7 @@ hr {
 .border-bottom {
   border-bottom: 1px solid var(--grey2);
 }
+
+.selected {
+  color: var(--primary1);
+}

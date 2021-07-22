@@ -52,7 +52,10 @@ export default class ProductDetailView extends View {
 
     this.pictureApi.getPicturesByProductId(1).then((pictures: Picture[]) => {
       new Carousel('#productDetailView__carousel', this.store, { pictures }).render();
-      new HeaderInvisible('#productDetailView__header-invisible', this.store, {}).render();
+      new HeaderInvisible('#productDetailView__header-invisible', this.store, {
+        productId,
+        rootElement: this.pageContainer!,
+      }).render();
     });
     this.productApi
       .getProductById(productId, { type: 'view', userId: this.store.user?.id ?? 0 })

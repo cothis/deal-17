@@ -9,3 +9,4 @@ export { default as TownView } from './town-view/town-view';
 export { default as ChattingListView } from './chatting-list-view/chatting-list-view';
 export { default as MenuView } from './menu-view/menu-view';
 export { default as ChattingDetailView } from './chatting-detail-view/chatting-detail-view';
+export { default as ModifyView } from './modify-view/modify-view';

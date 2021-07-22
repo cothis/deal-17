@@ -11,8 +11,8 @@ export class Api {
   }
 
   request<AjaxResponse>(path: string, OPTION?: RequestInit | undefined): Promise<AjaxResponse> {
-    return fetch(`${BASE_URL}${this.basePath}${path}`, { ...OPTION, credentials: 'include' }).then((response) =>
-      response.json()
+    return fetch(`${BASE_URL}${this.basePath}${path}`, { ...OPTION, credentials: 'include', mode: 'cors' }).then(
+      (response) => response.json()
     );
   }
 }
@@ -56,6 +56,15 @@ export class ProductApi extends Api {
       body: formData,
     };
     return this.request<any>('', option);
+  }
+
+  updateProduct(productId: number, formData: FormData): Promise<any> {
+    const option: RequestInit = {
+      method: 'put',
+      headers: {},
+      body: formData,
+    };
+    return this.request<any>(`/${productId}`, option);
   }
 
   updateProductState(id: number, state: number): Promise<void> {

@@ -7,6 +7,7 @@ import {
   getProductById,
   getProductDetail,
   increaseViewCount,
+  updateProductById,
   updateProductState,
 } from './product.service';
 import { createPictures } from '../pictures/picture.service';
@@ -19,7 +20,7 @@ router.get('/', (req, res) => {
   const type = req.query.type;
 
   if (type === 'view') {
-    console.log(req.query)
+    console.log(req.query);
     getMainProducts({
       userId: Number(req.query.userId),
       categoryId: Number(req.query.categoryId),
@@ -64,12 +65,33 @@ router.get('/:id', (req, res) => {
   }
 });
 
+router.put('/:id', upload.array('images', 10), async (req, res) => {
+  try {
+    const productId = req.params.id;
+    const { subject, price, categoryId, content, sellerId } = req.body;
+
+    const result = await updateProductById(
+      {
+        subject,
+        price: parseInt(price),
+        categoryId: parseInt(categoryId),
+        content,
+        sellerId: parseInt(sellerId),
+      },
+      productId
+    );
+    if (result) {
+      res.json({ result: 'ok' });
+    } else throw new Error('업데이트 결과 실패');
+  } catch (e) {
+    console.error(e);
+    res.status(500).json({ error: 'SERVER_ERROR' });
+  }
+});
+
 router.post('/', upload.array('images', 10), async (req, res) => {
   try {
-    console.log(req.body);
     const { subject, price, categoryId, content, sellerId } = req.body;
-    console.log(subject, price, categoryId, content, sellerId);
-
     const productId = await createProduct({
       subject,
       price: parseInt(price),
@@ -78,9 +100,7 @@ router.post('/', upload.array('images', 10), async (req, res) => {
       sellerId: parseInt(sellerId),
     });
 
-    console.log(req.files);
     const pictureId = createPictures(req, productId);
-
     res.json({ result: 'ok', productId, pictureId });
   } catch (e) {
     console.error(e);
