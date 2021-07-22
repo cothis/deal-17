@@ -5,6 +5,7 @@ import './write-view.css';
 import { ProductApi } from '../../core/api';
 import { RouterEvent } from '../../core/router';
 import { ImageItemComponent } from '../../components/write/image-item';
+import { CategoryItemComponent } from '../../components/write/category-item';
 
 const template: string = `
 <input id="fileInput" type="file" class="d-none" multiple accept=".gif, .jpg, .png">
@@ -32,8 +33,7 @@ const template: string = `
       </div>
       <div>
         <div class="text medium grey1">(필수)카테고리를 선택해주세요.</div>
-        <ul class="category-list">
-          {{__category-item__}}
+        <ul id="category-list" class="category-list">
         </ul>
       </div>
     </div>
@@ -75,14 +75,6 @@ export default class WriteView extends View {
     this.pageContainer.querySelector('#fileInput')?.addEventListener('change', this.onFileChange.bind(this));
     this.pageContainer.querySelector('#imgButton')?.addEventListener('click', this.onImgButtonClick.bind(this));
     this.pageContainer.querySelector('#requestWrite')?.addEventListener('click', this.onWriteButtonClick.bind(this));
-    this.pageContainer.querySelector('.category-list')?.addEventListener('click', this.onCategoryListClick.bind(this));
-  }
-
-  onCategoryListClick(e: Event) {
-    const target = (<HTMLElement>e.target).closest('.category-list-item');
-    if (!target) return;
-
-    this.state.categoryId = parseInt((<HTMLElement>target).dataset.category ?? '0');
   }
 
   onImgButtonClick() {
@@ -100,8 +92,6 @@ export default class WriteView extends View {
     formData.append('content', this.pageContainer?.querySelector('textarea')?.value ?? '');
     formData.append('sellerId', String(this.store.user?.id ?? 1));
 
-    console.log(formData);
-
     this.api.createProduct(formData).then((res) => {
       if (res.result === 'ok') {
         RouterEvent.dispatchEvent('@back');
@@ -115,7 +105,6 @@ export default class WriteView extends View {
 
     for (let i = 0; i < files?.length; i++) {
       if (this.state.images.length >= 10) break;
-
       this.state.images.push(files[i]);
     }
 
@@ -142,22 +131,22 @@ export default class WriteView extends View {
     }
   }
 
-  makeCategoryTempalte(): string {
-    return CATEGORIES.map(
-      (category) => `<li>
-                      <button type="button" class="category-list-item" data-category="${category.id}">${category.name}</ㅠ>
-                    </li>`
-    ).join('');
-  }
-
-  updateTemplate() {
-    this.setTemplateData('imageCount', String(this.state.images.length));
-    this.setTemplateData('category-item', this.makeCategoryTempalte());
+  createCategoryItem() {
+    CATEGORIES.forEach((category) => {
+      new CategoryItemComponent('#category-list', {
+        category,
+        setCategoryId: (categoryId: number) => {
+          this.state.categoryId = categoryId;
+        },
+      });
+    });
   }
 
   render() {
-    this.updateTemplate();
+    this.setTemplateData('imageCount', String(this.state.images.length));
+
     this.appendView(AnimateType.DOWN, AnimateType.DOWN);
+    this.createCategoryItem();
     this.addEventListener();
   }
 }
