@@ -133,4 +133,8 @@ export class TownApi extends Api {
   getTownsByUserId(id: number): Promise<Town[]> {
     return this.request<Town[]>(`?userId=${id}`);
   }
+
+  getOrAddTown(name: string): Promise<Town> {
+    return this.request<Town>(`search?name=${name}`);
+  }
 }
