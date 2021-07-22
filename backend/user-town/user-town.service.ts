@@ -25,6 +25,17 @@ export const addUserTown = (userId: number, townId: number): Promise<number> => 
     });
 };
 
+export const setActiveTown = (userTownId: number, active: number): Promise<boolean> => {
+  return promisePool
+    .query<OkPacket>('update user_town set active = ? where id = ?', [active, userTownId])
+    .then((res) => res[0])
+    .then((result) => true)
+    .catch((err) => {
+      console.error(err);
+      throw new Error('동네 상태 변경에 실패했습니다.');
+    });
+};
+
 export const getTownById = (id: number): Promise<Town> => {
   return promisePool.query('select * from town where id = ?', [id]).then((res) => <Town>camelCase((<Town[]>res[0])[0]));
 };
