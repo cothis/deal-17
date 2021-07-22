@@ -52,7 +52,8 @@ export const Upload = (dest: string) => {
       acl: 'public-read',
       key: function (req, file, cb) {
         console.log(`target : `, path.join(dest, file.originalname));
-        cb(null, path.join(dest, file.originalname));
+        const ext = file.mimetype.split('/')[1];
+        cb(null, path.join(dest, file.fieldname + '-' + Date.now().toString() + ext));
       },
     }),
     limits: {

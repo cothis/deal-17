@@ -2,9 +2,8 @@ import { camelCase } from 'change-case-object';
 import { Router } from 'express';
 import { getAllProducts, getProductById } from './product.service';
 import { Upload } from '../uploader';
-import multer from 'multer';
 
-const getBody = multer();
+const upload = Upload('products');
 const router = Router();
 
 router.get('/', async (_, res) => {
@@ -29,23 +28,16 @@ router.get('/:id', async (req, res) => {
   }
 });
 
-router.post('/', getBody.none(), async (req, res) => {
-  console.log(req.headers);
-  console.log(req.body.subject, req.body.price, req.body.category, req.body.content);
-  console.log(req.files);
-
-  const id = 1;
-  const upload = Upload(`products/${id}`);
-  const productsUploader = upload.array('images', 10);
-
-  productsUploader(req, res, (err) => {
-    if (err) {
-      console.error(err);
-      res.status(500).json({ error: 'SERVER_ERROR' });
-    } else {
-      res.json({ result: 'ok' });
-    }
-  });
+router.post('/', upload.array('images', 10), async (req, res) => {
+  try {
+    console.log({ ...req.body });
+    console.log(req.body);
+    console.log(req.body.subject);
+    console.log(req.files);
+  } catch (e) {
+    console.error(e);
+    res.status(500).json({ error: 'SERVER_ERROR' });
+  }
 });
 
 export default router;

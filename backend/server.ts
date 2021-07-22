@@ -7,7 +7,6 @@ import PictureController from './pictures/picture.controller';
 import UserController from './users/user.controller';
 import WishController from './wishes/wish.controller';
 import ChatRoomController from './chat-rooms/chat-room.controller';
-import bodyParser from 'body-parser';
 import * as path from 'path';
 
 const app = express();
