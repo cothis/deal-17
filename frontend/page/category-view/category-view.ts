@@ -29,7 +29,7 @@ export default class CategoryView extends View {
 
   render() {
     const categories = CATEGORIES.map(
-      (category) => `<category-item path="${category.image}">${category.name}</category-item>`
+      (category) => `<category-item path="${category.image}" id="${category.id}">${category.name}</category-item>`
     ).join('');
     this.setTemplateData('categories', categories);
     this.appendView(AnimateType.LEFT, AnimateType.LEFT);
