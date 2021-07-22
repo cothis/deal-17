@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import { addUserTown, getTownsByUserId } from '../user-town/user-town.service';
-import { getOrAddTown } from './town.service';
+import { getOrAddTown, getTownByUserTownId } from './town.service';
 
 const router = Router();
 
@@ -39,12 +39,9 @@ router.post('/', (req, res) => {
     if (!townName) throw new Error('동네 이름이 필요합니다.');
 
     getOrAddTown(String(townName))
-      .then((town) => {
-        addUserTown(userId, town.id);
-      })
-      .then((userTownId) => {
-        res.json({ result: true, userTownId });
-      });
+      .then((town) => addUserTown(userId, town.id))
+      .then(getTownByUserTownId)
+      .then((town) => res.json({ result: true, town }));
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: err.message });

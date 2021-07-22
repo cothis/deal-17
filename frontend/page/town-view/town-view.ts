@@ -46,8 +46,8 @@ export default class TownView extends View {
 
   onAddClick(e: Event) {
     const value = (<HTMLInputElement>this.pageContainer?.querySelector('#popupText')).value;
-    this.api.getOrAddTown(value).then(({ id, name }) => {
-      this.store.addTown({ id, name, isActive: false });
+    this.api.addUserTown(this.store.user!.id, value).then((res) => {
+      this.store.addTown(res.town);
       console.log(this.store.towns);
     });
   }

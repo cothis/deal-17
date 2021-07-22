@@ -138,7 +138,7 @@ export class TownApi extends Api {
     return this.request<Town>(`/search?name=${name}`);
   }
 
-  addUserTown(userId: number, townName: string): Promise<object> {
+  addUserTown(userId: number, townName: string): Promise<{ result: boolean; town: Town }> {
     const option: RequestInit = {
       method: 'post',
       body: JSON.stringify({ userId, townName }),
@@ -146,6 +146,6 @@ export class TownApi extends Api {
         'Content-Type': 'application/json',
       },
     };
-    return this.request<object>('/', option);
+    return this.request<{ result: boolean; town: Town }>('/', option);
   }
 }

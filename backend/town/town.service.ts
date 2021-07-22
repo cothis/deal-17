@@ -39,3 +39,9 @@ export const getOrAddTown = (name: string): Promise<Town> => {
 export const getTownById = (id: number): Promise<Town> => {
   return promisePool.query('select * from town where id = ?', [id]).then((res) => <Town>camelCase((<Town[]>res[0])[0]));
 };
+
+export const getTownByUserTownId = (userTownId: number): Promise<Town> => {
+  return promisePool
+    .query('select * from town t join user_town ut on t.id = ut.town_id where ut.id = ?', [userTownId])
+    .then((res) => <Town>camelCase((<Town[]>res[0])[0]));
+};
