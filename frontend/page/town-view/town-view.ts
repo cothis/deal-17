@@ -39,6 +39,34 @@ export default class TownView extends View {
     this.api = new TownApi();
   }
 
+  onRemoveClick(e: Event) {}
+
+  onAddClick(e: Event) {}
+
+  onButtonWrapperClick(e: Event) {
+    const button = (<HTMLElement>e.target).closest('button');
+    if (!button) {
+      return;
+    }
+
+    const state = button.getAttribute('state');
+    let handler;
+    if (state === 'active') {
+      handler = this.onRemoveClick;
+    } else if (state === 'add') {
+      handler = this.onAddClick;
+    }
+
+    new PopupComponent('#town-popup', this.store, {
+      input: {
+        label: '현재 위치를 입력하세요.',
+        placeholder: '시 구 제외, 동만 입력',
+      },
+      okText: '확인',
+      okClickHandler: (e) => console.log(e.target),
+    }).render();
+  }
+
   render() {
     if (this.store.user) {
       this.api.getTownsByUserId(this.store.user.id).then((result) => {
@@ -57,21 +85,7 @@ export default class TownView extends View {
 
         this.appendView(AnimateType.LEFT, AnimateType.LEFT);
 
-        this.pageContainer?.querySelector('#button-wrapper')?.addEventListener('click', (e) => {
-          const button = (<HTMLElement>e.target).closest('button');
-          if (!button) {
-            return;
-          }
-
-          new PopupComponent('#town-popup', this.store, {
-            input: {
-              label: '현재 위치를 입력하세요.',
-              placeholder: '시 구 제외, 동만 입력',
-            },
-            okText: '확인',
-            okClickHandler: (e) => console.log(e.target),
-          }).render();
-        });
+        this.pageContainer?.querySelector('#button-wrapper')?.addEventListener('click', this.onButtonWrapperClick);
       });
     }
   }
