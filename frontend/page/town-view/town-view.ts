@@ -62,9 +62,13 @@ export default class TownView extends View {
     let handler;
     let input;
     let okText;
+    let title;
+    let isAlert;
     if (state === 'active') {
       handler = this.onRemoveClick;
       okText = '삭제';
+      title = '정말 삭제하시겠습니까?';
+      isAlert = true;
     } else if (state === 'add') {
       handler = this.onAddClick;
       okText = '확인';
@@ -76,8 +80,10 @@ export default class TownView extends View {
 
     if (okText) {
       new PopupComponent('#town-popup', this.store, {
+        title: title,
         input: input,
         okText: okText,
+        isAlert: isAlert,
         okClickHandler: this.onAddClick.bind(this),
       }).render();
     }
