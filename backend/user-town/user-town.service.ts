@@ -5,9 +5,9 @@ import { promisePool } from '../db';
 
 export const getTownsByUserId = (userId: number): Promise<Town[]> => {
   return promisePool
-    .query<Town[]>(
-      `select name from town 
-    inner join user_town on town.id = user_town.town_id 
+    .query(
+      `select t.id as id, t.name as name, ut.active as is_active from town t 
+    inner join user_town ut on t.id = ut.town_id 
     where user_id = ?`,
       userId
     )
@@ -26,5 +26,5 @@ export const addUserTown = (userId: number, townId: number): Promise<number> => 
 };
 
 export const getTownById = (id: number): Promise<Town> => {
-  return promisePool.query<Town[]>('select * from town where id = ?', [id]).then((res) => <Town>camelCase(res[0][0]));
+  return promisePool.query('select * from town where id = ?', [id]).then((res) => <Town>camelCase((<Town[]>res[0])[0]));
 };

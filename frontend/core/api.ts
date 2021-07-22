@@ -148,4 +148,19 @@ export class TownApi extends Api {
   getTownsByUserId(id: number): Promise<Town[]> {
     return this.request<Town[]>(`?userId=${id}`);
   }
+
+  getOrAddTown(name: string): Promise<Town> {
+    return this.request<Town>(`/search?name=${name}`);
+  }
+
+  addUserTown(userId: number, townName: string): Promise<{ result: boolean; town: Town }> {
+    const option: RequestInit = {
+      method: 'post',
+      body: JSON.stringify({ userId, townName }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    };
+    return this.request<{ result: boolean; town: Town }>('/', option);
+  }
 }

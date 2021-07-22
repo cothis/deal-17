@@ -1,6 +1,6 @@
 import View from '../../core/view';
 import Store from '../../core/store';
-import { AnimateType } from '../../../types';
+import { AnimateType, Town } from '../../../types';
 import './town-view.css';
 import PopupComponent from '../../popup-view/popup-component';
 import { TownApi } from '../../core/api';
@@ -31,48 +31,107 @@ const template: string = `
 export default class TownView extends View {
   private store: Store;
   private api: TownApi;
+  private clickedIndex: number;
 
   constructor(containerId: string, store: Store) {
     super(containerId, template);
 
     this.store = store;
     this.api = new TownApi();
+    this.clickedIndex = 0;
+  }
+
+  onRemoveClick(e: Event) {
+    this.store.deleteTown(this.clickedIndex);
+  }
+
+  onAddClick(e: Event) {
+    const value = (<HTMLInputElement>this.pageContainer?.querySelector('#popupText')).value;
+    this.api.addUserTown(this.store.user!.id, value).then((res) => {
+      this.store.addTown(res.town);
+      console.log(this.store.towns);
+    });
+  }
+
+  onButtonWrapperClick(e: Event) {
+    const button = (<HTMLElement>e.target).closest('button');
+    if (!button) {
+      return;
+    }
+
+    const townButton = <HTMLElement>(<HTMLElement>e.target).closest('town-button');
+    if (!townButton) return;
+
+    this.clickedIndex = parseInt(townButton.dataset.index!);
+
+    const state = townButton.getAttribute('state');
+    let handler: (e: Event) => void;
+    let input;
+    let okText = '삭제';
+    let title;
+    let isAlert;
+    if (state === 'active' || state === 'inactive') {
+      handler = this.onRemoveClick;
+      okText = '삭제';
+      title = '정말 삭제하시겠습니까?';
+      isAlert = true;
+    } else if (state === 'add') {
+      handler = this.onAddClick;
+      okText = '확인';
+      input = {
+        label: '현재 위치를 입력하세요.',
+        placeholder: '시 구 제외, 동만 입력',
+      };
+    }
+
+    new PopupComponent('#town-popup', this.store, {
+      title: title,
+      input: input,
+      okText: okText,
+      isAlert: isAlert,
+      okClickHandler: handler!.bind(this),
+    }).render();
+  }
+
+  makeTownButtons(towns: Town[]) {
+    for (let i = 0; i < 2; i++) {
+      const town = towns[i];
+      if (town) {
+        this.addHtml(
+          `<town-button state="${town.isActive ? 'active' : 'inactive'}" name="${
+            town.name
+          }" data-index="${i}"></town-button>`
+        );
+      } else {
+        this.addHtml(`<town-button state="add"></town-button>`);
+      }
+    }
+
+    return this.getHtml();
   }
 
   render() {
     if (this.store.user) {
       this.api.getTownsByUserId(this.store.user.id).then((result) => {
-        for (let i = 0; i < 2; i++) {
-          const town = result[i];
-          if (town) {
-            this.addHtml(
-              `<town-button state="${town.isActive ? 'active' : 'inactive'}" name="${town.name}"></town-button>`
-            );
-          } else {
-            this.addHtml(`<town-button state="add"></town-button>`);
-          }
-        }
+        this.store.towns = result;
+        const htmls = this.makeTownButtons(result);
 
-        this.setTemplateData('town-button', this.getHtml());
+        this.setTemplateData('town-button', htmls);
 
         this.appendView(AnimateType.LEFT, AnimateType.LEFT);
 
-        this.pageContainer?.querySelector('#button-wrapper')?.addEventListener('click', (e) => {
-          const button = (<HTMLElement>e.target).closest('button');
-          if (!button) {
-            return;
-          }
-
-          new PopupComponent('#town-popup', this.store, {
-            input: {
-              label: '현재 위치를 입력하세요.',
-              placeholder: '시 구 제외, 동만 입력',
-            },
-            okText: '확인',
-            okClickHandler: (e) => console.log(e.target),
-          }).render();
-        });
+        this.pageContainer
+          ?.querySelector('#button-wrapper')
+          ?.addEventListener('click', this.onButtonWrapperClick.bind(this));
       });
+    }
+  }
+
+  onStoreChange() {
+    const buttonWrapper = this.pageContainer?.querySelector('#button-wrapper');
+    if (buttonWrapper) {
+      const townsHtml = this.makeTownButtons(this.store.towns);
+      buttonWrapper.innerHTML = townsHtml;
     }
   }
 }
