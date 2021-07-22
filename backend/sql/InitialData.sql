@@ -23,7 +23,7 @@ insert into PRODUCT(SUBJECT, CATEGORY_ID, PRICE, CONTENT, SELLER_ID)
 values('생활가전 유저1', 2, 3000, '가전입니다', 1);   
 insert into PRODUCT(SUBJECT, CATEGORY_ID, PRICE, CONTENT, SELLER_ID)
 values('생활가전 유저1 가격미정', 1, null, '디지털기기 팔아요', 1);   
-insert into PRODUCT(SUBJECT, CATEGORY_ID, PRICE, CONTENT, SEELER_ID)
+insert into PRODUCT(SUBJECT, CATEGORY_ID, PRICE, CONTENT, SELLER_ID)
 values('디지털가전 팔아요', 1, 5000, '디지털가전이 진짜 쌉니다', 1);
 
 INSERT INTO PICTURE(PATH, PRODUCT_ID) VALUES ('https://fujifilm-x.com/wp-content/uploads/2019/08/x-t30_sample-images03.jpg', 1);
