@@ -47,6 +47,7 @@
   },
   "dependencies": {
     "@types/express": "^4.17.13",
+    "@types/express-session": "^1.17.4",
     "bcrypt": "^5.0.1",
     "change-case-object": "^2.0.0",
     "core-js": "^3.15.2",
@@ -54,6 +55,7 @@
     "dotenv": "^10.0.0",
     "dotenv-defaults": "^2.0.2",
     "express": "^4.17.1",
+    "express-session": "^1.17.2",
     "mysql2": "^2.2.5"
   }
 }
