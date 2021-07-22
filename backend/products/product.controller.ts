@@ -65,7 +65,7 @@ router.get('/:id', (req, res) => {
   }
 });
 
-router.patch('/:id', upload.array('images', 10), async (req, res) => {
+router.put('/:id', upload.array('images', 10), async (req, res) => {
   try {
     const productId = req.params.id;
     const { subject, price, categoryId, content, sellerId } = req.body;
