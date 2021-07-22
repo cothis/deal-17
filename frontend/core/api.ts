@@ -23,11 +23,8 @@ export class SessionApi extends Api {
     super('/session');
   }
 
-  getSession(): any {
-    return this.request<any>('').then((response) => {
-      console.log(response);
-      return response.json();
-    });
+  getSession(): Promise<any> {
+    return this.request<any>('');
   }
 }
 
