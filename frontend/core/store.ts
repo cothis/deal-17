@@ -44,6 +44,11 @@ export default class Store implements UserStore, ProductStore {
     this._towns = towns;
   }
 
+  deleteTown(index: number) {
+    this._towns = this._towns.filter((town, i) => i != index);
+    this.observer.notifyObserver();
+  }
+
   addTown(town: Town) {
     this._towns.push(town);
     this.observer.notifyObserver();

@@ -31,17 +31,18 @@ const template: string = `
 export default class TownView extends View {
   private store: Store;
   private api: TownApi;
+  private clickedIndex: number;
 
   constructor(containerId: string, store: Store) {
     super(containerId, template);
 
     this.store = store;
     this.api = new TownApi();
+    this.clickedIndex = 0;
   }
 
   onRemoveClick(e: Event) {
-    console.log('remove cliced');
-    console.log(e.target);
+    this.store.deleteTown(this.clickedIndex);
   }
 
   onAddClick(e: Event) {
@@ -58,8 +59,10 @@ export default class TownView extends View {
       return;
     }
 
-    const townButton = (<HTMLElement>e.target).closest('town-button');
+    const townButton = <HTMLElement>(<HTMLElement>e.target).closest('town-button');
     if (!townButton) return;
+
+    this.clickedIndex = parseInt(townButton.dataset.index!);
 
     const state = townButton.getAttribute('state');
     let handler: (e: Event) => void;
