@@ -1,6 +1,5 @@
 import { Product, Picture, ChatRoom, Wish, User, Town } from '../../types';
 import qs from 'querystring';
-import { Session } from 'express-session';
 
 const BASE_URL: string = process.env.API_URL ?? 'http://localhost:8000';
 
