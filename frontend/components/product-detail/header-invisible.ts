@@ -4,6 +4,8 @@ import Store from '../../core/store';
 import SelectPopup from '../common/select-popup';
 
 import '../../page/product-detail-view/product-detail-view.css';
+import { Product } from '../../../types';
+import { RouterEvent } from '../../core/router';
 
 const template = `
 <div id="headerInvisibleComponent" class="header invisible">
@@ -22,7 +24,10 @@ enum Action {
   DELETE = 2,
 }
 
-interface Props {}
+interface Props {
+  productId: number;
+  rootElement: HTMLElement;
+}
 
 export default class HeaderInvisible extends View {
   private store: Store;
@@ -46,11 +51,13 @@ export default class HeaderInvisible extends View {
   }
 
   onClick(id: number) {
+    console.log(this);
     this.selectPopup.hide();
     this.isDropdownShow = false;
     switch (id) {
       case Action.EDIT:
         // 수정
+        RouterEvent.dispatchEvent(`/modify/${this.props.productId}`);
         console.log('수정하기 클릭');
         break;
       case Action.DELETE:
@@ -61,6 +68,9 @@ export default class HeaderInvisible extends View {
   }
 
   onHideClick(e: Event) {
+    const target = (<HTMLElement>e.target).closest('#headerInvisibleComponent__state-dropdown');
+    if (target) return;
+
     e.stopPropagation();
     this.selectPopup.hide();
     this.isDropdownShow = false;
@@ -81,7 +91,7 @@ export default class HeaderInvisible extends View {
     const component = document.querySelector('#headerInvisibleComponent__detail');
     component?.addEventListener('click', this.onClickEventHandler.bind(this));
 
-    document.addEventListener('click', this.onHideClick.bind(this));
-    document.addEventListener('touchstart', this.onHideClick.bind(this));
+    this.props.rootElement.addEventListener('click', this.onHideClick.bind(this));
+    this.props.rootElement.addEventListener('touchstart', this.onHideClick.bind(this));
   }
 }

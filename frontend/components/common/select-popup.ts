@@ -31,6 +31,7 @@ export default class SelectPopup extends View {
 
   onClickEventHandler(e: Event) {
     e.stopPropagation();
+    console.log('여기');
     this.props.onClick(Number((e.target as HTMLElement).dataset.id));
   }
 
