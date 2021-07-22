@@ -9,7 +9,7 @@ import { UserApi } from '../core/api';
 import { RouterEvent } from '../core/router';
 
 const template: string = `
-<div id="joinView" class="joiv-view">
+<div id="joinView" class="zindex-200 joiv-view">
   <div id="joinView__header" class="header offwhite p-5"></div>
   <div class="container">
     <div id="joinView__inputForm" class="d-flex col p-5">

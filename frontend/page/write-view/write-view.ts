@@ -8,7 +8,7 @@ import { ImageItemComponent } from '../../components/write/image-item';
 import { CategoryItemComponent } from '../../components/write/category-item';
 
 const template: string = `
-<input id="fileInput" type="file" class="d-none" multiple accept=".gif, .jpg, .png">
+<input id="fileInput" type="file" class="zindex-100 d-none" multiple accept=".gif, .jpg, .png">
 <form class="d-flex grow col">
   <div id="writeView__header" class="header white p-5">
     <router-link to="@back" class="icon-wrapper">

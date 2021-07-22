@@ -9,7 +9,7 @@ import { RouterEvent } from '../core/router';
 import MainView from './main-view';
 
 const template: string = `
-<div class="d-flex col">
+<div class="zindex-100 d-flex col">
   <div id="mypageView__header" class="header offwhite p-5"></div>
   <div class="container">
     <div id="myPage" class="d-flex col p-5">

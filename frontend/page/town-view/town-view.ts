@@ -6,7 +6,7 @@ import PopupComponent from '../../popup-view/popup-component';
 import { TownApi } from '../../core/api';
 
 const template: string = `
-<div class="flex column grow">
+<div class="zindex-100 flex column grow">
   <div class="header offwhite p-5">
     <router-link to="@back" class="icon-wrapper">
       <i class="wmi wmi-chevron-left large"></i>

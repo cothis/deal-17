@@ -4,7 +4,7 @@ import { AnimateType, CATEGORIES } from '../../../types';
 import './category-view.css';
 
 const template: string = `
-<div class="flex column grow">
+<div class="zindex-100 flex column grow">
   <div class="header offwhite p-5">
     <router-link to="@back" class="icon-wrapper">
       <i class="wmi wmi-chevron-left large"></i>

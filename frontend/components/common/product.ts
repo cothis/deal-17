@@ -16,7 +16,7 @@ const template: string = `
         <div class="link medium flex grow">{{__subject__}}</div>
         <i data-id="{{__wishId__}}" class="wmi wmi-heart large grey1 {{__primary1__}}"></i>
         <i id="{{__moreId__}}" class="moreButton wmi wmi-more-vertical large grey1"></i>
-        <div id="{{__selectPopupId__}}" class="product-component-select-popup"></div>
+        <div id="{{__selectPopupId__}}" class="zindex-1 product-component-select-popup"></div>
       </div>
       <div class="product-content flex ai-center text small grey1">
         <div>{{__townName__}}</div>

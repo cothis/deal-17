@@ -19,7 +19,7 @@ import SendFormComponent from '../../components/chatting-detail/send-form';
 import './chatting-detail-view.css';
 
 const template = `
-<div class="chatting-detail">
+<div class="zindex-300 chatting-detail">
     <div id="ChattingDetailView__header"></div>
     <div id="ChattingDetailView__product-summary"></div>
     <div id="ChattingDetailView__message-list"></div>
@@ -43,7 +43,7 @@ export default class ChattingDetailView extends View {
 
     this.appendView(AnimateType.RIGHT, AnimateType.RIGHT);
 
-    this.productApi.getProductById(1).then((product) => {
+    this.productApi.getProductById(1, { type: '', userId: 0 }).then((product) => {
       new HeaderComponent('#ChattingDetailView__header', this.store, { title: 'test user' }).render();
       new ProductSummaryComponent('#ChattingDetailView__product-summary', this.store, { product }).render();
     });
