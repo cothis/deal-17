@@ -24,6 +24,7 @@ window.customElements.define('town-button', TownViewElement);
 
 const store = new Store();
 const router = new Router();
+const sessionApi = new SessionApi();
 
 const sessionApi = new SessionApi();
 sessionApi
@@ -72,4 +73,13 @@ store.observer.registerObserver(chattingListView);
 store.observer.registerObserver(menuView);
 store.observer.registerObserver(chattingDetailView);
 
-router.route('');
+sessionApi
+  .getSession()
+  .then((result) => {
+    store.user = result;
+    router.route('');
+  })
+  .catch((err) => {
+    console.log('로그아웃 상태입니다.');
+    router.route('');
+  });

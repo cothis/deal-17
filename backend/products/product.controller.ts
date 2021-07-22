@@ -19,6 +19,7 @@ router.get('/', (req, res) => {
   const type = req.query.type;
 
   if (type === 'view') {
+    console.log(req.query)
     getMainProducts({
       userId: Number(req.query.userId),
       categoryId: Number(req.query.categoryId),

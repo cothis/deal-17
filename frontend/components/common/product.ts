@@ -72,9 +72,8 @@ export class ProductComponent extends View {
       this.setTemplateData('primary1', 'primary1');
     }
 
-    // TODO: login sessiong 붙으면 주석 해제하기
     if (!this.store.user) {
-      // this.setTemplateData('displayNone', 'display-none');
+      this.setTemplateData('displayNone', 'display-none');
     }
 
     this.updateView();

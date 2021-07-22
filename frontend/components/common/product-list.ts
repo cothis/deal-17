@@ -28,6 +28,23 @@ export default class ProductList extends View {
     this.wishApi = new WishApi();
   }
 
+  onProductWishClick(e: Event, product: Product) {
+    const wishElement = e.target as HTMLElement;
+    const wishButtonId = Number(wishElement.dataset.id);
+
+    if (wishButtonId) {
+      if (wishElement.classList.contains('primary1')) {
+        wishElement.classList.remove('primary1');
+      } else {
+        wishElement.classList.add('primary1');
+      }
+
+      this.wishApi.toggleWish(this.store.user!.id, wishButtonId);
+    } else {
+      RouterEvent.dispatchEvent(`/product/${product.id}`);
+    }
+  }
+
   render() {
     this.updateView();
     this.props.products.forEach((_, i) => {
@@ -39,24 +56,7 @@ export default class ProductList extends View {
     this.props.products.forEach((product, i) => {
       new ProductComponent(`#mainView__product${i}`, this.store, { product }).render();
       const productComponent = document.querySelector(`#mainView__product${i}`);
-      productComponent?.addEventListener('click', (e) => {
-        const wishElement = e.target as HTMLElement;
-        const wishButtonId = Number(wishElement.dataset.id);
-
-        if (wishButtonId) {
-          // TODO: user id 연결하기
-          console.log(this.store.user)
-          if (wishElement.classList.contains('primary1')) {
-            wishElement.classList.remove('primary1');
-          } else {
-            wishElement.classList.add('primary1');
-          }
-
-          this.wishApi.toggleWish(1, wishButtonId);
-        } else {
-          RouterEvent.dispatchEvent(`/product/${product.id}`);
-        }
-      });
+      productComponent?.addEventListener('click', (e) => this.onProductWishClick(e, product));
     });
   }
 }

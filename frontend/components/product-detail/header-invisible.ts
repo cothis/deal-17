@@ -39,10 +39,8 @@ export default class HeaderInvisible extends View {
 
   onClickEventHandler(e: Event) {
     e.stopPropagation();
-    console.log(this.isDropdownShow)
     if (!this.isDropdownShow) {
       this.isDropdownShow = true;
-      console.log('show')
       this.selectPopup.show();
     }
   }
@@ -50,7 +48,6 @@ export default class HeaderInvisible extends View {
   onClick(id: number) {
     this.selectPopup.hide();
     this.isDropdownShow = false;
-    console.log('hide1')
     switch (id) {
       case Action.EDIT:
         // 수정
@@ -65,7 +62,6 @@ export default class HeaderInvisible extends View {
 
   onHideClick(e: Event) {
     e.stopPropagation();
-    console.log('hide2')
     this.selectPopup.hide();
     this.isDropdownShow = false;
   }
