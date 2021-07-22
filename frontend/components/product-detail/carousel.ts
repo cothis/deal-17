@@ -174,7 +174,7 @@ export default class Carousel extends View {
 
   render() {
     this.props.pictures.forEach((picture) => {
-      this.addHtml(`<div id="test" style="width:100%;height:100%"><img src="${picture.path}" class="slide" /><div id="imageGradient" class="image gradient"></div></div>`);
+      this.addHtml(`<div><img src="${picture.path}" class="slide" /><div id="imageGradient" class="image gradient"></div></div>`);
     });
     const slide = this.getHtml();
     this.setTemplateData('slide', slide);

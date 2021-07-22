@@ -1,5 +1,6 @@
 import { Product, Picture, ChatRoom, Wish, User } from '../../types';
 import qs from 'querystring';
+import { Session } from 'express-session';
 
 const BASE_URL: string = process.env.API_URL ?? 'http://localhost:8000';
 
@@ -22,8 +23,11 @@ export class SessionApi extends Api {
     super('/session');
   }
 
-  getSession(): Promise<any> {
-    return this.request<any>('');
+  getSession(): any {
+    return this.request<any>('').then((response) => {
+      console.log(response);
+      return response.json();
+    });
   }
 }
 
@@ -56,6 +60,17 @@ export class ProductApi extends Api {
       body: formData,
     };
     return this.request<any>('', option);
+  }
+
+  updateProductState(id: number, state: number): Promise<void> {
+    const option: RequestInit = {
+      method: 'put',
+      body: JSON.stringify({ state }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    };
+    return this.request<void>(`/${id}/state`);
   }
 }
 

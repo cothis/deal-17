@@ -49,7 +49,6 @@ app.use('/static', express.static(path.join(__dirname, '../static')));
 app.use('/dist', express.static(path.join(__dirname, '../dist')));
 app.get('/', (req, res) => res.sendFile(path.join(__dirname, '../dist/index.html')));
 app.get('/session', (req, res) => {
-  console.log(req.session);
   res.json(req.session.user);
 });
 app.use('/api/v0/products', ProductController);

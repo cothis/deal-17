@@ -1,5 +1,6 @@
 import View from '../../core/view';
 import Store from '../../core/store';
+import { ProductApi } from '../../core/api';
 
 import SelectPopup from '../common/select-popup';
 
@@ -25,6 +26,7 @@ enum ProductLabel {
 
 interface Props {
   state: number;
+  onChange: (id: number) => void;
 }
 
 export default class State extends View {
@@ -34,12 +36,14 @@ export default class State extends View {
   private isDropdownShow: boolean = false;
   private selectPopup!: SelectPopup;
   private activeState: ProductState;
+  private productApi: ProductApi;
 
   constructor(selector: string, store: Store, props: Props) {
     super(selector, template);
     this.store = store;
     this.props = props;
     this.activeState = this.props.state;
+    this.productApi = new ProductApi();
 
     switch (this.props.state) {
       case ProductState.SALE:
@@ -69,22 +73,18 @@ export default class State extends View {
 
   onClick(id: number) {
     this.selectPopup.hide();
+    this.props.onChange(id);
+
     switch (id) {
       case ProductState.SALE:
-        // 판매중
-        console.log('판매중');
         this.state = ProductLabel.SALE;
         this.activeState = ProductState.SALE;
         break;
       case ProductState.RESERVED:
-        // 예약중
-        console.log('예약중');
         this.state = ProductLabel.RESERVED;
         this.activeState = ProductState.RESERVED;
         break;
       case ProductState.COMPLETED:
-        // 거래완료
-        console.log('거래완료');
         this.state = ProductLabel.COMPLETED;
         this.activeState = ProductState.COMPLETED;
         break;
