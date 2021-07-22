@@ -109,7 +109,7 @@ export class ProductComponent extends View {
         'https://pds.joins.com/news/component/htmlphoto_mmdata/201912/02/e157f4c7-2dc7-416c-8a88-d1a3dbfff9e8.jpg'
     );
     this.setTemplateData('subject', this.props.product.subject);
-    if (!this.props.isMine) {
+    if (this.props.isMine) {
       this.setTemplateData('moreId', String(this.props.product.id));
     } else {
       this.setTemplateData('wishId', String(this.props.product.id));

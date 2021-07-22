@@ -32,6 +32,7 @@ export default class ProductList extends View {
   onProductWishClick(e: Event, product: Product) {
     const wishElement = e.target as HTMLElement;
     const wishButtonId = Number(wishElement.dataset.id);
+    console.log(wishElement.dataset)
 
     if (wishButtonId) {
       if (wishElement.classList.contains('primary1')) {
@@ -62,7 +63,9 @@ export default class ProductList extends View {
         isMine: this.store.user?.id === product.sellerId,
       }).render();
       const productComponent = document.querySelector(`#${this.props.viewName}__product${i}`);
-      productComponent?.addEventListener('click', (e) => this.onProductWishClick(e, product));
+      productComponent?.addEventListener('click', (e) => {
+        this.onProductWishClick(e, product)
+      });
     });
   }
 }
