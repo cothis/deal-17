@@ -4,7 +4,7 @@ import Store from '../../core/store';
 
 const template = `
 <div id="carouselComponent" class="slider">
-    <div class="wrapper">
+    <div id="wrapper" class="wrapper">
         <div id="slides" class="slides">
           {{__slide__}}
         </div>
@@ -174,7 +174,7 @@ export default class Carousel extends View {
 
   render() {
     this.props.pictures.forEach((picture) => {
-      this.addHtml(`<div><img src="${picture.path}" class="slide" /><div class="image gradient"></div></div>`);
+      this.addHtml(`<div><img src="${picture.path}" class="slide" /><div id="imageGradient" class="image gradient"></div></div>`);
     });
     const slide = this.getHtml();
     this.setTemplateData('slide', slide);
@@ -187,5 +187,9 @@ export default class Carousel extends View {
     this.updateView();
 
     this.initCarousel();
+
+    document.querySelector('#test')?.addEventListener('click', (e) => {
+      console.log(e.target)
+    })
   }
 }

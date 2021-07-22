@@ -18,7 +18,7 @@ import Footer from '../../components/product-detail/footer';
 import '../../page/product-detail-view/product-detail-view.css';
 
 const template = `
- <div class="product-detail">
+ <div id="productDetailView" class="product-detail">
    <div id="productDetailView__carousel" class="overflow-hidden"></div>
    <div id="productDetailView__header-invisible"></div>
    <div class="x-py-24 x-px-16">
@@ -54,7 +54,12 @@ export default class ProductDetailView extends View {
     this.productApi.getProductById(productId, { type: 'view', userId: 1 }).then((product: Product) => {
       console.log(product);
 
-      new State('#productDetailView__state', this.store, { state: product.state }).render();
+      new State('#productDetailView__state', this.store, {
+        state: product.state,
+        onChange: (state: number) => {
+          this.productApi.updateProductState(productId, state);
+        },
+      }).render();
       new Title('#productDetailView__title', this.store, {
         subject: product.subject,
         category: product.category.name,
@@ -76,5 +81,8 @@ export default class ProductDetailView extends View {
         chatRoomCount: product.chatRooms,
       }).render();
     });
+
+
+
   }
 }

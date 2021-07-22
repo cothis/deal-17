@@ -1,5 +1,6 @@
 import * as http from 'http';
 import express from 'express';
+import session from 'express-session';
 import cors from 'cors';
 import 'dotenv-defaults/config';
 import ProductController from './products/product.controller';
@@ -8,7 +9,6 @@ import UserController from './users/user.controller';
 import WishController from './wishes/wish.controller';
 import ChatRoomController from './chat-rooms/chat-room.controller';
 import * as path from 'path';
-import session from 'express-session';
 import { User } from '../types';
 
 declare module 'express-session' {
@@ -19,6 +19,12 @@ declare module 'express-session' {
 
 const app = express();
 const server: http.Server = http.createServer(app);
+
+declare module 'express-session' {
+  export interface SessionData {
+    user: User;
+  }
+}
 
 app.set('port', process.env.PORT || 8000);
 app.use(
@@ -43,7 +49,6 @@ app.use('/static', express.static(path.join(__dirname, '../static')));
 app.use('/dist', express.static(path.join(__dirname, '../dist')));
 app.get('/', (req, res) => res.sendFile(path.join(__dirname, '../dist/index.html')));
 app.get('/session', (req, res) => {
-  console.log(req.session);
   res.json(req.session.user);
 });
 app.use('/api/v0/products', ProductController);
