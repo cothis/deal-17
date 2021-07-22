@@ -1,5 +1,6 @@
 import { Product, Picture, ChatRoom, Wish, User } from '../../types';
 import qs from 'querystring';
+import { Session } from 'express-session';
 
 const BASE_URL: string = process.env.API_URL ?? 'http://localhost:8000';
 
@@ -11,7 +12,22 @@ export class Api {
   }
 
   request<AjaxResponse>(path: string, OPTION?: RequestInit | undefined): Promise<AjaxResponse> {
-    return fetch(`${BASE_URL}${this.basePath}${path}`, OPTION).then((response) => response.json());
+    return fetch(`${BASE_URL}${this.basePath}${path}`, { ...OPTION, credentials: 'include' }).then((response) =>
+      response.json()
+    );
+  }
+}
+
+export class SessionApi extends Api {
+  constructor() {
+    super('/session');
+  }
+
+  getSession(): any {
+    return this.request<any>('').then((response) => {
+      console.log(response);
+      return response.json();
+    });
   }
 }
 
