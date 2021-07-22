@@ -30,7 +30,7 @@ const template: string = `
     </div>
     <div class="py-4 border-bottom">
       <div>
-        <input id="subject" name="subject" type="text" class="write-input text large" placeholder="글 제목">
+        <input id="subject" name="subject" type="text" class="write-input text large" placeholder="글 제목" value="{{__subject__}}">
       </div>
       <div>
         <div class="text medium grey1">(필수)카테고리를 선택해주세요.</div>
@@ -39,10 +39,10 @@ const template: string = `
       </div>
     </div>
     <div class="py-4 border-bottom">
-    <input id="price" type="text" name="price" class="write-input" placeholder="₩ 가격(선택사항)">
+    <input id="price" type="text" name="price" class="write-input" placeholder="₩ 가격(선택사항)" value="{{__price__}}">
     </div>
     <div class="py-4">
-      <textarea name="content" class="write-input textarea"></textarea>
+      <textarea name="content" class="write-input textarea">{{__content__}}</textarea>
     </div>
   </div>
   <div class="location-bar p-5">
@@ -140,6 +140,7 @@ export default class ModifyView extends View {
     CATEGORIES.forEach((category) => {
       new CategoryItemComponent('#category-list', {
         category,
+        initActive: category.id == this.state.categoryId,
         setCategoryId: (categoryId: number) => {
           this.state.categoryId = categoryId;
         },
@@ -150,7 +151,19 @@ export default class ModifyView extends View {
   render(remainUrl: string) {
     this.productId = parseInt(remainUrl.substr(1));
     this.api.getProductById(this.productId, { type: '', userId: 0 }).then((product) => {
+      console.log(product);
       this.product = product;
+      this.state.categoryId = this.product.categoryId;
+
+      this.setTemplateData('subject', this.product.subject);
+      this.setTemplateData('price', this.product.price ? String(this.product.price) : '');
+      this.setTemplateData('content', this.product.content ?? '');
+
+      this.setTemplateData('imageCount', String(this.state.images.length));
+
+      this.appendView(AnimateType.DOWN, AnimateType.DOWN);
+      this.createCategoryItem();
+      this.addEventListener();
     });
     // this.pictureApi.getPicturesByProductId(this.productId).then((images) => {
     //   images.map((image) => {
@@ -159,11 +172,5 @@ export default class ModifyView extends View {
     //     });
     //   });
     // });
-
-    this.setTemplateData('imageCount', String(this.state.images.length));
-
-    this.appendView(AnimateType.DOWN, AnimateType.DOWN);
-    this.createCategoryItem();
-    this.addEventListener();
   }
 }

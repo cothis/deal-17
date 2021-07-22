@@ -3,7 +3,7 @@ import View from '../../core/view';
 
 const template = `
 <li>
-  <button type="button" class="category-list-item" data-category="{{__category-id__}}">
+  <button type="button" class="category-list-item {{__selected__}}" data-category="{{__category-id__}}">
     {{__category-name__}}
   </button>
 </li>
@@ -11,6 +11,7 @@ const template = `
 
 interface Props {
   category: Category;
+  initActive?: boolean;
   setCategoryId: (categoryID: number) => void;
 }
 
@@ -26,6 +27,8 @@ export class CategoryItemComponent extends View {
   }
 
   onButtonClick(e: Event) {
+    this.component?.parentElement?.querySelector('.selected')?.classList.remove('selected');
+    this.component?.querySelector('button')?.classList.add('selected');
     this.props.setCategoryId(this.props.category.id);
   }
 
@@ -36,7 +39,9 @@ export class CategoryItemComponent extends View {
   render() {
     this.setTemplateData('category-id', String(this.props.category.id));
     this.setTemplateData('category-name', this.props.category.name);
+    this.setTemplateData('selected', this.props.initActive ? 'selected' : '');
     this.component = this.appendComponent();
+
     this.registerEventListeners();
   }
 }
