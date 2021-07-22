@@ -23,7 +23,7 @@ window.customElements.define('category-item', CategoryItem);
 window.customElements.define('town-button', TownViewElement);
 
 const store = new Store();
-const router = new Router();
+const router = new Router(store);
 const sessionApi = new SessionApi();
 
 const mainView = new MainView('#app', store);
