@@ -9,7 +9,10 @@ const router = Router();
 router.get('/:id', (req, res) => {
   if (req.params.id === 'search') {
     getUserByEmail(String(req.query.email))
-      .then((user) => res.json(user))
+      .then((user) => {
+        req.session.user = user;
+        res.json(user);
+      })
       .catch((err: Error) => {
         console.error(err);
         res.status(500).json({ error: err.message });

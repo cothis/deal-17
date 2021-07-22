@@ -4,15 +4,33 @@ import cors from 'cors';
 import 'dotenv-defaults/config';
 import ProductController from './products/product.controller';
 import PictureController from './pictures/picture.controller';
-import UserController from './users/user.controller'
-import WishController from './wishes/wish.controller'
-import ChatRoomController from './chat-rooms/chat-room.controller'
+import UserController from './users/user.controller';
+import WishController from './wishes/wish.controller';
+import ChatRoomController from './chat-rooms/chat-room.controller';
 import * as path from 'path';
+import session from 'express-session';
+import { User } from '../types';
+
+declare module 'express-session' {
+  interface SessionData {
+    user: User;
+  }
+}
 
 const app = express();
 const server: http.Server = http.createServer(app);
 
 app.set('port', process.env.PORT || 8000);
+app.use(
+  session({
+    secret: 'keyboard cat',
+    resave: false,
+    saveUninitialized: true,
+    cookie: {
+      secure: true,
+    },
+  })
+);
 app.use(express.json());
 app.use(cors());
 app.use('/static', express.static(path.join(__dirname, '../static')));
