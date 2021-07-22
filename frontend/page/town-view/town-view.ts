@@ -45,7 +45,9 @@ export default class TownView extends View {
         for (let i = 0; i < 2; i++) {
           const town = result[i];
           if (town) {
-            this.addHtml(`<town-button state="active" name="${town.name}"></town-button>`);
+            this.addHtml(
+              `<town-button state="${town.isActive ? 'active' : 'inactive'}" name="${town.name}"></town-button>`
+            );
           } else {
             this.addHtml(`<town-button state="add"></town-button>`);
           }
