@@ -20,13 +20,13 @@ export const getProductById = async (req: Request): Promise<Product> => {
 export const createProduct = (body: {
   subject: string;
   price: number;
-  categoryId: string;
+  categoryId: number;
   content: string;
   sellerId: number;
 }): Promise<number> => {
   const { subject, price, categoryId, content, sellerId } = body;
   return promisePool
-    .query<OkPacket>('insert into PRODUCT(subject, category_id, price, content, seller_id values(?, ?, ?, ?, ?)', [
+    .query<OkPacket>('insert into PRODUCT(subject, category_id, price, content, seller_id) values(?, ?, ?, ?, ?)', [
       subject,
       categoryId,
       price,
@@ -36,6 +36,7 @@ export const createProduct = (body: {
     .then((res) => res[0])
     .then((result) => result.insertId)
     .catch((err) => {
+      console.error(err);
       throw new Error('상품 등록 실패');
     });
 };

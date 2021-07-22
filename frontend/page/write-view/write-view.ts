@@ -3,6 +3,7 @@ import Store from '../../core/store';
 import { AnimateType, CATEGORIES } from '../../../types';
 import './write-view.css';
 import { ProductApi } from '../../core/api';
+import { RouterEvent } from '../../core/router';
 
 const template: string = `
 <input id="fileInput" type="file" class="d-none" multiple accept=".gif, .jpg, .png">
@@ -27,7 +28,7 @@ const template: string = `
     </div>
     <div class="py-4 border-bottom">
       <div>
-        <input name="subject" type="text" class="write-input text large" placeholder="글 제목">
+        <input id="subject" name="subject" type="text" class="write-input text large" placeholder="글 제목">
       </div>
       <div>
         <div class="text medium grey1">(필수)카테고리를 선택해주세요.</div>
@@ -37,7 +38,7 @@ const template: string = `
       </div>
     </div>
     <div class="py-4 border-bottom">
-    <input type="text" name="price" class="write-input" placeholder="₩ 가격(선택사항)">
+    <input id="price" type="text" name="price" class="write-input" placeholder="₩ 가격(선택사항)">
     </div>
     <div class="py-4">
       <textarea name="content" class="write-input textarea"></textarea>
@@ -52,7 +53,7 @@ const template: string = `
 
 interface State {
   images: File[];
-  category: string;
+  categoryId: number;
 }
 
 export default class WriteView extends View {
@@ -63,7 +64,7 @@ export default class WriteView extends View {
   constructor(containerId: string, store: Store) {
     super(containerId, template);
     this.store = store;
-    this.state = { images: [], category: '' };
+    this.state = { images: [], categoryId: 0 };
     this.api = new ProductApi();
   }
 
@@ -82,7 +83,7 @@ export default class WriteView extends View {
     const target = (<HTMLElement>e.target).closest('.category-list-item');
     if (!target) return;
 
-    this.state.category = (<HTMLElement>target).dataset.category ?? '';
+    this.state.categoryId = parseInt((<HTMLElement>target).dataset.category ?? '0');
   }
 
   onImgButtonClick() {
@@ -94,14 +95,19 @@ export default class WriteView extends View {
     this.state.images.forEach((image) => {
       formData.append('images', image, image.name);
     });
-    formData.append('subject', 'hi');
-    formData.append('price', '3000');
-    formData.append('category', this.state.category);
-    formData.append('content', 'content');
+    formData.append('subject', (<HTMLInputElement>this.pageContainer?.querySelector('#subject'))?.value ?? '');
+    formData.append('price', (<HTMLInputElement>this.pageContainer?.querySelector('#price'))?.value ?? '');
+    formData.append('categoryId', String(this.state.categoryId));
+    formData.append('content', this.pageContainer?.querySelector('textarea')?.value ?? '');
+    formData.append('sellerId', String(this.store.user?.id ?? 1));
 
     console.log(formData);
 
-    this.api.createProduct(formData).then(console.log);
+    this.api.createProduct(formData).then((res) => {
+      if (res.result === 'ok') {
+        RouterEvent.dispatchEvent('@back');
+      }
+    });
   }
 
   onFileChange(e: Event) {
@@ -162,7 +168,7 @@ export default class WriteView extends View {
   makeCategoryTempalte(): string {
     return CATEGORIES.map(
       (category) => `<li>
-                      <button type="button" class="category-list-item" data-category="${category.name}">${category.name}</ㅠ>
+                      <button type="button" class="category-list-item" data-category="${category.id}">${category.name}</ㅠ>
                     </li>`
     ).join('');
   }
