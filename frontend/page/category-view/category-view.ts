@@ -29,9 +29,15 @@ export default class CategoryView extends View {
 
   render() {
     const categories = CATEGORIES.map(
-      (category) => `<category-item path="${category.image}">${category.name}</category-item>`
+      (category) => `<category-item path="${category.imagePath}" id="${category.id}">${category.name}</category-item>`
     ).join('');
     this.setTemplateData('categories', categories);
     this.appendView(AnimateType.LEFT, AnimateType.LEFT);
+
+    this.pageContainer?.querySelector('ul')?.addEventListener('category-change', (e: CustomEventInit) => {
+      console.log(e.detail);
+
+      this.store.category = CATEGORIES.find((category) => category.id == e.detail.categoryId) ?? null;
+    });
   }
 }

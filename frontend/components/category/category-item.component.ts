@@ -1,5 +1,3 @@
-import Store from '../../core/store';
-
 export class CategoryItem extends HTMLElement {
   private initHTML: string;
   private element: HTMLElement;
@@ -12,8 +10,10 @@ export class CategoryItem extends HTMLElement {
     this.element.classList.add('category-item', 'flex', 'column', 'gap-4', 'jc-center', 'ai-center');
 
     this.render();
-    this.addEventListener('click', (e) => {
-      console.log(e.currentTarget);
+    this.element.addEventListener('click', (e) => {
+      const categoryId = (<HTMLLIElement>e.currentTarget).dataset.categoryId;
+
+      this.element.parentElement!.dispatchEvent(new CustomEvent('category-change', { detail: { categoryId } }));
     });
 
     this.path = '';
@@ -24,11 +24,12 @@ export class CategoryItem extends HTMLElement {
   }
 
   static get observedAttributes() {
-    return ['path'];
+    return ['path', 'id'];
   }
 
   render() {
     this.path = this.getAttribute('path') ?? '';
+    this.element.dataset.categoryId = this.getAttribute('id') ?? '';
 
     this.element.innerHTML = `
       <div class="img-box">
