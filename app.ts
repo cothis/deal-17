@@ -10,6 +10,7 @@ import {
   ChattingListView,
   MenuView,
   ChattingDetailView,
+  ModifyView,
 } from './frontend/page';
 import { Router } from './frontend/core/router';
 import Store from './frontend/core/store';
@@ -37,6 +38,7 @@ const townView = new TownView('#app', store);
 const chattingListView = new ChattingListView('#app', store);
 const menuView = new MenuView('#app', store);
 const chattingDetailView = new ChattingDetailView('#app', store);
+const modifyView = new ModifyView('#app', store);
 
 router.setDefaultPage(mainView);
 
@@ -50,6 +52,7 @@ router.addRoutePath('/town', townView);
 router.addRoutePath('/chat/detail', chattingDetailView);
 router.addRoutePath('/chat', chattingListView);
 router.addRoutePath('/menu', menuView);
+router.addRoutePath('/modify', modifyView);
 
 store.observer.registerObserver(mainView);
 store.observer.registerObserver(loginView);
@@ -62,6 +65,7 @@ store.observer.registerObserver(townView);
 store.observer.registerObserver(chattingListView);
 store.observer.registerObserver(menuView);
 store.observer.registerObserver(chattingDetailView);
+store.observer.registerObserver(modifyView);
 
 sessionApi
   .getSession()
