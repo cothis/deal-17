@@ -7,6 +7,7 @@ import PictureController from './pictures/picture.controller';
 import UserController from './users/user.controller';
 import WishController from './wishes/wish.controller';
 import ChatRoomController from './chat-rooms/chat-room.controller';
+import TownController from './town/town.controller';
 import * as path from 'path';
 import session from 'express-session';
 import { User } from '../types';
@@ -51,6 +52,7 @@ app.use('/api/v0/pictures', PictureController);
 app.use('/api/v0/users', UserController);
 app.use('/api/v0/wishes', WishController);
 app.use('/api/v0/chat-rooms', ChatRoomController);
+app.use('/api/v0/town', TownController);
 
 server.listen(app.get('port'), () => {
   console.log('Express server listening on port ' + app.get('port'));
