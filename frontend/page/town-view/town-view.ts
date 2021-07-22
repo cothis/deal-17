@@ -1,6 +1,6 @@
 import View from '../../core/view';
 import Store from '../../core/store';
-import { AnimateType } from '../../../types';
+import { AnimateType, Town } from '../../../types';
 import './town-view.css';
 import PopupComponent from '../../popup-view/popup-component';
 import { TownApi } from '../../core/api';
@@ -44,7 +44,8 @@ export default class TownView extends View {
   onAddClick(e: Event) {
     const value = (<HTMLInputElement>this.pageContainer?.querySelector('#popupText')).value;
     this.api.getOrAddTown(value).then(({ id, name }) => {
-      this.store.towns.push({ id, name, isActive: false });
+      this.store.addTown({ id, name, isActive: false });
+      console.log(this.store.towns);
     });
   }
 
@@ -82,21 +83,27 @@ export default class TownView extends View {
     }
   }
 
+  makeTownButtons(towns: Town[]) {
+    for (let i = 0; i < 2; i++) {
+      const town = towns[i];
+      if (town) {
+        this.addHtml(
+          `<town-button state="${town.isActive ? 'active' : 'inactive'}" name="${town.name}"></town-button>`
+        );
+      } else {
+        this.addHtml(`<town-button state="add"></town-button>`);
+      }
+    }
+
+    return this.getHtml();
+  }
+
   render() {
     if (this.store.user) {
       this.api.getTownsByUserId(this.store.user.id).then((result) => {
-        for (let i = 0; i < 2; i++) {
-          const town = result[i];
-          if (town) {
-            this.addHtml(
-              `<town-button state="${town.isActive ? 'active' : 'inactive'}" name="${town.name}"></town-button>`
-            );
-          } else {
-            this.addHtml(`<town-button state="add"></town-button>`);
-          }
-        }
+        const htmls = this.makeTownButtons(result);
 
-        this.setTemplateData('town-button', this.getHtml());
+        this.setTemplateData('town-button', htmls);
 
         this.appendView(AnimateType.LEFT, AnimateType.LEFT);
 
@@ -104,6 +111,14 @@ export default class TownView extends View {
           ?.querySelector('#button-wrapper')
           ?.addEventListener('click', this.onButtonWrapperClick.bind(this));
       });
+    }
+  }
+
+  onStoreChange() {
+    const buttonWrapper = this.pageContainer?.querySelector('#button-wrapper');
+    if (buttonWrapper) {
+      const townsHtml = this.makeTownButtons(this.store.towns);
+      buttonWrapper.innerHTML = townsHtml;
     }
   }
 }

@@ -40,8 +40,8 @@ export default class Store implements UserStore, ProductStore {
     return this._towns;
   }
 
-  set towns(towns) {
-    this._towns = towns;
+  addTown(town: Town) {
+    this._towns.push(town);
     this.observer.notifyObserver();
   }
 
