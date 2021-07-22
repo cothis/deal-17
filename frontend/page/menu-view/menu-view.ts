@@ -14,7 +14,7 @@ import chattingListComponent from '../../components/common/chatting-list';
 import './menu-view.css';
 
 const template = `
- <div class="menu-view">
+ <div class="zindex-100 menu-view">
    <div id="menuView__header"></div>
    <div id="menuView__menu-bar"></div>
    <div id="menuView__content"></div>

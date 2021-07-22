@@ -9,7 +9,7 @@ import { RouterEvent } from '../core/router';
 import { UserApi } from '../core/api';
 
 const template: string = `
-<div id="loginView" class="login-view">
+<div id="loginView" class="zindex-100 login-view">
   <div id="loginView__header" class="header offwhite p-5"></div>
   <div class="container">
     <div id="loginView__inputForm" class="d-flex col p-5"></div>

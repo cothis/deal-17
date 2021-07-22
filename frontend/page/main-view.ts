@@ -11,7 +11,7 @@ import { Link } from '../helper/router-link/router-link';
 
 const template = `
 <div class="mainView">
-  <div id="mainView__header" class="header p-5"></div>
+  <div id="mainView__header" class="zindex-10 header p-5"></div>
   <div id="mainView__productList"></div>
   <div id="mainView__fabButton"></div>
   <div id="mainView__sidePanel"></div>

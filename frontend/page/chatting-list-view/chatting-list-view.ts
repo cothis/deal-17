@@ -11,7 +11,7 @@ import './chatting-list-view.css';
 import { RouterEvent } from '../../core/router';
 
 const template = `
- <div id="ChattingListView" class="chatting-list">
+ <div id="ChattingListView" class="zindex-200 chatting-list">
    <div id="ChattingListView__header"></div>
    <div id="ChattingListView__content"></div>
  </div>

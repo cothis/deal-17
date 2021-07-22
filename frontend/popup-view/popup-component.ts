@@ -3,7 +3,7 @@ import Store from '../core/store';
 import './popup-component.css';
 
 const template: string = `
-<div class="backdrop"></div>
+<div class="zindex-100 backdrop"></div>
 <div class="modal popup {{__inputState__}}">
   {{__title__}}
   {{__input__}}
