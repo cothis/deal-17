@@ -29,7 +29,7 @@ export default class MypageView extends View {
 
   onClick() {
     this.store.user = null;
-    this.store.observer.notifyObserver(this.store);
+    this.store.observer.notifyObserver();
     RouterEvent.dispatchEvent('@back');
   }
 
@@ -41,7 +41,7 @@ export default class MypageView extends View {
     new LoginButtonComponent('#myPage', this.store, {
       title: '로그아웃',
       id: 'logout',
-      onClick: this.onClick,
+      onClick: this.onClick.bind(this),
     }).render();
   }
 }
