@@ -12,7 +12,6 @@ import {
 import { createPictures } from '../pictures/picture.service';
 import { Upload } from '../uploader';
 
-
 const upload = Upload('products');
 const router = Router();
 
@@ -86,17 +85,18 @@ router.post('/', upload.array('images', 10), async (req, res) => {
     console.error(e);
     res.status(500).json({ error: 'SERVER_ERROR' });
   }
-  
-router.put('/:id/state', (req, res) => {
-  const id = Number(req.params.id);
-  const state = Number(req.body.state);
-  
-  updateProductState(id, state)
-    .then(() => res.json({}))
-    .catch((e) => {
-      console.error(e);
-      res.status(500).json({ error: 'SERVER_ERROR' });
-    });
+
+  router.put('/:id/state', (req, res) => {
+    const id = Number(req.params.id);
+    const state = Number(req.body.state);
+
+    updateProductState(id, state)
+      .then(() => res.json({}))
+      .catch((e) => {
+        console.error(e);
+        res.status(500).json({ error: 'SERVER_ERROR' });
+      });
+  });
 });
 
 export default router;
