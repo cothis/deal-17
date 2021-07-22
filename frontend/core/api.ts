@@ -172,4 +172,15 @@ export class TownApi extends Api {
     };
     return this.request<{ result: boolean; town: Town }>('/', option);
   }
+
+  deleteTown(townId: number): Promise<{ result: boolean }> {
+    const option: RequestInit = {
+      method: 'delete',
+      body: JSON.stringify({ townId }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    };
+    return this.request<{ result: boolean }>(`/${townId}`, option);
+  }
 }

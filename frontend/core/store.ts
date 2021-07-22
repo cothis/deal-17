@@ -57,6 +57,7 @@ export default class Store implements UserStore, ProductStore {
 
   deleteTown(index: number) {
     this._towns = this._towns.filter((town, i) => i != index);
+    this._towns[0].isActive = true;
     this.observer.notifyObserver();
   }
 
