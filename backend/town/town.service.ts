@@ -4,7 +4,7 @@ import { promisePool } from '../db';
 import { camelCase } from 'change-case-object';
 
 export const getTowns = (): Promise<Town[]> => {
-  return promisePool.query<Town[]>(`select * from town`).then((res) => res[0]);
+  return promisePool.query(`select * from town`).then((res) => <Town[]>res[0]);
 };
 
 export const addTown = (name: string): Promise<number> => {
@@ -18,8 +18,8 @@ export const addTown = (name: string): Promise<number> => {
 };
 
 export const getOrAddTown = (name: string): Promise<Town> => {
-  return promisePool.query<Town[]>('select * from town where name = ?', [name]).then((res) => {
-    const town: Town = res[0][0];
+  return promisePool.query('select * from town where name = ?', [name]).then((res) => {
+    const town: Town = (<Town[]>res[0])[0];
     if (town) {
       return <Town>camelCase(town);
     } else {
@@ -37,5 +37,5 @@ export const getOrAddTown = (name: string): Promise<Town> => {
 };
 
 export const getTownById = (id: number): Promise<Town> => {
-  return promisePool.query<Town[]>('select * from town where id = ?', [id]).then((res) => <Town>camelCase(res[0][0]));
+  return promisePool.query('select * from town where id = ?', [id]).then((res) => <Town>camelCase((<Town[]>res[0])[0]));
 };
