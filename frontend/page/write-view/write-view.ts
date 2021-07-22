@@ -4,6 +4,7 @@ import { AnimateType, CATEGORIES } from '../../../types';
 import './write-view.css';
 import { ProductApi } from '../../core/api';
 import { RouterEvent } from '../../core/router';
+import { ImageItemComponent } from '../../components/write/image-item';
 
 const template: string = `
 <input id="fileInput" type="file" class="d-none" multiple accept=".gif, .jpg, .png">
@@ -23,7 +24,6 @@ const template: string = `
         <span>{{__imageCount__}}/10</span>
       </div>
       <ul id="imgList" class="d-flex gap-4 grow overflow-x-auto">
-        {{__images__}}
       </ul>
     </div>
     <div class="py-4 border-bottom">
@@ -74,7 +74,7 @@ export default class WriteView extends View {
     this.pageContainer.querySelector('.textarea')?.addEventListener('input', this.onTextareaInput);
     this.pageContainer.querySelector('#fileInput')?.addEventListener('change', this.onFileChange.bind(this));
     this.pageContainer.querySelector('#imgButton')?.addEventListener('click', this.onImgButtonClick.bind(this));
-    this.pageContainer.querySelector('#imgList')?.addEventListener('click', this.onDeleteButtonClick.bind(this));
+    // this.pageContainer.querySelector('#imgList')?.addEventListener('click', this.onDeleteButtonClick.bind(this));
     this.pageContainer.querySelector('#requestWrite')?.addEventListener('click', this.onWriteButtonClick.bind(this));
     this.pageContainer.querySelector('.category-list')?.addEventListener('click', this.onCategoryListClick.bind(this));
   }
@@ -120,7 +120,7 @@ export default class WriteView extends View {
       this.state.images.push(files[i]);
     }
 
-    this.updatePage();
+    this.updateImgList();
   }
 
   onTextareaInput(e: Event) {
@@ -131,37 +131,15 @@ export default class WriteView extends View {
     textarea.style.height = textarea.scrollHeight + 'px';
   }
 
-  updatePage() {
-    (<HTMLElement>this.pageContainer?.querySelector('#imgButton > span')).innerHTML = `${this.state.images.length}/10`;
-    this.makeImagesTemplate().then((result) => {
-      (<HTMLElement>this.pageContainer?.querySelector('#imgList')).innerHTML = result;
-    });
-  }
-
-  getTemporalPath(file: File): Promise<string> {
-    return new Promise<string>((resolve, reject) => {
-      const fileReader = new FileReader();
-      fileReader.addEventListener('load', (e) => {
-        resolve(String((<FileReader>e.target).result));
-      });
-      fileReader.readAsDataURL(file);
-    });
-  }
-
-  onDeleteButtonClick(e: Event) {
-    const button = (<HTMLElement>e.target).closest('button');
-    if (!button) return;
-
-    const li = button.closest('li');
-    if (!li) return;
-
-    const ul = li.closest('ul');
-    if (!ul) return;
-
-    const index = Array.from(ul.children).findIndex((child) => child === li);
-    if (index >= 0) {
-      this.state.images.splice(index, 1);
-      this.updatePage();
+  updateImgList() {
+    const lengthIndicator = <HTMLElement>this.pageContainer?.querySelector('#imgButton > span');
+    lengthIndicator.innerHTML = `${this.state.images.length}/10`;
+    const $imgList = this.pageContainer?.querySelector('#imgList');
+    if ($imgList) {
+      $imgList.innerHTML = '';
+      this.state.images.forEach(
+        (image) => new ImageItemComponent('#imgList', { images: this.state.images, image, lengthIndicator })
+      );
     }
   }
 
@@ -173,47 +151,14 @@ export default class WriteView extends View {
     ).join('');
   }
 
-  makeImagesTemplate(): Promise<string> {
-    const promiseArray = [];
-    for (const image of this.state.images) {
-      promiseArray.push(
-        new Promise<void>((resolve) =>
-          this.getTemporalPath(image).then((src) => {
-            this.addHtml(`
-            <li class="img-button delete">
-              <div class="img-box medium">
-                <img src="${src}">
-                <button type="button" class="bg-black rounded text offwhite small flex ai-center jc-center">
-                  <i class="wmi wmi-close medium"></i>
-                </button>
-              </div>
-            </li>
-            `);
-            resolve();
-          })
-        )
-      );
-    }
-    return Promise.all(promiseArray).then(() => this.getHtml());
-  }
-
-  updateTemplate(): Promise<void> {
-    return new Promise<void>((resolve) => {
-      this.setTemplateData('imageCount', String(this.state.images.length));
-      this.setTemplateData('category-item', this.makeCategoryTempalte());
-      this.makeImagesTemplate().then((result) => {
-        this.setTemplateData('images', result);
-        resolve();
-      });
-    });
+  updateTemplate() {
+    this.setTemplateData('imageCount', String(this.state.images.length));
+    this.setTemplateData('category-item', this.makeCategoryTempalte());
   }
 
   render() {
-    this.updateTemplate()
-      .then(() => {
-        this.appendView(AnimateType.DOWN, AnimateType.DOWN);
-        this.addEventListener();
-      })
-      .catch(console.error);
+    this.updateTemplate();
+    this.appendView(AnimateType.DOWN, AnimateType.DOWN);
+    this.addEventListener();
   }
 }

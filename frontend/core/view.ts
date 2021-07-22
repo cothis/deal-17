@@ -49,11 +49,14 @@ export default abstract class View {
     }
   }
 
-  protected appendComponent(): void {
+  protected appendComponent(): HTMLElement {
     const $div = document.createElement('div');
     $div.innerHTML = this.renderTemplate;
     this.renderTemplate = this.template;
+    const $firstChild = <HTMLElement>$div.firstElementChild;
+
     Array.from($div.children).forEach((child) => this.container.appendChild(child));
+    return $firstChild;
   }
 
   protected addHtml(htmlString: string): void {
