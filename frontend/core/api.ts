@@ -70,7 +70,7 @@ export class ProductApi extends Api {
         'Content-Type': 'application/json',
       },
     };
-    return this.request<void>(`/${id}/state`);
+    return this.request<void>(`/${id}/state`, option);
   }
 }
 
