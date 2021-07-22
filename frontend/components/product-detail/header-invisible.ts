@@ -81,7 +81,7 @@ export default class HeaderInvisible extends View {
     const component = document.querySelector('#headerInvisibleComponent__detail');
     component?.addEventListener('click', this.onClickEventHandler.bind(this));
 
-    document.addEventListener('click', this.onHideClick.bind(this));
-    document.addEventListener('touchstart', this.onHideClick.bind(this));
+    document.body.addEventListener('click', this.onHideClick.bind(this));
+    document.body.addEventListener('touchstart', this.onHideClick.bind(this));
   }
 }
