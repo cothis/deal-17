@@ -32,13 +32,16 @@ export interface Product extends RowDataPacket {
   readonly sellerId: number;
   state: number;
   views: number;
-  readonly createdAt: Date;
+  readonly createdAt: string;
 
   // db 외 정보
   pictures: Picture[];
   userWish: boolean;
-  wishes: number;
+  townName: string;
   chatRooms: number;
+  wishes: number;
+  seller: User;
+  category: Category;
 }
 
 export interface ChatRoom extends RowDataPacket {
@@ -108,3 +111,4 @@ export const CATEGORIES = [
   { id: 11, name: '반려동물', image: 'https://deal-17.s3.ap-northeast-2.amazonaws.com/categories/pet.png' },
   { id: 12, name: '도서/티켓/음반', image: 'https://deal-17.s3.ap-northeast-2.amazonaws.com/categories/book.png' },
 ];
+export const QUERY_RESULT_ROWS = 0;

@@ -16,6 +16,7 @@ import Store from './frontend/core/store';
 import { Link } from './frontend/helper/router-link/router-link';
 import { CategoryItem } from './frontend/components/category/category-item.component';
 import { TownViewElement } from './frontend/page/town-view/town-view.custom';
+import { Observer } from './frontend/core/observer';
 
 window.customElements.define('router-link', Link);
 window.customElements.define('category-item', CategoryItem);
@@ -36,7 +37,7 @@ const chattingListView = new ChattingListView('#app', store);
 const menuView = new MenuView('#app', store);
 const chattingDetailView = new ChattingDetailView('#app', store);
 
-router.setDefaultPage(mainView)
+router.setDefaultPage(mainView);
 
 router.addRoutePath('/login', loginView);
 router.addRoutePath('/join', joinView);
@@ -49,5 +50,16 @@ router.addRoutePath('/chat/detail', chattingDetailView);
 router.addRoutePath('/chat', chattingListView);
 router.addRoutePath('/menu', menuView);
 
+store.observer.registerObserver(mainView);
+store.observer.registerObserver(loginView);
+store.observer.registerObserver(joinView);
+store.observer.registerObserver(productDetailView);
+store.observer.registerObserver(writeView);
+store.observer.registerObserver(mypageView);
+store.observer.registerObserver(categoryView);
+store.observer.registerObserver(townView);
+store.observer.registerObserver(chattingListView);
+store.observer.registerObserver(menuView);
+store.observer.registerObserver(chattingDetailView);
 
 router.route('');

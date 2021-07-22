@@ -1,31 +1,66 @@
 import { camelCase } from 'change-case-object';
 import { Router } from 'express';
-import { createProduct, getAllProducts, getProductById } from './product.service';
-import { Upload } from '../uploader';
+import {
+  createProduct,
+  getAllProducts,
+  getMainProducts,
+  getProductById,
+  getProductDetail,
+  increaseViewCount,
+  updateProductState,
+} from './product.service';
 import { createPictures } from '../pictures/picture.service';
+import { Upload } from '../uploader';
+
 
 const upload = Upload('products');
 const router = Router();
 
-router.get('/', async (_, res) => {
-  try {
-    const allProducts = await getAllProducts();
+router.get('/', (req, res) => {
+  const type = req.query.type;
 
-    res.json(camelCase(allProducts));
-  } catch (e) {
-    console.error(e);
-    res.status(500).json({ error: 'SERVER_ERROR' });
+  if (type === 'view') {
+    getMainProducts({
+      userId: Number(req.query.userId),
+      categoryId: Number(req.query.categoryId),
+      page: Number(req.query.page),
+      pageSize: Number(req.query.pageSize),
+    })
+      .then((products) => res.json(products))
+      .catch((e) => {
+        console.error(e);
+        res.status(500).json({ error: 'SERVER_ERROR' });
+      });
+  } else {
+    getAllProducts()
+      .then((result) => res.json(result))
+      .catch((e) => {
+        console.error(e);
+        res.status(500).json({ error: 'SERVER_ERROR' });
+      });
   }
 });
 
-router.get('/:id', async (req, res) => {
-  try {
-    const product = await getProductById(req);
+router.get('/:id', (req, res) => {
+  const type = req.query.type;
+  const userId = Number(req.query.userId);
+  const productId = Number(req.params.id);
 
-    res.json(camelCase(product));
-  } catch (e) {
-    console.error(e);
-    res.status(500).json({ error: 'SERVER_ERROR' });
+  if (type === 'view') {
+    getProductDetail({ userId, productId: productId })
+      .then((product) => res.json(product))
+      .catch((e) => {
+        console.error(e);
+        res.status(500).json({ error: 'SERVER_ERROR' });
+      });
+    increaseViewCount(productId);
+  } else {
+    getProductById(productId)
+      .then((result) => res.json(result))
+      .catch((e) => {
+        console.error(e);
+        res.status(500).json({ error: 'SERVER_ERROR' });
+      });
   }
 });
 
@@ -51,6 +86,17 @@ router.post('/', upload.array('images', 10), async (req, res) => {
     console.error(e);
     res.status(500).json({ error: 'SERVER_ERROR' });
   }
+  
+router.put('/:id/state', (req, res) => {
+  const id = Number(req.params.id);
+  const state = Number(req.body.state);
+  
+  updateProductState(id, state)
+    .then(() => res.json({}))
+    .catch((e) => {
+      console.error(e);
+      res.status(500).json({ error: 'SERVER_ERROR' });
+    });
 });
 
 export default router;

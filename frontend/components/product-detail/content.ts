@@ -6,12 +6,15 @@ import '../../page/product-detail-view/product-detail-view.css';
 const template = `
 <div id="contentComponent">
   <pre class="product-detail__content text large">{{__content__}}</pre>
-  <div class="text xsmall grey1 x-mt-24">채팅 {{__chatRoomCount__}} &middot; 관심 {{__wishCount__}} &middot; 조회 {{__viewCount__}}</div>
+  <div class="text xsmall grey1 x-mt-24">채팅 {{__chatRooms__}} &middot; 관심 {{__wishes__}} &middot; 조회 {{__views__}}</div>
 </div>
 `;
 
 interface Props {
   content: string;
+  chatRooms: number;
+  wishes: number;
+  views: number;
 }
 
 export default class Content extends View {
@@ -26,9 +29,9 @@ export default class Content extends View {
 
   render() {
     this.setTemplateData('content', this.props.content);
-    this.setTemplateData('chatRoomCount', '0');
-    this.setTemplateData('wishCount', '1');
-    this.setTemplateData('viewCount', '0');
+    this.setTemplateData('chatRooms', String(this.props.chatRooms));
+    this.setTemplateData('wishes', String(this.props.wishes));
+    this.setTemplateData('views', String(this.props.views));
 
     this.appendComponent();
   }

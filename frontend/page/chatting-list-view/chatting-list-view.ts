@@ -29,7 +29,6 @@ export default class ChattingList extends View {
   }
 
   onChatDetailClick(e: Event) {
-    // console.log(e.target);
     RouterEvent.dispatchEvent('/chat/detail/1');
   }
 

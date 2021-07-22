@@ -1,3 +1,5 @@
+import Store from '../../core/store';
+
 export class CategoryItem extends HTMLElement {
   private initHTML: string;
   private element: HTMLElement;

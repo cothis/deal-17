@@ -1,4 +1,5 @@
 import { Product, Picture, ChatRoom, Wish, User } from '../../types';
+import qs from 'querystring';
 
 const BASE_URL: string = process.env.API_URL ?? 'http://localhost:8000';
 
@@ -19,12 +20,21 @@ export class ProductApi extends Api {
     super('/api/v0/products');
   }
 
-  getAllProducts(): Promise<Product[]> {
-    return this.request<Product[]>('');
+  getAllProducts(param: {
+    type: string;
+    userId: number;
+    wishId?: number;
+    townId?: number;
+    chatRoomId?: number;
+    categoryId?: number;
+    page?: number;
+    pageSize?: number;
+  }): Promise<Product[]> {
+    return this.request<Product[]>(`?${qs.stringify(param)}`);
   }
 
-  getProductById(id: number): Promise<Product> {
-    return this.request<Product>(`/${id}`);
+  getProductById(productId: number, param: { type: string; userId: number }): Promise<Product> {
+    return this.request<Product>(`/${productId}?${qs.stringify(param)}`);
   }
 
   createProduct(formData: FormData): Promise<any> {
@@ -79,6 +89,17 @@ export class WishApi extends Api {
 
   getWishesByUserId(userId: number): Promise<Wish[]> {
     return this.request<Wish[]>(`/${userId}`);
+  }
+
+  toggleWish(userId: number, productId: number): Promise<void> {
+    const option: RequestInit = {
+      method: 'put',
+      body: JSON.stringify({ userId, productId }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    };
+    return this.request<void>('', option);
   }
 }
 

@@ -72,7 +72,7 @@ export default class HeaderInvisible extends View {
       onClick: this.onClick.bind(this),
     });
     this.selectPopup.render();
-    
+
     document
       .querySelector('#headerInvisibleComponent__detail')
       ?.addEventListener('click', this.onClickEventHandler.bind(this));

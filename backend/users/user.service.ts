@@ -27,7 +27,7 @@ export const getUserByEmail = (email: string): Promise<User> => {
     .query('select * from user where email = ?', [email])
     .then((res) => {
       const user = (<User[]>res[0])[0];
-      if (user) return user;
+      if (user) return <User>camelCase(user);
       else throw Error;
     })
     .catch((err) => {

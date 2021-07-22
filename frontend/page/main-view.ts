@@ -7,6 +7,7 @@ import Header from '../components/common/header';
 import ProductList from '../components/common/product-list';
 import FabButton from '../components/main/fab-button';
 import LoginView from './login-view';
+import { Link } from '../helper/router-link/router-link';
 
 const template = `
 <div class="MainView">
@@ -33,28 +34,22 @@ export default class MainView extends View {
     this.store = store;
     this.api = new ProductApi();
   }
-
-  // showSideView(type: SideViewType) {
-  //   switch (type) {
-  //     case SideViewType.USER:
-  //       this.loginView!.show();
-  //       break;
-  //     case SideViewType.MENU:
-  //       break;
-  //     case SideViewType.CATEGORY:
-  //       break;
-  //   }
-  // }
-
+  
   render() {
-    this.api.getAllProducts().then((products: Product[]) => {
+    this.api.getAllProducts({ type: 'view', userId: 1 }).then((products: Product[]) => {
       this.appendView();
       new Header('#mainView__header', this.store, {}).render();
       new ProductList('#mainView__productList', this.store, { products }).render();
       new FabButton('#mainView__fabButton', this.store, {}).render();
-
-      // this.loginView = new LoginView('#mainView__sidePanel', this.store);
-      // this.loginView!.render();
     });
+  }
+
+  onStoreChange() {
+    if (this.pageContainer) {
+      const routerLink: Link | null = this.pageContainer.querySelector('#user');
+      if (routerLink) {
+        routerLink.setAttribute('to', this.store.user ? '/mypage' : '/login');
+      }
+    }
   }
 }

@@ -46,26 +46,34 @@ export default class ProductDetailView extends View {
   render(remainUrl?: string) {
     const productId = Number(remainUrl?.substr(1, 1));
     this.appendView(AnimateType.RIGHT, AnimateType.RIGHT);
+
     this.pictureApi.getPicturesByProductId(1).then((pictures: Picture[]) => {
       new Carousel('#productDetailView__carousel', this.store, { pictures }).render();
       new HeaderInvisible('#productDetailView__header-invisible', this.store, {}).render();
     });
-    this.productApi.getProductById(productId).then((product: Product) => {
+    this.productApi.getProductById(productId, { type: 'view', userId: 1 }).then((product: Product) => {
+      console.log(product);
+
       new State('#productDetailView__state', this.store, { state: product.state }).render();
       new Title('#productDetailView__title', this.store, {
         subject: product.subject,
-        category: '기타 중고물품',
-        createdAt: '4시간 전',
+        category: product.category.name,
+        createdAt: String(new Date(product.createdAt)),
       }).render();
-      new Content('#productDetailView__content', this.store, { content: product.content ?? '' }).render();
+      new Content('#productDetailView__content', this.store, {
+        content: product.content ?? '',
+        chatRooms: product.chatRooms,
+        wishes: product.wishes,
+        views: product.views,
+      }).render();
       new SellerInfo('#productDetailView__seller-info', this.store, {
-        sellerEmail: '테스트유저',
-        sellerTown: '역삼동',
+        sellerEmail: product.seller.email,
+        sellerTown: product.townName,
       }).render();
       new Footer('#productDetailView__footer', this.store, {
-        isWish: false,
+        isWish: product.userWish,
         price: convertToMarketPrice(product.price) ?? '가격미정',
-        chatRoomCount: 2,
+        chatRoomCount: product.chatRooms,
       }).render();
     });
   }

@@ -1,5 +1,5 @@
-import { request } from 'express';
 import { AnimateType } from '../../types';
+import Store from './store';
 
 export default abstract class View {
   private template: string;
@@ -83,4 +83,6 @@ export default abstract class View {
       this.pageContainer?.remove();
     }
   }
+
+  onStoreChange(): void {}
 }
