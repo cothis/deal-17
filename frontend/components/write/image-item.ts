@@ -25,8 +25,6 @@ export class ImageItemComponent extends View {
     super(selector, template);
     this.props = props;
 
-    console.log(this.props);
-
     this.render();
   }
 

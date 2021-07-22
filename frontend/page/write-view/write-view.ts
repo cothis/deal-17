@@ -74,7 +74,6 @@ export default class WriteView extends View {
     this.pageContainer.querySelector('.textarea')?.addEventListener('input', this.onTextareaInput);
     this.pageContainer.querySelector('#fileInput')?.addEventListener('change', this.onFileChange.bind(this));
     this.pageContainer.querySelector('#imgButton')?.addEventListener('click', this.onImgButtonClick.bind(this));
-    // this.pageContainer.querySelector('#imgList')?.addEventListener('click', this.onDeleteButtonClick.bind(this));
     this.pageContainer.querySelector('#requestWrite')?.addEventListener('click', this.onWriteButtonClick.bind(this));
     this.pageContainer.querySelector('.category-list')?.addEventListener('click', this.onCategoryListClick.bind(this));
   }
