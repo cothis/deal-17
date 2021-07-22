@@ -6,7 +6,7 @@ import { promisePool } from '../db';
 export const getTownsByUserId = (userId: number): Promise<Town[]> => {
   return promisePool
     .query(
-      `select t.id as id, t.name as, ut.active as is_active name from town t 
+      `select t.id as id, t.name as name, ut.active as is_active from town t 
     inner join user_town ut on t.id = ut.town_id 
     where user_id = ?`,
       userId
