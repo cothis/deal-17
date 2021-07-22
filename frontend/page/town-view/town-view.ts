@@ -86,6 +86,7 @@ export default class TownView extends View {
   makeTownButtons(towns: Town[]) {
     for (let i = 0; i < 2; i++) {
       const town = towns[i];
+      console.log(town);
       if (town) {
         this.addHtml(
           `<town-button state="${town.isActive ? 'active' : 'inactive'}" name="${town.name}"></town-button>`
@@ -101,6 +102,7 @@ export default class TownView extends View {
   render() {
     if (this.store.user) {
       this.api.getTownsByUserId(this.store.user.id).then((result) => {
+        this.store.towns = result;
         const htmls = this.makeTownButtons(result);
 
         this.setTemplateData('town-button', htmls);
