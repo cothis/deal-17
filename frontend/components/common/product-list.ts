@@ -7,13 +7,14 @@ import { WishApi } from '../../core/api';
 import { ProductComponent } from '../../components/common/product';
 
 const template = `
-<div id="mainView__product">
+<div id="productListComponent__product">
 {{__product__}}
 </div>
 `;
 
 interface Props {
   products: Product[];
+  viewName: string;
 }
 
 export default class ProductList extends View {
@@ -47,15 +48,17 @@ export default class ProductList extends View {
 
   render() {
     this.updateView();
+    console.log(this.props.products);
     this.props.products.forEach((_, i) => {
-      this.addHtml(`<div id="mainView__product${i}"></div>`);
+      this.addHtml(`<div id="${this.props.viewName}__product${i}"></div>`);
     });
     const html = this.getHtml();
     this.setTemplateData('product', html);
     this.updateView();
     this.props.products.forEach((product, i) => {
-      new ProductComponent(`#mainView__product${i}`, this.store, { product }).render();
-      const productComponent = document.querySelector(`#mainView__product${i}`);
+      console.log(product);
+      new ProductComponent(`#${this.props.viewName}__product${i}`, this.store, { product }).render();
+      const productComponent = document.querySelector(`#${this.props.viewName}__product${i}`);
       productComponent?.addEventListener('click', (e) => this.onProductWishClick(e, product));
     });
   }
