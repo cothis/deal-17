@@ -36,7 +36,7 @@ app.use(cors());
 app.use('/static', express.static(path.join(__dirname, '../static')));
 app.use('/dist', express.static(path.join(__dirname, '../dist')));
 app.get('/', (req, res) => res.sendFile(path.join(__dirname, '../dist/index.html')));
-
+app.get('/session', (req, res) => res.json(req.session));
 app.use('/api/v0/products', ProductController);
 app.use('/api/v0/pictures', PictureController);
 app.use('/api/v0/users', UserController);
