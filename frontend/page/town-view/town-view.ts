@@ -49,22 +49,32 @@ export default class TownView extends View {
       return;
     }
 
-    const state = button.getAttribute('state');
+    const townButton = (<HTMLElement>e.target).closest('town-button');
+    if (!townButton) return;
+
+    const state = townButton.getAttribute('state');
     let handler;
+    let input;
+    let okText;
     if (state === 'active') {
       handler = this.onRemoveClick;
+      okText = '삭제';
     } else if (state === 'add') {
       handler = this.onAddClick;
-    }
-
-    new PopupComponent('#town-popup', this.store, {
-      input: {
+      okText = '확인';
+      input = {
         label: '현재 위치를 입력하세요.',
         placeholder: '시 구 제외, 동만 입력',
-      },
-      okText: '확인',
-      okClickHandler: (e) => console.log(e.target),
-    }).render();
+      };
+    }
+
+    if (okText) {
+      new PopupComponent('#town-popup', this.store, {
+        input: input,
+        okText: okText,
+        okClickHandler: this.onAddClick.bind(this),
+      }).render();
+    }
   }
 
   render() {
@@ -85,7 +95,9 @@ export default class TownView extends View {
 
         this.appendView(AnimateType.LEFT, AnimateType.LEFT);
 
-        this.pageContainer?.querySelector('#button-wrapper')?.addEventListener('click', this.onButtonWrapperClick);
+        this.pageContainer
+          ?.querySelector('#button-wrapper')
+          ?.addEventListener('click', this.onButtonWrapperClick.bind(this));
       });
     }
   }

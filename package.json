@@ -5,7 +5,7 @@
   "main": "./frontend/app.ts",
   "scripts": {
     "build": "webpack",
-    "devserver": "webpack-dev-server --open --progress",
+    "devserver": "webpack-dev-server -d --open --progress",
     "start": "nodemon ./backend/server.ts"
   },
   "repository": {
