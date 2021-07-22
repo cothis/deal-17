@@ -55,6 +55,7 @@ export class ProductComponent extends View {
   onClick() {}
 
   render() {
+    console.log(this.props.product)
     this.setTemplateData(
       'image-path',
       this.props.product.pictures[0]?.path ||
