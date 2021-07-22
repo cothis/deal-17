@@ -39,7 +39,10 @@ export default class TownView extends View {
     this.api = new TownApi();
   }
 
-  onRemoveClick(e: Event) {}
+  onRemoveClick(e: Event) {
+    console.log('remove cliced');
+    console.log(e.target);
+  }
 
   onAddClick(e: Event) {
     const value = (<HTMLInputElement>this.pageContainer?.querySelector('#popupText')).value;
@@ -59,12 +62,12 @@ export default class TownView extends View {
     if (!townButton) return;
 
     const state = townButton.getAttribute('state');
-    let handler;
+    let handler: (e: Event) => void;
     let input;
-    let okText;
+    let okText = '삭제';
     let title;
     let isAlert;
-    if (state === 'active') {
+    if (state === 'active' || state === 'inactive') {
       handler = this.onRemoveClick;
       okText = '삭제';
       title = '정말 삭제하시겠습니까?';
@@ -78,24 +81,23 @@ export default class TownView extends View {
       };
     }
 
-    if (okText) {
-      new PopupComponent('#town-popup', this.store, {
-        title: title,
-        input: input,
-        okText: okText,
-        isAlert: isAlert,
-        okClickHandler: this.onAddClick.bind(this),
-      }).render();
-    }
+    new PopupComponent('#town-popup', this.store, {
+      title: title,
+      input: input,
+      okText: okText,
+      isAlert: isAlert,
+      okClickHandler: handler!.bind(this),
+    }).render();
   }
 
   makeTownButtons(towns: Town[]) {
     for (let i = 0; i < 2; i++) {
       const town = towns[i];
-      console.log(town);
       if (town) {
         this.addHtml(
-          `<town-button state="${town.isActive ? 'active' : 'inactive'}" name="${town.name}"></town-button>`
+          `<town-button state="${town.isActive ? 'active' : 'inactive'}" name="${
+            town.name
+          }" data-index="${i}"></town-button>`
         );
       } else {
         this.addHtml(`<town-button state="add"></town-button>`);

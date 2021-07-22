@@ -83,7 +83,7 @@ export default class PopupComponent extends View {
     });
 
     this.container.querySelector('#ok')?.addEventListener('click', (e) => {
-      if (this.container.querySelector('input')?.value) {
+      if (!this.props.input || this.container.querySelector('input')?.value) {
         this.okClickHandler(e);
         this.container.classList.add('display-none');
         this.container.innerHTML = '';
