@@ -1,4 +1,4 @@
-import { Product, Picture } from '../../../types';
+import { Product, Picture, ChatRoom } from '../../../types';
 import View from '../../core/view';
 import Store from '../../core/store';
 import { ProductApi, ChatRoomApi, WishApi } from '../../core/api';
@@ -9,6 +9,7 @@ import SelectPopup from '../../components/common/select-popup';
 import Header from '../../components/common/header-offwhite';
 import MenuBar from '../../components/menu/menu-bar';
 import ProductList from '../../components/common/product-list';
+import chattingListComponent from '../../components/common/chatting-list';
 
 import './menu-view.css';
 
@@ -35,6 +36,7 @@ enum MenuLabel {
 export default class menuView extends View {
   private store: Store;
   private productApi: ProductApi;
+  private chatRoomApi: ChatRoomApi;
   private activeMenuId: number;
   private menuBar!: MenuBar;
 
@@ -43,6 +45,7 @@ export default class menuView extends View {
     this.store = store;
     this.productApi = new ProductApi();
     this.activeMenuId = MenuId.SALE;
+    this.chatRoomApi = new ChatRoomApi();
   }
 
   isActive(id: number) {
@@ -53,14 +56,37 @@ export default class menuView extends View {
     switch (id) {
       case MenuId.SALE:
         this.activeMenuId = MenuId.SALE;
+        this.showProductList();
         break;
       case MenuId.CHAT:
         this.activeMenuId = MenuId.CHAT;
+        this.showChattingList();
         break;
       case MenuId.WISH:
         this.activeMenuId = MenuId.WISH;
+        this.showWishList();
         break;
     }
+  }
+
+  showProductList() {
+    const products = this.store.products.filter((e) => e.sellerId === this.store.user!.id);
+    console.log(products);
+    new ProductList('#menuView__content', this.store, { products, viewName: 'menuView' }).render();
+  }
+
+  showChattingList() {
+    this.chatRoomApi.getChatRoomByProductId(1).then((chatRooms: ChatRoom[]) => {
+      new chattingListComponent('#menuView__content', this.store, {
+        chatRooms,
+      }).render();
+    });
+  }
+
+  showWishList() {
+    const products = this.store.products.filter((e) => e.userWish === true);
+    console.log(products);
+    new ProductList('#menuView__content', this.store, { products, viewName: 'menuView' }).render();
   }
 
   render() {
@@ -77,8 +103,6 @@ export default class menuView extends View {
     });
     this.menuBar.render();
 
-    const products = this.store.products.filter((e) => e.sellerId === this.store.user!.id);
-    console.log(products);
-    new ProductList('#menuView__content', this.store, { products, viewName: 'menuView' }).render();
+    this.showProductList();
   }
 }
