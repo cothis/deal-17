@@ -10,7 +10,7 @@ import LoginView from './login-view';
 import { Link } from '../helper/router-link/router-link';
 
 const template = `
-<div class="MainView">
+<div class="mainView">
   <div id="mainView__header" class="header p-5"></div>
   <div id="mainView__productList"></div>
   <div id="mainView__fabButton"></div>
@@ -37,9 +37,10 @@ export default class MainView extends View {
 
   render() {
     this.api.getAllProducts({ type: 'view', userId: this.store.user?.id ?? 0 }).then((products: Product[]) => {
+      this.store.products = products;
       this.appendView();
       new Header('#mainView__header', this.store, {}).render();
-      new ProductList('#mainView__productList', this.store, { products }).render();
+      new ProductList('#mainView__productList', this.store, { products, viewName: 'mainView' }).render();
       new FabButton('#mainView__fabButton', this.store, {}).render();
     });
   }

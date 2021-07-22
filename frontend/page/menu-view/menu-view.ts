@@ -14,9 +14,9 @@ import './menu-view.css';
 
 const template = `
  <div class="menu-view">
-   <div id="MenuView__header"></div>
-   <div id="MenuView__menu-bar"></div>
-   <div id="MenuView__content"></div>
+   <div id="menuView__header"></div>
+   <div id="menuView__menu-bar"></div>
+   <div id="menuView__content"></div>
  </div>
  `;
 
@@ -32,7 +32,7 @@ enum MenuLabel {
   WISH = '관심목록',
 }
 
-export default class MenuView extends View {
+export default class menuView extends View {
   private store: Store;
   private productApi: ProductApi;
   private activeMenuId: number;
@@ -66,8 +66,8 @@ export default class MenuView extends View {
   render() {
     this.appendView(AnimateType.RIGHT, AnimateType.RIGHT);
 
-    new Header('#MenuView__header', this.store, { title: '메뉴' }).render();
-    this.menuBar = new MenuBar('#MenuView__menu-bar', this.store, {
+    new Header('#menuView__header', this.store, { title: '메뉴' }).render();
+    this.menuBar = new MenuBar('#menuView__menu-bar', this.store, {
       items: [
         { id: MenuId.SALE, label: MenuLabel.SALE, active: this.isActive(MenuId.SALE) },
         { id: MenuId.CHAT, label: MenuLabel.CHAT, active: this.isActive(MenuId.CHAT) },
@@ -77,8 +77,8 @@ export default class MenuView extends View {
     });
     this.menuBar.render();
 
-    this.productApi.getAllProducts({ type: 'view', userId: this.store.user!.id }).then((products: Product[]) => {
-      new ProductList('#MenuView__content', this.store, { products }).render();
-    });
+    const products = this.store.products.filter((e) => e.sellerId === this.store.user!.id);
+    console.log(products);
+    new ProductList('#menuView__content', this.store, { products, viewName: 'menuView' }).render();
   }
 }
