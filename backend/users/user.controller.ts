@@ -2,7 +2,7 @@ import { Router } from 'express';
 import { getUserById, getUserByEmail, join } from './user.service';
 import { getOrAddTown } from '../town/town.service';
 import { Town, UserTown } from '../../types';
-import { addUserTown } from '../user-town/user-town.service';
+import { addUserTown, setActiveTown } from '../user-town/user-town.service';
 import { RouterEvent } from '../../frontend/core/router';
 
 const router = Router();
@@ -40,7 +40,7 @@ router.get('/:id', (req, res) => {
 
 router.post('/', (req, res) => {
   Promise.all<number, Town>([join(req.body.email), getOrAddTown(req.body.town)])
-    .then(([userId, town]) => addUserTown(userId, town.id))
+    .then(([userId, town]) => addUserTown(userId, town.id, 1))
     .then((userTownId) => res.json({ userTownId }))
     .catch((e) => {
       console.error(e);

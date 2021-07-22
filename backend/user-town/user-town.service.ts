@@ -14,9 +14,9 @@ export const getTownsByUserId = (userId: number): Promise<Town[]> => {
     .then((res) => <Town[]>camelCase(res[0]));
 };
 
-export const addUserTown = (userId: number, townId: number): Promise<number> => {
+export const addUserTown = (userId: number, townId: number, active: number): Promise<number> => {
   return promisePool
-    .query<OkPacket>('insert into user_town(user_id, town_id) values (?, ?)', [userId, townId])
+    .query<OkPacket>('insert into user_town(user_id, town_id, active) values (?, ?, ?)', [userId, townId, active])
     .then((res) => res[0])
     .then((result) => result.insertId)
     .catch((err) => {
@@ -25,11 +25,11 @@ export const addUserTown = (userId: number, townId: number): Promise<number> => 
     });
 };
 
-export const setActiveTown = (userTownId: number, active: number): Promise<boolean> => {
+export const setActiveTown = (userTownId: number, active: number): Promise<number> => {
   return promisePool
     .query<OkPacket>('update user_town set active = ? where id = ?', [active, userTownId])
     .then((res) => res[0])
-    .then((result) => true)
+    .then((result) => userTownId)
     .catch((err) => {
       console.error(err);
       throw new Error('동네 상태 변경에 실패했습니다.');

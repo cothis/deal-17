@@ -39,7 +39,7 @@ router.post('/', (req, res) => {
     if (!townName) throw new Error('동네 이름이 필요합니다.');
 
     getOrAddTown(String(townName))
-      .then((town) => addUserTown(userId, town.id))
+      .then((town) => addUserTown(userId, town.id, 0))
       .then(getTownByUserTownId)
       .then((town) => res.json({ result: true, town }));
   } catch (err) {
