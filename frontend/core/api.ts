@@ -135,6 +135,6 @@ export class TownApi extends Api {
   }
 
   getOrAddTown(name: string): Promise<Town> {
-    return this.request<Town>(`search?name=${name}`);
+    return this.request<Town>(`/search?name=${name}`);
   }
 }
