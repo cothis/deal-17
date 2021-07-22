@@ -40,9 +40,7 @@ export default class HeaderInvisible extends View {
   onClickEventHandler(e: Event) {
     e.stopPropagation();
     this.isDropdownShow = !this.isDropdownShow;
-    if (!this.isDropdownShow) {
-      this.selectPopup.hide();
-    } else {
+    if (this.isDropdownShow) {
       this.selectPopup.show();
     }
   }

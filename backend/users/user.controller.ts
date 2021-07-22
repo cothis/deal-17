@@ -3,8 +3,14 @@ import { getUserById, getUserByEmail, join } from './user.service';
 import { getOrAddTown } from '../town/town.service';
 import { Town, UserTown } from '../../types';
 import { addUserTown } from '../user-town/user-town.service';
+import { RouterEvent } from '../../frontend/core/router';
 
 const router = Router();
+
+router.get('/session', (req, res) => {
+  console.log(req.session);
+  res.json(req.session.user);
+});
 
 router.get('/:id', (req, res) => {
   if (req.params.id === 'search') {

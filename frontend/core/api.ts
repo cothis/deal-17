@@ -96,6 +96,10 @@ export class UserApi extends Api {
     };
     return this.request<{ userTownId: number }>('', option);
   }
+
+  getSession(): Promise<User[]> {
+    return this.request<User[]>(`/session`);
+  }
 }
 
 export class WishApi extends Api {

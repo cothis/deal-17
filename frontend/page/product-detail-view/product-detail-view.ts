@@ -18,7 +18,7 @@ import Footer from '../../components/product-detail/footer';
 import '../../page/product-detail-view/product-detail-view.css';
 
 const template = `
- <div class="product-detail">
+ <div id="productDetailView" class="product-detail">
    <div id="productDetailView__carousel" class="overflow-hidden"></div>
    <div id="productDetailView__header-invisible"></div>
    <div class="x-py-24 x-px-16">
@@ -75,6 +75,10 @@ export default class ProductDetailView extends View {
         price: convertToMarketPrice(product.price) ?? '가격미정',
         chatRoomCount: product.chatRooms,
       }).render();
+    });
+
+    document.querySelector('#productDetailView')!.addEventListener('click', (e) => {
+      console.log(e.target as HTMLElement);
     });
   }
 }
