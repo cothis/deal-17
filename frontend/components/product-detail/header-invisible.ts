@@ -39,14 +39,18 @@ export default class HeaderInvisible extends View {
 
   onClickEventHandler(e: Event) {
     e.stopPropagation();
-    this.isDropdownShow = !this.isDropdownShow;
-    if (this.isDropdownShow) {
+    console.log(this.isDropdownShow)
+    if (!this.isDropdownShow) {
+      this.isDropdownShow = true;
+      console.log('show')
       this.selectPopup.show();
     }
   }
 
   onClick(id: number) {
     this.selectPopup.hide();
+    this.isDropdownShow = false;
+    console.log('hide1')
     switch (id) {
       case Action.EDIT:
         // 수정
@@ -57,6 +61,13 @@ export default class HeaderInvisible extends View {
         console.log('삭제 클릭');
         break;
     }
+  }
+
+  onHideClick(e: Event) {
+    e.stopPropagation();
+    console.log('hide2')
+    this.selectPopup.hide();
+    this.isDropdownShow = false;
   }
 
   render() {
@@ -71,8 +82,10 @@ export default class HeaderInvisible extends View {
     });
     this.selectPopup.render();
 
-    document
-      .querySelector('#headerInvisibleComponent__detail')
-      ?.addEventListener('click', this.onClickEventHandler.bind(this));
+    const component = document.querySelector('#headerInvisibleComponent__detail');
+    component?.addEventListener('click', this.onClickEventHandler.bind(this));
+
+    document.addEventListener('click', this.onHideClick.bind(this));
+    document.addEventListener('touchstart', this.onHideClick.bind(this));
   }
 }

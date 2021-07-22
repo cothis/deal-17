@@ -82,8 +82,7 @@ export default class ProductDetailView extends View {
       }).render();
     });
 
-    document.querySelector('#productDetailView')!.addEventListener('click', (e) => {
-      console.log(e.target as HTMLElement);
-    });
+
+
   }
 }
