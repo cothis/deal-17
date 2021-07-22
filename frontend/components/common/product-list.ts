@@ -45,6 +45,7 @@ export default class ProductList extends View {
 
         if (wishButtonId) {
           // TODO: user id 연결하기
+          console.log(this.store.user)
           if (wishElement.classList.contains('primary1')) {
             wishElement.classList.remove('primary1');
           } else {
