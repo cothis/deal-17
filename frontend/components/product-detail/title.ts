@@ -1,5 +1,6 @@
 import View from '../../core/view';
 import Store from '../../core/store';
+import { convertToMarketDate } from '../../helper/dateHelper';
 
 const template = `
 <div id="titleComponent">
@@ -27,7 +28,7 @@ export default class State extends View {
   render() {
     this.setTemplateData('subject', this.props.subject);
     this.setTemplateData('category', this.props.category);
-    this.setTemplateData('createdAt', this.props.createdAt);
+    this.setTemplateData('createdAt', convertToMarketDate(this.props.createdAt));
     this.appendComponent();
   }
 }
