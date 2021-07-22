@@ -1,9 +1,10 @@
 import { Product, Picture } from '../../../types';
 import View from '../../core/view';
 import Store from '../../core/store';
-import { PictureApi, ProductApi } from '../../core/api';
+import { PictureApi, ProductApi, WishApi } from '../../core/api';
 import { AnimateType } from '../../../types';
 import { convertToMarketPrice } from '../../helper/numberHelper';
+import { RouterEvent } from '../../core/router';
 
 import SelectPopup from '../../components/common/select-popup';
 
@@ -35,12 +36,14 @@ export default class ProductDetailView extends View {
   private store: Store;
   private pictureApi: PictureApi;
   private productApi: ProductApi;
+  private wishApi: WishApi;
 
   constructor(selector: string, store: Store) {
     super(selector, template);
     this.store = store;
     this.pictureApi = new PictureApi();
     this.productApi = new ProductApi();
+    this.wishApi = new WishApi();
   }
 
   render(remainUrl?: string) {
@@ -51,35 +54,44 @@ export default class ProductDetailView extends View {
       new Carousel('#productDetailView__carousel', this.store, { pictures }).render();
       new HeaderInvisible('#productDetailView__header-invisible', this.store, {}).render();
     });
-    this.productApi.getProductById(productId, { type: 'view', userId: 1 }).then((product: Product) => {
-      console.log(product);
+    this.productApi
+      .getProductById(productId, { type: 'view', userId: this.store.user?.id ?? 0 })
+      .then((product: Product) => {
+        console.log(product);
 
-      new State('#productDetailView__state', this.store, {
-        state: product.state,
-        onChange: (state: number) => {
-          this.productApi.updateProductState(productId, state);
-        },
-      }).render();
-      new Title('#productDetailView__title', this.store, {
-        subject: product.subject,
-        category: product.category.name,
-        createdAt: product.createdAt,
-      }).render();
-      new Content('#productDetailView__content', this.store, {
-        content: product.content ?? '',
-        chatRooms: product.chatRooms,
-        wishes: product.wishes,
-        views: product.views,
-      }).render();
-      new SellerInfo('#productDetailView__seller-info', this.store, {
-        sellerEmail: product.seller.email,
-        sellerTown: product.townName,
-      }).render();
-      new Footer('#productDetailView__footer', this.store, {
-        isWish: product.userWish,
-        price: convertToMarketPrice(product.price) ?? '가격미정',
-        chatRoomCount: product.chatRooms,
-      }).render();
-    });
+        new State('#productDetailView__state', this.store, {
+          state: product.state,
+          onChange: (state: number) => {
+            this.productApi.updateProductState(productId, state);
+          },
+        }).render();
+        new Title('#productDetailView__title', this.store, {
+          subject: product.subject,
+          category: product.category.name,
+          createdAt: product.createdAt,
+        }).render();
+        new Content('#productDetailView__content', this.store, {
+          content: product.content ?? '',
+          chatRooms: product.chatRooms,
+          wishes: product.wishes,
+          views: product.views,
+        }).render();
+        new SellerInfo('#productDetailView__seller-info', this.store, {
+          sellerEmail: product.seller.email,
+          sellerTown: product.townName,
+        }).render();
+        new Footer('#productDetailView__footer', this.store, {
+          isWish: product.userWish,
+          price: convertToMarketPrice(product.price) ?? '가격미정',
+          chatRoomCount: product.chatRooms,
+          onClick: () => {
+            if (!this.store.user) {
+              RouterEvent.dispatchEvent('/login');
+            } else {
+              this.wishApi.toggleWish(this.store.user!.id, product.id);
+            }
+          },
+        }).render();
+      });
   }
 }

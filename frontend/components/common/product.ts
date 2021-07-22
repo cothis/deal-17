@@ -67,19 +67,15 @@ export class ProductComponent extends View {
     this.setTemplateData('price', convertToMarketPrice(this.props.product.price));
     this.setTemplateData('chatRooms', String(this.props.product.chatRooms));
     this.setTemplateData('wishes', String(this.props.product.wishes));
-      console.log(this.props.product)
+
     if (this.props.product.userWish) {
-      console.log('wish')
       this.setTemplateData('primary1', 'primary1');
     }
 
-    // TODO: login sessiong 붙으면 주석 해제하기
     if (!this.store.user) {
       this.setTemplateData('displayNone', 'display-none');
     }
 
     this.updateView();
   }
-
-  onStoreChange() {console.log('change!!')}
 }
