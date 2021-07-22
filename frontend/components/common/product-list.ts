@@ -57,7 +57,10 @@ export default class ProductList extends View {
     this.updateView();
     this.props.products.forEach((product, i) => {
       console.log(product);
-      new ProductComponent(`#${this.props.viewName}__product${i}`, this.store, { product }).render();
+      new ProductComponent(`#${this.props.viewName}__product${i}`, this.store, {
+        product,
+        isMine: this.store.user?.id === product.sellerId,
+      }).render();
       const productComponent = document.querySelector(`#${this.props.viewName}__product${i}`);
       productComponent?.addEventListener('click', (e) => this.onProductWishClick(e, product));
     });

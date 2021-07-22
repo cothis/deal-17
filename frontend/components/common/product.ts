@@ -12,7 +12,8 @@ const template: string = `
     <div class="product-info flex column">
       <div class="product-info-title">
         <div class="link medium flex grow">{{__subject__}}</div>
-        <i data-id="{{__wishId__}}" class="{{__displayNone__}} wmi wmi-heart large grey1 {{__primary1__}}"></i>
+        <i data-id="{{__wishId__}}" class="{{__displayNoneWish__}} wmi wmi-heart large grey1 {{__primary1__}}"></i>
+        <i data-id="{{__moreId__}}" class="{{__displayNoneMore__}} wmi wmi-more-vertical large grey1"></i>
       </div>
       <div class="product-content flex ai-center text small grey1">
         <div>{{__townName__}}</div>
@@ -40,6 +41,7 @@ const template: string = `
 
 interface Props {
   product: Product;
+  isMine: boolean;
 }
 
 export class ProductComponent extends View {
@@ -55,14 +57,19 @@ export class ProductComponent extends View {
   onClick() {}
 
   render() {
-    console.log(this.props.product)
+    console.log(this.props.product);
     this.setTemplateData(
       'image-path',
       this.props.product.pictures[0]?.path ||
         'https://pds.joins.com/news/component/htmlphoto_mmdata/201912/02/e157f4c7-2dc7-416c-8a88-d1a3dbfff9e8.jpg'
     );
     this.setTemplateData('subject', this.props.product.subject);
-    this.setTemplateData('wishId', String(this.props.product.id));
+    if (this.props.isMine) {
+      this.setTemplateData('moreId', String(this.props.product.id));
+    } else {
+      this.setTemplateData('wishId', String(this.props.product.id));
+    }
+
     this.setTemplateData('townName', this.props.product.townName || 'test동');
     this.setTemplateData('createdAt', convertToMarketDate(this.props.product.createdAt));
     this.setTemplateData('price', convertToMarketPrice(this.props.product.price));
@@ -73,8 +80,10 @@ export class ProductComponent extends View {
       this.setTemplateData('primary1', 'primary1');
     }
 
-    if (!this.store.user) {
-      this.setTemplateData('displayNone', 'display-none');
+    if (this.props.isMine || !this.store.user) {
+      this.setTemplateData('displayNoneWish', 'display-none');
+    } else {
+      this.setTemplateData('displayNoneMore', 'display-none');
     }
 
     this.updateView();
