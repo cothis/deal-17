@@ -77,7 +77,7 @@ export default class MenuView extends View {
     });
     this.menuBar.render();
 
-    this.productApi.getAllProducts().then((products: Product[]) => {
+    this.productApi.getAllProducts({ type: 'view', userId: this.store.user!.id }).then((products: Product[]) => {
       new ProductList('#MenuView__content', this.store, { products }).render();
     });
   }

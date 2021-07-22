@@ -1,5 +1,6 @@
 import { RouteInfo } from '../../types';
 import View from './view';
+import Store from './store';
 
 const EVENT_NAME = 'route';
 
@@ -38,11 +39,13 @@ export class Router {
   private history: string[];
   private routeTable: Map<string, View>;
   private defaultRoute: View | null;
+  private store: Store;
 
-  constructor() {
+  constructor(store: Store) {
     this.routeTable = new Map();
     this.history = [];
     this.defaultRoute = null;
+    this.store = store;
 
     new RouterEvent();
     this.registerRouteEvent();
@@ -112,8 +115,9 @@ export class Router {
 
     const page = this.routeTable.get(url);
     if (page) {
-      if (isReplace) history.replaceState({}, 'view', url);
-      else history.pushState({}, 'view', url);
+      if (isReplace) {
+        history.replaceState({}, 'view', url);
+      } else history.pushState({}, 'view', url);
       page.render(remainUrl);
       this.history.push(url);
     } else throw new Error('해당 경로에 매칭되는 View Element가 없습니다.');

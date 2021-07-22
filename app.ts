@@ -23,18 +23,8 @@ window.customElements.define('category-item', CategoryItem);
 window.customElements.define('town-button', TownViewElement);
 
 const store = new Store();
-const router = new Router();
+const router = new Router(store);
 const sessionApi = new SessionApi();
-
-const sessionApi = new SessionApi();
-sessionApi
-  .getSession()
-  .then((result) => {
-    store.user = result;
-  })
-  .catch((err) => {
-    console.log('로그아웃 상태입니다.');
-  });
 
 const mainView = new MainView('#app', store);
 const loginView = new LoginView('#app', store);
