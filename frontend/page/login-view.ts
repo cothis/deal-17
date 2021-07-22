@@ -50,7 +50,8 @@ export default class LoginView extends View {
           .getUserByEmail(this.state.email)
           .then((user) => {
             this.store.user = user;
-            RouterEvent.dispatchEvent('@back');
+            // RouterEvent.dispatchEvent('@back');
+            location.href = '/';
           })
           .catch(console.error);
       },

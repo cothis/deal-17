@@ -36,7 +36,7 @@ export default class MainView extends View {
   }
 
   render() {
-    this.api.getAllProducts({ type: 'view', userId: 1 }).then((products: Product[]) => {
+    this.api.getAllProducts({ type: 'view', userId: this.store.user?.id ?? 0 }).then((products: Product[]) => {
       this.appendView();
       new Header('#mainView__header', this.store, {}).render();
       new ProductList('#mainView__productList', this.store, { products }).render();

@@ -108,6 +108,7 @@ const injectProductDetail = (products: Product[], userId: number) => {
 
       wishes.forEach((wish) => {
         const product = productIdMap[wish.productId];
+        console.log(wish)
         product.userWish = wish.isChecked === 1;
       });
 
@@ -193,6 +194,8 @@ export const getMainProducts = ({
   const pageParam = page || 1;
   const pageSizeParam = pageSize || 10;
 
+  console.log(userId, categoryId, page, pageSize);
+
   return promisePool
     .query(`select * from PRODUCT where CATEGORY_ID = ifnull(?, CATEGORY_ID) order by ID desc limit ? offset ?`, [
       categoryIdParam,
@@ -219,7 +222,7 @@ export const getProductDetail = ({ userId, productId }: { userId: number; produc
       (result[QUERY_RESULT_ROWS] as any[]).forEach((row) => {
         row.CREATED_AT = row.CREATED_AT.getTime();
       });
-      
+
       const products = camelCase(result[QUERY_RESULT_ROWS]) as Product[];
       return injectProductDetail(products, userId);
     })

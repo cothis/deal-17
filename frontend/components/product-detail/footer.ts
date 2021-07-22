@@ -7,7 +7,7 @@ const template = `
 <div id="footerComponent">
     <div class="product-bar">
         <div class="flex ai-center grow w-20">
-            <i class="wmi wmi-heart large grey1 bold"></i>
+        <i data-id="{{__wishId__}}" class="{{__displayNone__}} wmi wmi-heart large grey1 {{__primary1__}}"></i>
             <div class="product-detail__bar"></div>
             <div>{{__price__}}</div>
         </div>
